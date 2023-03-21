@@ -5,7 +5,7 @@ wizarding-world-game-cpts587
 This is a repo for the Project of CPTS-587 Software Design and Architecture
 
 Work Distribution for Deliverable 1
-#Priyanka :
+# Priyanka :
 
 Create the base structure of the Project -- Done
 Created the Menu Screen, Option Screen with Arrow key options and exit screen -- Done
