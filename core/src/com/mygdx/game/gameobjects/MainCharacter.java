@@ -18,13 +18,13 @@ public class MainCharacter implements GameControllable {
     public Rectangle hitBox;
 
     public MainCharacter(Object object) {
-        float width = 100;
-        float height = 100;
+        float width = 150;
+        float height = 150;
         float x = (GameConstants.WINDOW_WIDTH - width) / 2;
         float y = 50;
      this.moveSpeed = 10f;
      this.characterBox = new Rectangle(x, y, width, height);
-     this.hitBox = new Rectangle(250, 400, 10, 10);
+     this.hitBox = new Rectangle(250, 400, 15, 15);
      this.characterMode = new Texture("images/character.jpg");
      this.hitMode = new Texture("images/hitbox.png");
     }
