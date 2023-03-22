@@ -13,7 +13,9 @@ public class MainCharacter implements GameControllable {
     public float moveSpeed;
     private float slowMultiplier= 0.1f;
     private Texture characterMode;
+    private Texture hitMode;
     public Rectangle characterBox;
+    public Rectangle hitBox;
 
     public MainCharacter(Object object) {
         float width = 100;
@@ -22,15 +24,19 @@ public class MainCharacter implements GameControllable {
         float y = 50;
      this.moveSpeed = 10f;
      this.characterBox = new Rectangle(x, y, width, height);
+     this.hitBox = new Rectangle(250, 400, 10, 10);
      this.characterMode = new Texture("images/character.jpg");
+     this.hitMode = new Texture("images/hitbox.png");
     }
     public void draw(Batch batch) {
         batch.draw(characterMode,characterBox.x, characterBox.y, characterBox.width, characterBox.height );
+        if(isSlow)
+            batch.draw(hitMode,hitBox.x, hitBox.y, hitBox.width, hitBox.height );
     }
     private float getSpeed() {
      float speed = this.moveSpeed;
      if (isSlow) {
-      speed *= this.slowMultiplier;
+         speed *= this.slowMultiplier;
      }
      return speed;
     }
