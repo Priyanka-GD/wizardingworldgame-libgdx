@@ -16,13 +16,10 @@ public class PlayerCommand {
     public void add(GameControllable subscriber) {
         subscribers.add(subscriber);
     }
-    public void remove(GameControllable subscriber) {
-        subscribers.remove(subscriber);
-    }
     public void run() {
         for (GameControllable sub : subscribers) {
             if(inputType==0) {
-                // Movements
+                // Character Movements
                 sub.slowMode(Gdx.input.isKeyPressed(GameConstants.SLOW_MODE));
                 if (Gdx.input.isKeyPressed(GameConstants.UP)) {
                     sub.moveUp();
@@ -36,10 +33,20 @@ public class PlayerCommand {
                 if (Gdx.input.isKeyPressed(GameConstants.RIGHT)) {
                     sub.moveRight();
                 }
+                if (Gdx.input.isKeyPressed(GameConstants.W)) {
+                    sub.moveW();
+                }
+                if (Gdx.input.isKeyPressed(GameConstants.S)) {
+                    sub.moveS();
+                }
+                if (Gdx.input.isKeyPressed(GameConstants.A)) {
+                    sub.moveA();
+                }
+                if (Gdx.input.isKeyPressed(GameConstants.D)) {
+                    sub.moveD();
+                }
             }
 
         }
     }
-
-
 }
