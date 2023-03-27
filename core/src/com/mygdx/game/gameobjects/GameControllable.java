@@ -6,8 +6,4 @@ public interface GameControllable {
     public void moveLeft();
     public void moveRight();
     public void slowMode(boolean slow);
-    public void moveW ();
-    public void moveS ();
-    public void moveA ();
-    public void moveD ();
 }

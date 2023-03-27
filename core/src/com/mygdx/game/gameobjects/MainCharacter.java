@@ -59,22 +59,6 @@ public class MainCharacter implements GameControllable {
         characterBox.x = Math.min(characterBox.x + this.getSpeed() , GameConstants.WINDOW_WIDTH - characterBox.width);
     }
     @Override
-    public void moveW () {
-       characterBox.y+=  this.getSpeed();
-    }
-    @Override
-    public void moveS () {
-        characterBox.y-=  this.getSpeed();
-    }
-    @Override
-    public void moveA () {
-        characterBox.x-=  this.getSpeed();
-    }
-    @Override
-    public void moveD () {
-        characterBox.x+= this.getSpeed();
-    }
-    @Override
     public void slowMode(boolean isSlow) {
         this.isSlow = isSlow;
     }

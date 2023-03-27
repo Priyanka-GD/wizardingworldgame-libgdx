@@ -33,18 +33,6 @@ public class PlayerCommand {
                 if (Gdx.input.isKeyPressed(GameConstants.RIGHT)) {
                     sub.moveRight();
                 }
-                if (Gdx.input.isKeyPressed(GameConstants.W)) {
-                    sub.moveW();
-                }
-                if (Gdx.input.isKeyPressed(GameConstants.S)) {
-                    sub.moveS();
-                }
-                if (Gdx.input.isKeyPressed(GameConstants.A)) {
-                    sub.moveA();
-                }
-                if (Gdx.input.isKeyPressed(GameConstants.D)) {
-                    sub.moveD();
-                }
             }
 
         }
