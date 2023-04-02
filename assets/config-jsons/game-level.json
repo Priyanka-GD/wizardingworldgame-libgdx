@@ -1,0 +1,18 @@
+{
+  "character": {
+    "hp": 10
+  },
+  "enemy": [
+    {
+      "hp": 1,
+      "texture": "voldemort.jpg",
+      "x": 30,
+      "y": 800,
+      "width": 30,
+      "height": 30,
+      "interval": 1,
+      "count": 5,
+      "isFinalBoss": false
+    }
+  ]
+}
