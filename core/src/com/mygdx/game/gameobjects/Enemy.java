@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Rectangle;
 import com.mygdx.game.lasermovement.Movement;
+import com.mygdx.game.utils.GameConstants;
 
 import java.util.List;
 
@@ -16,13 +17,13 @@ abstract public class Enemy {
     public LaserWrapper laserWrapper;
     public Movement movement;
     Texture enemyTexture;
-    Texture enemyShipTexture;
 
     public Enemy () {
         isFinalBoss = false;
     }
 
     public void draw (Batch batch, float deltaTime) {
+        movement.move(deltaTime, this.hitbox);
         batch.draw(enemyTexture, hitbox.x, hitbox.y, hitbox.width, hitbox.height);
     }
 
@@ -35,5 +36,10 @@ abstract public class Enemy {
     }
 
     public abstract void die ();
+
+    public boolean isOutOfBounds () {
+        return this.hitbox.x + hitbox.width < 0 || this.hitbox.x > GameConstants.WINDOW_WIDTH || this.hitbox.y + hitbox.height < 0
+                || this.hitbox.y > GameConstants.WINDOW_HEIGHT;
+    }
 }
 

@@ -11,7 +11,7 @@ public class EnemyCharacterShip extends Enemy {
         this.hp = builder.hp;
         this.hitbox = builder.hitbox;
         this.score = builder.score;
-        this.enemyShipTexture = builder.texture;
+        this.enemyTexture = builder.texture;
         this.movement = builder.movement;
         this.laserWrapper = builder.laserWrapper;
         this.isFinalBoss = builder.isFinalBoss;
@@ -80,5 +80,6 @@ public class EnemyCharacterShip extends Enemy {
         public EnemyCharacterShip build () {
             return new EnemyCharacterShip(this);
         }
+
     }
 }

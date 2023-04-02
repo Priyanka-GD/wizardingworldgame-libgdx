@@ -12,4 +12,5 @@ public class GameConstants {
         public static int RIGHT = Input.Keys.RIGHT;
         public static int SLOW_MODE = Input.Keys.SHIFT_LEFT;
         public static JsonConfigReader config;
+    public static final int GAME_LENGTH = 150;
 }

@@ -46,7 +46,7 @@ public class MainCharacter implements GameControllable {
     }
 
     public void update (float deltaTime) {
-        shootTimestamp += deltaTime;
+        this.shootTimestamp += deltaTime;
     }
 
     @Override
@@ -65,12 +65,17 @@ public class MainCharacter implements GameControllable {
     }
 
     @Override
-    public void moveRight() {
-        characterBox.x = Math.min(characterBox.x + this.getSpeed() , GameConstants.WINDOW_WIDTH - characterBox.width);
+    public void moveRight () {
+        characterBox.x = Math.min(characterBox.x + this.getSpeed(), GameConstants.WINDOW_WIDTH - characterBox.width);
     }
+
     @Override
-    public void slowMode(boolean isSlow) {
+    public void slowMode (boolean isSlow) {
         this.isSlow = isSlow;
+    }
+
+    public boolean overlaps (Rectangle other) {
+        return this.characterBox.overlaps(other);
     }
 }
 

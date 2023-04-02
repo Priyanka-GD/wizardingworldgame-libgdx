@@ -1,19 +1,31 @@
 {
   "character": {
-    "hp": 10
+    "lives": 10,
+    "award-prob": 1.0
   },
   "enemy": [
     {
       "hp": 1,
-      "texture": "voldemort.jpg",
+      "texture": "images/voldemort.jpg",
       "x": 30,
       "y": 800,
       "width": 30,
       "height": 30,
+      "movement": "LMovement",
+      "laser": [
+        {
+          "texture": "images/laserBlueThunder.png",
+          "strategy": "NormalLaserStrategy",
+          "movement": "StraightLineMovement",
+          "width": 20,
+          "effectiveFrom": 0
+        }
+      ],
       "interval": 1,
       "count": 5,
       "isFinalBoss": false,
-      "spawnTime": 3
+      "spawnTime": 3,
+      "reward": 100
     }
   ]
 }

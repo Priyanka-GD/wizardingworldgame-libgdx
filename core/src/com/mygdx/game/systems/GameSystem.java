@@ -1,6 +1,8 @@
 package com.mygdx.game.systems;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.mygdx.game.factories.EnemyFactory;
+import com.mygdx.game.factories.EnemyShipFactory;
 import com.mygdx.game.gameobjects.Enemy;
 import com.mygdx.game.gameobjects.EnemyLaser;
 import com.mygdx.game.gameobjects.MainCharacter;
@@ -24,23 +26,52 @@ public class GameSystem {
     private Queue<JSONObject> enemyToBeReleased;
     private List<Enemy> enemyShipList;
     private List<EnemyLaser> enemyLaserList;
+    protected BackgroundScreen subject;
+    EnemyFactory enemyCharacterFactory;
+    private float characterTimestamp;
+    private boolean end = false;
 
     public GameSystem (BackgroundScreen screen) {
+
+        this.subject = screen;
         init();
     }
 
     public void init () {
         JsonConfigReader config = GameConstants.config;
-        mainCharacter = new MainCharacter(new Object());
+        mainCharacter = new MainCharacter(config.getPlayerAttribute().get("award-prob"));
         command = new PlayerCommand();
         command.add(mainCharacter);
         enemyToBeReleased = new LinkedList<>();
-        enemyLaserList = new LinkedList<>();
+        enemyLaserList = new ArrayList<>();
         enemyShipList = new LinkedList<>();
         enemyReleaseTime = new LinkedList<>();
         //Deliverable 2
+        characterTimestamp = 0;
+        enemyCharacterFactory = new EnemyShipFactory();
         loadEnemies(config);
 
+    }
+
+    private void renderCharacter (SpriteBatch sbatch, float deltaTime) {
+        mainCharacter.draw(sbatch, deltaTime);
+    }
+
+    public void render (SpriteBatch sbatch, float deltaTime) {
+        updateGame(deltaTime);
+        renderCharacter(sbatch, deltaTime);
+        // Deliverable 2
+        renderEnemy(sbatch, deltaTime);
+        renderEnemyLasers(sbatch, deltaTime);
+    }
+
+    //Deliverable 2
+    private void spawnEnemy () {
+        if (enemyReleaseTime.size() > 0 && characterTimestamp > enemyReleaseTime.peek()) {
+            enemyReleaseTime.poll();
+            Enemy enemy = enemyCharacterFactory.produce(enemyToBeReleased.poll());
+            enemyShipList.add(enemy);
+        }
     }
 
     public void loadEnemies (JsonConfigReader config) {
@@ -57,27 +88,40 @@ public class GameSystem {
         }
     }
 
-    //Deliverable 2
     private void renderEnemy (SpriteBatch sbatch, float deltaTime) {
         List<Enemy> removeList = new ArrayList<>();
         for (Enemy enemy : enemyShipList) {
             enemy.draw(sbatch, deltaTime);
             enemy.fire(deltaTime, enemyLaserList);
+            if (enemy.isOutOfBounds()) {
+                if (enemy.isFinalBoss) {
+                    this.end = true;
+                }
+                removeList.add(enemy);
+            }
         }
         enemyShipList.removeAll(removeList);
     }
 
-    public void render (SpriteBatch sbatch, float deltaTime) {
-        renderCharacter(sbatch, deltaTime);
-        makeCharacterMove();
-        renderEnemy(sbatch, deltaTime);
-    }
-
-    private void renderCharacter (SpriteBatch sbatch, float deltaTime) {
-        mainCharacter.draw(sbatch, deltaTime);
-    }
-
-    private void makeCharacterMove () {
+    private void updateGame (float deltaTime) {
+        characterTimestamp += deltaTime;
+        spawnEnemy();
         command.run();
+    }
+
+    private void renderEnemyLasers (SpriteBatch sbatch, float deltaTime) {
+        List<EnemyLaser> removeList1 = new ArrayList<>();
+        for (EnemyLaser enemyLaser : enemyLaserList) {
+            enemyLaser.move(deltaTime);
+            enemyLaser.draw(sbatch);
+            if (enemyLaser.canRemove()) {
+                removeList1.add(enemyLaser);
+            }
+        }
+        enemyLaserList.removeAll(removeList1);
+    }
+
+    public boolean canEnd () {
+        return characterTimestamp > GameConstants.GAME_LENGTH || this.end;
     }
 }
