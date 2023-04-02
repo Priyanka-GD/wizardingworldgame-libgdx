@@ -12,7 +12,8 @@
       "height": 30,
       "interval": 1,
       "count": 5,
-      "isFinalBoss": false
+      "isFinalBoss": false,
+      "spawnTime": 3
     }
   ]
 }

@@ -11,6 +11,8 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.systems.GameSystem;
 import com.mygdx.game.utils.GameConstants;
+import com.mygdx.game.utils.JsonConfigReader;
+import org.json.simple.JSONObject;
 
 import static com.badlogic.gdx.graphics.GL20.GL_COLOR_BUFFER_BIT;
 
@@ -18,21 +20,25 @@ import static com.badlogic.gdx.graphics.GL20.GL_COLOR_BUFFER_BIT;
 public class GameScreen implements Screen {
     private final Camera cameraForeground;
     private final Viewport viewport;
-    private MainGame game;
-    private int foregroundOffset;
-    private GameSystem gameSystem;
+    private final MainGame game;
+    private final int foregroundOffset;
+    private final GameSystem gameSystem;
 
-    private Texture texture;
-    private SpriteBatch spriteBatch;
+    private final Texture texture;
+    private final SpriteBatch spriteBatch;
     private BackgroundScreen backgroundScreen;
 
 
-    public GameScreen(MainGame game) {
+    public GameScreen (MainGame game) {
+        //Deliverable 2
+        JsonConfigReader config = GameConstants.config;
+        JSONObject playerConfigs = config.getPlayerAttribute();
+        //Deliverable 1
         this.gameSystem = new GameSystem(this.backgroundScreen);
         spriteBatch = new SpriteBatch();
         this.cameraForeground = new OrthographicCamera();
         ((OrthographicCamera) cameraForeground).setToOrtho(false, GameConstants.WINDOW_WIDTH, GameConstants.WINDOW_HEIGHT);
-        this.viewport = new FitViewport(GameConstants.WINDOW_WIDTH, GameConstants.WINDOW_HEIGHT,cameraForeground);
+        this.viewport = new FitViewport(GameConstants.WINDOW_WIDTH, GameConstants.WINDOW_HEIGHT, cameraForeground);
         foregroundOffset = 0;
         texture = new Texture("images/gamescreen.jpg");
         this.game = game;
@@ -50,7 +56,7 @@ public class GameScreen implements Screen {
         Gdx.gl.glViewport(10,10, GameConstants.WINDOW_WIDTH, GameConstants.WINDOW_HEIGHT);
         spriteBatch.begin();
         spriteBatch.draw(this.texture, 0, 0, GameConstants.EXT_WINDOW_WIDTH, GameConstants.EXT_WINDOW_HEIGHT);
-        gameSystem.render(spriteBatch);
+        gameSystem.render(spriteBatch, deltaTime);
         spriteBatch.end();
     }
     @Override

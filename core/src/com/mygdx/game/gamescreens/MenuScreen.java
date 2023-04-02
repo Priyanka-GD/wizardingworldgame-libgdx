@@ -12,13 +12,14 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.game.utils.GameConstants;
+import com.mygdx.game.utils.JsonConfigReader;
 
 public class MenuScreen implements Screen {
         private final MainGame game;
         private final Texture background;
         private final Stage stage;
-        public static int keyBind = 0;
-        private Skin skin;
+    public static int keyBind = 0;
+    private final Skin skin;
 
         public MenuScreen(MainGame game) {
             this.game = game;
@@ -114,6 +115,7 @@ public class MenuScreen implements Screen {
         game.setScreen(new ArrowScreen(game));
     }
     private void startGame() {
+        GameConstants.config = new JsonConfigReader(1);
         this.dispose();
         stage.dispose();
         game.setScreen(new GameScreen(game));
