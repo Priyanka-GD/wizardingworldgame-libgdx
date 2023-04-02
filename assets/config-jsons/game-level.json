@@ -6,15 +6,15 @@
   "enemy": [
     {
       "hp": 1,
-      "texture": "images/voldemort.jpg",
+      "texture": "images/basillisk.png",
       "x": 30,
       "y": 800,
-      "width": 30,
-      "height": 30,
+      "width": 50,
+      "height": 50,
       "movement": "LMovement",
       "laser": [
         {
-          "texture": "images/laserBlueThunder.png",
+          "texture": "images/thunder1.png",
           "strategy": "NormalLaserStrategy",
           "movement": "StraightLineMovement",
           "width": 20,
