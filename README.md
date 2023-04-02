@@ -30,3 +30,5 @@ The enemies will have specific timeframe in the game, and if the player can esca
 till the end of the game, then the player wins.
 
 # Work done for Deliverable 2
+1. Basillisk(enemy) as an enemy appear in a count of 5 and throw thunderbolt at the character.
+2. Created Json file to read the configuration for game characters
