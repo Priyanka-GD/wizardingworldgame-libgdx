@@ -39,7 +39,7 @@ public class GameSystem {
 
     public void init () {
         JsonConfigReader config = GameConstants.config;
-        mainCharacter = new MainCharacter(config.getPlayerAttribute().get("award-prob"));
+        mainCharacter = new MainCharacter(new Object());
         command = new PlayerCommand();
         command.add(mainCharacter);
         enemyToBeReleased = new LinkedList<>();
