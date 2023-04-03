@@ -1,5 +1,7 @@
-package com.mygdx.game.utils;
+package com.gameclasses.utils;
+
 import com.badlogic.gdx.Input;
+import com.gameclasses.controller.JsonConfigReader;
 
 public class GameConstants {
         public static final int EXT_WINDOW_WIDTH = 836;
@@ -11,4 +13,6 @@ public class GameConstants {
         public static int LEFT = Input.Keys.LEFT;
         public static int RIGHT = Input.Keys.RIGHT;
         public static int SLOW_MODE = Input.Keys.SHIFT_LEFT;
+        public static JsonConfigReader config;
+    public static final int GAME_LENGTH = 150;
 }

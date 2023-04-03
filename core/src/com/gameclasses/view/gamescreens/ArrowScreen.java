@@ -1,4 +1,4 @@
-package com.mygdx.game.gamescreens;
+package com.gameclasses.view.gamescreens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -14,11 +14,11 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
-import com.mygdx.game.utils.GameConstants;
+import com.gameclasses.utils.GameConstants;
 
 public class ArrowScreen implements Screen {
         private final MainGame game;
-        private SpriteBatch sbatch;
+        private final SpriteBatch sbatch;
         private final Texture background;
         private final Stage stage;
         private final Skin skin;

@@ -1,34 +1,32 @@
-package com.mygdx.game.utils;
+package com.gameclasses.controller;
 
 import com.badlogic.gdx.Gdx;
-import com.mygdx.game.gameobjects.GameControllable;
-import com.mygdx.game.gamescreens.MenuScreen;
+import com.gameclasses.model.gameobjects.GameControllable;
+import com.gameclasses.utils.GameConstants;
+import com.gameclasses.view.gamescreens.MenuScreen;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class PlayerCommand {
-    List<GameControllable> subscribers;
+    List<GameControllable> gameControllables;
     public int inputType = MenuScreen.keyBind;
     public PlayerCommand() {
-        subscribers = new ArrayList<>();
+        gameControllables = new ArrayList<>();
     }
     public void add(GameControllable subscriber) {
-        subscribers.add(subscriber);
-    }
-    public void remove(GameControllable subscriber) {
-        subscribers.remove(subscriber);
+        gameControllables.add(subscriber);
     }
     public void run() {
-        for (GameControllable sub : subscribers) {
-            if(inputType==0) {
-                // Movements
+        for (GameControllable sub : gameControllables) {
+            if (inputType == 0) {
+                // Character Movements
                 sub.slowMode(Gdx.input.isKeyPressed(GameConstants.SLOW_MODE));
-                if (Gdx.input.isKeyPressed(GameConstants.UP)) {
-                    sub.moveUp();
-                }
                 if (Gdx.input.isKeyPressed(GameConstants.DOWN)) {
                     sub.moveDown();
+                }
+                if (Gdx.input.isKeyPressed(GameConstants.UP)) {
+                    sub.moveUp();
                 }
                 if (Gdx.input.isKeyPressed(GameConstants.LEFT)) {
                     sub.moveLeft();
@@ -40,6 +38,4 @@ public class PlayerCommand {
 
         }
     }
-
-
 }

@@ -1,4 +1,4 @@
-package com.mygdx.game.gamescreens;
+package com.gameclasses.view.gamescreens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Camera;
@@ -11,7 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.mygdx.game.utils.GameConstants;
+import com.gameclasses.utils.GameConstants;
 
 
 public class BackgroundScreen  {
@@ -20,8 +20,8 @@ public class BackgroundScreen  {
     private final Viewport viewportBackground;
     private final Texture background;
     private final BitmapFont font0, font1;
-    private SpriteBatch sbatch;
-    private String mode;
+    private final SpriteBatch sbatch;
+    private final String mode;
     private final Skin skin;
     private final Stage stage;
     public BackgroundScreen() {

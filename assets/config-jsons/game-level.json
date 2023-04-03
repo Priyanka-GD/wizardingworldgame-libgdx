@@ -1,0 +1,31 @@
+{
+  "character": {
+    "lives": 10,
+    "award-prob": 1.0
+  },
+  "enemy": [
+    {
+      "hp": 1,
+      "texture": "images/basillisk.png",
+      "x": 30,
+      "y": 800,
+      "width": 50,
+      "height": 50,
+      "movement": "LMovement",
+      "laser": [
+        {
+          "texture": "images/thunder1.png",
+          "strategy": "NormalLaserStrategy",
+          "movement": "StraightLineMovement",
+          "width": 20,
+          "effectiveFrom": 0
+        }
+      ],
+      "interval": 1,
+      "count": 5,
+      "isFinalBoss": false,
+      "spawnTime": 3,
+      "reward": 100
+    }
+  ]
+}

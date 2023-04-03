@@ -1,9 +1,9 @@
-package com.mygdx.game;
+package com.gameclasses;
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
-import com.mygdx.game.gamescreens.MainGame;
-import com.mygdx.game.utils.GameConstants;
+import com.gameclasses.utils.GameConstants;
+import com.gameclasses.view.gamescreens.MainGame;
 
 public class DesktopLauncher {
 	public static void main (String[] arg) {
