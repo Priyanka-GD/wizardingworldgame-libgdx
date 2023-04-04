@@ -2,7 +2,7 @@ package com.gameclasses.model.lasermovement;
 
 import com.badlogic.gdx.math.Rectangle;
 
-public class StraightLineMovement implements Movement {
+public class StraightLineShapedLaserMovement implements LaserMovement {
 
 
     // direction between 0 - 1

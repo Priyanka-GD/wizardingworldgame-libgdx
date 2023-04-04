@@ -2,7 +2,7 @@ package com.gameclasses.model.gameobjects;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
-import com.gameclasses.model.lasermovement.Movement;
+import com.gameclasses.model.lasermovement.LaserMovement;
 
 public class EnemyCharacterShip extends Enemy {
 
@@ -12,7 +12,7 @@ public class EnemyCharacterShip extends Enemy {
         this.hitbox = builder.hitbox;
         this.score = builder.score;
         this.enemyTexture = builder.texture;
-        this.enemyMovement = builder.movement;
+        this.enemyLaserMovement = builder.laserMovement;
         this.laserWrapper = builder.laserWrapper;
         this.isFinalBoss = builder.isFinalBoss;
     }
@@ -27,7 +27,7 @@ public class EnemyCharacterShip extends Enemy {
         private int score;
         private Texture texture;
         private Rectangle hitbox;
-        private Movement movement;
+        private LaserMovement laserMovement;
         private LaserWrapper laserWrapper;
         private boolean isFinalBoss;
 
@@ -58,7 +58,7 @@ public class EnemyCharacterShip extends Enemy {
         public EnemyBuilder movement (String movement) {
             try {
                 Class cls = Class.forName("com.gameclasses.model.lasermovement." + movement);
-                this.movement = (Movement) cls.getConstructor().newInstance();
+                this.laserMovement = (LaserMovement) cls.getConstructor().newInstance();
             } catch (Throwable e) {
                 System.err.println(e);
             } finally {

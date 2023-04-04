@@ -3,17 +3,17 @@ package com.gameclasses.model.gameobjects;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Rectangle;
-import com.gameclasses.model.lasermovement.Movement;
+import com.gameclasses.model.lasermovement.LaserMovement;
 import com.gameclasses.utils.GameConstants;
 
 public class EnemyLaser {
     private final Texture textureReg;
     public Rectangle hitbox;
-    public Movement movement;
+    public LaserMovement laserMovement;
 
-    public EnemyLaser (String filename, Rectangle hitbox, Movement movement) {
+    public EnemyLaser (String filename, Rectangle hitbox, LaserMovement laserMovement) {
         this.hitbox = hitbox;
-        this.movement = movement;
+        this.laserMovement = laserMovement;
         this.textureReg = new Texture(filename);
     }
 
@@ -23,7 +23,7 @@ public class EnemyLaser {
     }
 
     public void move (float deltaTime) {
-        movement.move(deltaTime, hitbox);
+        laserMovement.move(deltaTime, hitbox);
     }
 
     public boolean overlaps (Rectangle hitbox) {

@@ -3,7 +3,7 @@ package com.gameclasses.model.gameobjects;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Rectangle;
-import com.gameclasses.model.lasermovement.Movement;
+import com.gameclasses.model.lasermovement.LaserMovement;
 import com.gameclasses.utils.GameConstants;
 
 import java.util.List;
@@ -15,7 +15,7 @@ abstract public class Enemy {
     public int score;
     public boolean isFinalBoss;
     public LaserWrapper laserWrapper;
-    public Movement enemyMovement;
+    public LaserMovement enemyLaserMovement;
     Texture enemyTexture;
 
     public Enemy () {
@@ -23,7 +23,7 @@ abstract public class Enemy {
     }
 
     public void draw (Batch batch, float deltaTime) {
-        enemyMovement.move(deltaTime, this.hitbox);
+        enemyLaserMovement.move(deltaTime, this.hitbox);
         batch.draw(enemyTexture, hitbox.x, hitbox.y, hitbox.width, hitbox.height);
     }
 

@@ -2,15 +2,15 @@ package com.gameclasses.model.lasermovement;
 
 import com.badlogic.gdx.math.Rectangle;
 
-public class LMovement implements Movement {
+public class LShapedLaserMovement implements LaserMovement {
     public float timestamp;
     public float timeToTurn;
     public float speed;
 
-    public LMovement () {
+    public LShapedLaserMovement () {
         timestamp = 0;
         timeToTurn = 5;
-        speed = 50;
+        speed = 45;
     }
 
     @Override

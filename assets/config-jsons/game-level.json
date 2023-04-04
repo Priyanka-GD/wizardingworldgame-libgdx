@@ -11,12 +11,12 @@
       "y": 800,
       "width": 50,
       "height": 50,
-      "movement": "LMovement",
+      "movement": "LShapedLaserMovement",
       "laser": [
         {
           "texture": "images/thunder1.png",
           "strategy": "NormalLaserStrategy",
-          "movement": "StraightLineMovement",
+          "movement": "StraightLineShapedLaserMovement",
           "width": 20,
           "effectiveFrom": 0
         }
@@ -26,6 +26,50 @@
       "isFinalBoss": false,
       "spawnTime": 3,
       "reward": 100
+    },
+    {
+      "hp": 20,
+      "texture": "images/umbridge-midboss.png",
+      "x": 250,
+      "y": 800,
+      "width": 100,
+      "height": 100,
+      "movement": "LShapedLaserMovement",
+      "laser": [
+        {
+          "texture": "images/thunder1.png",
+          "strategy": "NormalLaserStrategy",
+          "movement": "StraightLineShapedLaserMovement",
+          "effectiveFrom": 7
+        }
+      ],
+      "interval": 1,
+      "count": 1,
+      "reward": 1000,
+      "spawnTime": 30,
+      "isFinalBoss": false
+    },
+    {
+      "hp": 40,
+      "texture": "images/voldemort.jpg",
+      "x": 250,
+      "y": 800,
+      "width": 100,
+      "height": 100,
+      "movement": "LShapedLaserMovement",
+      "laser": [
+        {
+          "texture": "images/thunder1.png",
+          "strategy": "NormalLaserStrategy",
+          "movement": "StraightLineShapedLaserMovement",
+          "effectiveFrom": 13
+        }
+      ],
+      "interval": 1,
+      "count": 1,
+      "reward": 1000,
+      "spawnTime": 50,
+      "isFinalBoss": false
     }
   ]
 }
