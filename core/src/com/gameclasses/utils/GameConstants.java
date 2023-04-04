@@ -2,7 +2,7 @@ package com.gameclasses.utils;
 
 import com.badlogic.gdx.Input;
 import com.gameclasses.controller.JsonConfigReader;
-import com.gameclasses.model.gameobjects.MainCharacter;
+import com.gameclasses.model.gameobjects.Player;
 
 public class GameConstants {
     public static final int EXT_WINDOW_WIDTH = 836;
@@ -16,5 +16,5 @@ public class GameConstants {
     public static int SLOW_MODE = Input.Keys.SHIFT_LEFT;
     public static JsonConfigReader config;
     public static final int GAME_LENGTH = 150;
-    public static MainCharacter playerShip;
+    public static Player playerShip;
 }

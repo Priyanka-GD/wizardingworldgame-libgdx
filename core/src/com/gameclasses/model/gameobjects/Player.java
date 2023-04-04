@@ -4,10 +4,11 @@ package com.gameclasses.model.gameobjects;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Rectangle;
+import com.gameclasses.model.gamecontrollable.GameControllable;
 import com.gameclasses.utils.GameConstants;
 
 
-public class MainCharacter implements GameControllable {
+public class Player implements GameControllable {
     private boolean isSlow;
     private final float slowMultiplier = 0.1f;
 
@@ -18,7 +19,7 @@ public class MainCharacter implements GameControllable {
     public Rectangle characterBox;
     public Rectangle hitBox;
 
-    public MainCharacter (Object object) {
+    public Player (Object object) {
         float width = 100;
         float height = 100;
         float x = (GameConstants.WINDOW_WIDTH - width) / 2;

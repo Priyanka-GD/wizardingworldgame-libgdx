@@ -2,12 +2,12 @@ package com.gameclasses.controller.systems;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.gameclasses.controller.JsonConfigReader;
-import com.gameclasses.controller.PlayerCommand;
 import com.gameclasses.model.factories.EnemyFactory;
 import com.gameclasses.model.factories.EnemyShipFactory;
+import com.gameclasses.model.gamecontrollable.PlayerCommand;
 import com.gameclasses.model.gameobjects.Enemy;
 import com.gameclasses.model.gameobjects.EnemyLaser;
-import com.gameclasses.model.gameobjects.MainCharacter;
+import com.gameclasses.model.gameobjects.Player;
 import com.gameclasses.utils.GameConstants;
 import com.gameclasses.view.gamescreens.BackgroundScreen;
 import org.json.simple.JSONArray;
@@ -20,7 +20,7 @@ import java.util.Queue;
 
 
 public class GameSystem {
-    MainCharacter mainCharacter;
+    Player player;
     private PlayerCommand playerCommand;
     private Queue<Float> enemyReleaseTime;
     private Queue<JSONObject> enemyToBeReleased;
@@ -39,10 +39,10 @@ public class GameSystem {
 
     public void init () {
         JsonConfigReader config = GameConstants.config;
-        mainCharacter = new MainCharacter(config.getPlayerAttribute().get("award-prob"));
-        GameConstants.playerShip = mainCharacter;
+        player = new Player(config.getPlayerAttribute().get("award-prob"));
+        GameConstants.playerShip = player;
         playerCommand = new PlayerCommand();
-        playerCommand.add(mainCharacter);
+        playerCommand.add(player);
         enemyToBeReleased = new LinkedList<>();
         enemyLaserList = new ArrayList<>();
         enemyShipList = new LinkedList<>();
@@ -55,7 +55,7 @@ public class GameSystem {
     }
 
     private void renderCharacter (SpriteBatch sbatch, float deltaTime) {
-        mainCharacter.draw(sbatch, deltaTime);
+        player.draw(sbatch, deltaTime);
     }
 
     public void render (SpriteBatch sbatch, float deltaTime) {

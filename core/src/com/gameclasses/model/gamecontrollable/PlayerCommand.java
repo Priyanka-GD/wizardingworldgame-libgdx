@@ -1,7 +1,6 @@
-package com.gameclasses.controller;
+package com.gameclasses.model.gamecontrollable;
 
 import com.badlogic.gdx.Gdx;
-import com.gameclasses.model.gameobjects.GameControllable;
 import com.gameclasses.utils.GameConstants;
 import com.gameclasses.view.gamescreens.MenuScreen;
 

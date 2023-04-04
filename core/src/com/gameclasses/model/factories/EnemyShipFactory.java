@@ -1,8 +1,8 @@
 package com.gameclasses.model.factories;
 
+import com.gameclasses.controller.laserstrategy.LaserWrapper;
 import com.gameclasses.model.gameobjects.Enemy;
 import com.gameclasses.model.gameobjects.EnemyCharacterShip;
-import com.gameclasses.model.gameobjects.LaserWrapper;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 

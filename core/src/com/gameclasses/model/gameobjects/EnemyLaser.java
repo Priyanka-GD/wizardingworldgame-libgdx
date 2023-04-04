@@ -3,8 +3,8 @@ package com.gameclasses.model.gameobjects;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Rectangle;
-import com.gameclasses.model.lasermovement.LaserMovement;
 import com.gameclasses.utils.GameConstants;
+import com.gameclasses.view.lasermovement.LaserMovement;
 
 public class EnemyLaser {
     private final Texture textureReg;

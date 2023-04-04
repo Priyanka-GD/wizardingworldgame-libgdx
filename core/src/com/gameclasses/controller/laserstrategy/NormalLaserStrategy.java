@@ -2,7 +2,7 @@ package com.gameclasses.controller.laserstrategy;
 
 import com.badlogic.gdx.math.Rectangle;
 import com.gameclasses.model.gameobjects.EnemyLaser;
-import com.gameclasses.model.lasermovement.LaserMovement;
+import com.gameclasses.view.lasermovement.LaserMovement;
 
 import java.util.List;
 

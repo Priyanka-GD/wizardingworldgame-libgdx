@@ -1,4 +1,4 @@
-package com.gameclasses.model.gameobjects;
+package com.gameclasses.model.gamecontrollable;
 
 public interface GameControllable {
     void moveUp ();
