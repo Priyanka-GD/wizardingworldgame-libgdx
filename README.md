@@ -18,7 +18,7 @@ This is a repo for the Project of CPTS-587 Software Design and Architecture
 Wizaring world game mimicks the harry potter fiction world, in which the main charater is played against 
 the antagonist of the play.
 the 4 bosses in the game would be : 
--- Basillisk --  Regular enemies
+-- Basillisk, Dementor --  Regular enemies
 -- Professor Umbridge - mid-boss
 -- Lord Voldemort -- Final Boss
 
