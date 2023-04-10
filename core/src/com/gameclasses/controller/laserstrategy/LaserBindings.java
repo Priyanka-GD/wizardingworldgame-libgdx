@@ -7,13 +7,13 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
-public class LaserWrapper {
-    private float timestamp;
-    private LaserStrategy currentStrategy;
+public class LaserBindings {
     private final Queue<Float> releaseTime;
     private final Queue<LaserStrategy> strategyList;
+    private float timestamp;
+    private LaserStrategy currentStrategy;
 
-    public LaserWrapper () {
+    public LaserBindings () {
         timestamp = 0;
         releaseTime = new LinkedList<>();
         strategyList = new LinkedList<>();

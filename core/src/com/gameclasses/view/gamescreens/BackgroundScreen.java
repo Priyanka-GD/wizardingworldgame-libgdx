@@ -53,13 +53,13 @@ public class BackgroundScreen extends ScoreRenderer {
         sbatch.begin();
         sbatch.draw(this.background, 0, 0, GameConstants.EXT_WINDOW_WIDTH, GameConstants.EXT_WINDOW_HEIGHT);
         fontHP.draw(sbatch, "HP: ", GameConstants.WINDOW_WIDTH + 12, GameConstants.WINDOW_HEIGHT - 60);
-        this.displayPlayerLives();
+        this.displayLives();
         sbatch.end();
         stage.act();
         stage.draw();
     }
 
-    public void displayPlayerLives () {
+    public void displayLives () {
         for (int i = 0; i < this.heartCount; i++)
             sbatch.draw(lives, GameConstants.WINDOW_WIDTH + 15 + ((i % 6) * 50), GameConstants.WINDOW_HEIGHT - (240 + 50 * (i / 6)), 40, 40);
     }

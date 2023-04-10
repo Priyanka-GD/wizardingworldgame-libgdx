@@ -3,7 +3,7 @@ package com.gameclasses.model.gameobjects;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
 import com.gameclasses.controller.lasermovement.LaserMovement;
-import com.gameclasses.controller.laserstrategy.LaserWrapper;
+import com.gameclasses.controller.laserstrategy.LaserBindings;
 import com.gameclasses.view.score.PlayerLivesSystem;
 
 public class EnemyCharacterShip extends Enemy {
@@ -15,7 +15,7 @@ public class EnemyCharacterShip extends Enemy {
         this.score = builder.score;
         this.enemyTexture = builder.texture;
         this.enemyLaserMovement = builder.laserMovement;
-        this.laserWrapper = builder.laserWrapper;
+        this.laserBindings = builder.laserBindings;
         this.isFinalBoss = builder.isFinalBoss;
     }
 
@@ -33,7 +33,7 @@ public class EnemyCharacterShip extends Enemy {
         private Texture texture;
         private Rectangle hitbox;
         private LaserMovement laserMovement;
-        private LaserWrapper laserWrapper;
+        private LaserBindings laserBindings;
         private boolean isFinalBoss;
 
         public BuilderEnemy () {
@@ -71,8 +71,8 @@ public class EnemyCharacterShip extends Enemy {
             }
         }
 
-        public BuilderEnemy laserWrapper (LaserWrapper laserWrapper) {
-            this.laserWrapper = laserWrapper;
+        public BuilderEnemy laserBindings (LaserBindings laserBindings) {
+            this.laserBindings = laserBindings;
             return this;
         }
 

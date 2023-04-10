@@ -4,7 +4,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Rectangle;
 import com.gameclasses.controller.lasermovement.LaserMovement;
-import com.gameclasses.controller.laserstrategy.LaserWrapper;
+import com.gameclasses.controller.laserstrategy.LaserBindings;
 import com.gameclasses.utils.GameConstants;
 import com.gameclasses.view.score.PlayerLivesSystem;
 
@@ -16,7 +16,7 @@ abstract public class Enemy {
     public int hp;
     public int score;
     public boolean isFinalBoss;
-    public LaserWrapper laserWrapper;
+    public LaserBindings laserBindings;
     public LaserMovement enemyLaserMovement;
     Texture enemyTexture;
 
@@ -30,7 +30,7 @@ abstract public class Enemy {
     }
 
     public void fire (float deltaTime, List<EnemyLaser> lasers) {
-        laserWrapper.fire(deltaTime, this.hitbox, lasers);
+        laserBindings.fire(deltaTime, this.hitbox, lasers);
     }
 
     public boolean overlaps (Rectangle other) {
