@@ -18,7 +18,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
-
 public class GameSystem {
     Player player;
     private CharacterCommand characterCommand;
@@ -32,7 +31,6 @@ public class GameSystem {
     private boolean end = false;
 
     public GameSystem (BackgroundScreen screen) {
-
         this.subject = screen;
         init();
     }
@@ -88,7 +86,6 @@ public class GameSystem {
             }
         }
     }
-
     private void renderEnemy (SpriteBatch sbatch, float deltaTime) {
         List<Enemy> removeList = new ArrayList<>();
         for (Enemy enemy : enemyShipList) {
@@ -103,13 +100,11 @@ public class GameSystem {
         }
         enemyShipList.removeAll(removeList);
     }
-
     private void updateGame (float deltaTime) {
         characterTimestamp += deltaTime;
         spawnEnemy();
         characterCommand.run();
     }
-
     private void renderEnemyLasers (SpriteBatch sbatch, float deltaTime) {
         List<EnemyLaser> removeList1 = new ArrayList<>();
         for (EnemyLaser enemyLaser : enemyLaserList) {
@@ -121,8 +116,8 @@ public class GameSystem {
         }
         enemyLaserList.removeAll(removeList1);
     }
-
     public boolean canEnd () {
+
         return characterTimestamp > GameConstants.GAME_LENGTH || this.end;
     }
 }

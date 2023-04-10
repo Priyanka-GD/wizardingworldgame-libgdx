@@ -116,7 +116,7 @@ public class MenuScreen implements Screen {
         game.setScreen(new ArrowScreen(game));
     }
     private void startGame() {
-        GameConstants.config = new JsonConfigReader(1);
+        GameConstants.config = new JsonConfigReader();
         this.dispose();
         stage.dispose();
         game.setScreen(new GameScreen(game));
