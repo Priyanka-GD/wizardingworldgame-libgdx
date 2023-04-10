@@ -21,13 +21,12 @@ public class BackgroundScreen extends ScoreRenderer {
 
     private final Viewport viewportBackground;
     private final Texture background;
-    private final BitmapFont font0;
+    private final BitmapFont fontHP;
     private final SpriteBatch sbatch;
-    private final String mode;
     private final Skin skin;
     private final Stage stage;
     private final Texture lives;
-    private int heartCount, score;
+    private int heartCount;
 
     public BackgroundScreen (PlayerLivesSystem subject) {
         this.cameraBackground = new OrthographicCamera();
@@ -35,10 +34,9 @@ public class BackgroundScreen extends ScoreRenderer {
         this.viewportBackground = new StretchViewport(GameConstants.EXT_WINDOW_WIDTH, GameConstants.EXT_WINDOW_HEIGHT, cameraBackground);
         this.background = new Texture("images/firstscreen.jpg");
         this.lives = new Texture("images/horcrux.png");
-        this.font0 = new BitmapFont();
-        this.font0.setColor(0, 0, 0, 1);
-        this.font0.getData().setScale(2f);
-        this.mode = "Normal speed";
+        this.fontHP = new BitmapFont();
+        this.fontHP.setColor(0, 0, 0, 1);
+        this.fontHP.getData().setScale(2f);
         this.skin = new Skin(Gdx.files.internal("skin/glassy-ui.json"));
         this.stage = new Stage(this.viewportBackground);
         Gdx.input.setInputProcessor(stage);
@@ -54,7 +52,7 @@ public class BackgroundScreen extends ScoreRenderer {
         Gdx.gl.glViewport(0, 0, GameConstants.EXT_WINDOW_WIDTH, GameConstants.EXT_WINDOW_HEIGHT);
         sbatch.begin();
         sbatch.draw(this.background, 0, 0, GameConstants.EXT_WINDOW_WIDTH, GameConstants.EXT_WINDOW_HEIGHT);
-        font0.draw(sbatch, "HP: ", GameConstants.WINDOW_WIDTH + 12, GameConstants.WINDOW_HEIGHT - 60);
+        fontHP.draw(sbatch, "HP: ", GameConstants.WINDOW_WIDTH + 12, GameConstants.WINDOW_HEIGHT - 60);
         this.displayLives();
         sbatch.end();
         stage.act();
