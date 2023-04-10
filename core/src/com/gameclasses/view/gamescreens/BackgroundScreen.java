@@ -12,47 +12,62 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.gameclasses.utils.GameConstants;
+import com.gameclasses.view.score.PlayerLivesSystem;
+import com.gameclasses.view.score.ScoreRenderer;
 
 
-public class BackgroundScreen  {
+public class BackgroundScreen extends ScoreRenderer {
     private final Camera cameraBackground;
 
     private final Viewport viewportBackground;
     private final Texture background;
-    private final BitmapFont font0, font1;
+    private final BitmapFont font0;
     private final SpriteBatch sbatch;
     private final String mode;
     private final Skin skin;
     private final Stage stage;
-    public BackgroundScreen() {
+    private final Texture lives;
+    private int heartCount, score;
+
+    public BackgroundScreen (PlayerLivesSystem subject) {
         this.cameraBackground = new OrthographicCamera();
         ((OrthographicCamera) cameraBackground).setToOrtho(false, GameConstants.EXT_WINDOW_WIDTH, GameConstants.EXT_WINDOW_HEIGHT);
-        this.viewportBackground = new StretchViewport(GameConstants.EXT_WINDOW_WIDTH, GameConstants.EXT_WINDOW_HEIGHT,cameraBackground);
+        this.viewportBackground = new StretchViewport(GameConstants.EXT_WINDOW_WIDTH, GameConstants.EXT_WINDOW_HEIGHT, cameraBackground);
         this.background = new Texture("images/firstscreen.jpg");
+        this.lives = new Texture("images/horcrux.png");
         this.font0 = new BitmapFont();
-        this.font1 = new BitmapFont();
         this.font0.setColor(0, 0, 0, 1);
         this.font0.getData().setScale(2f);
-        this.font1.setColor(1,1,1,1);
-        this.font1.getData().setScale(2f);
         this.mode = "Normal speed";
         this.skin = new Skin(Gdx.files.internal("skin/glassy-ui.json"));
         this.stage = new Stage(this.viewportBackground);
         Gdx.input.setInputProcessor(stage);
         sbatch = new SpriteBatch();
+        this.subject = subject;
+        this.subject.attachBackScreen(this);
+        this.heartCount = this.subject.getLives();
     }
 
-    public void renderBackground(){
+    public void renderBackground () {
         sbatch.setColor(Color.WHITE);
-        font0.setColor(Color.WHITE);
         sbatch.setProjectionMatrix(cameraBackground.combined);
-        Gdx.gl.glViewport(0,0, GameConstants.EXT_WINDOW_WIDTH, GameConstants.EXT_WINDOW_HEIGHT);
+        Gdx.gl.glViewport(0, 0, GameConstants.EXT_WINDOW_WIDTH, GameConstants.EXT_WINDOW_HEIGHT);
         sbatch.begin();
         sbatch.draw(this.background, 0, 0, GameConstants.EXT_WINDOW_WIDTH, GameConstants.EXT_WINDOW_HEIGHT);
+        font0.draw(sbatch, "HP: ", GameConstants.WINDOW_WIDTH + 12, GameConstants.WINDOW_HEIGHT - 60);
+        this.displayLives();
         sbatch.end();
         stage.act();
         stage.draw();
     }
 
+    public void displayLives () {
+        for (int i = 0; i < this.heartCount; i++)
+            sbatch.draw(lives, GameConstants.WINDOW_WIDTH + 15 + ((i % 6) * 50), GameConstants.WINDOW_HEIGHT - (240 + 50 * (i / 6)), 40, 40);
+    }
 
+    @Override
+    public void updateLives () {
+        this.heartCount = subject.getLives();
+    }
 }

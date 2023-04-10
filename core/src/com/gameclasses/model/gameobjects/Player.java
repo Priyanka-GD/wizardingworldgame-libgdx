@@ -12,7 +12,7 @@ public class Player implements GameControllable {
     private boolean isSlow;
     private final float slowMultiplier = 0.1f;
 
-    public float movingSpeed;
+    public float moveSpeed;
     private final Texture characterMode;
     private final Texture hitMode;
     private float shootTimestamp = 0;
@@ -24,7 +24,7 @@ public class Player implements GameControllable {
         float height = 100;
         float x = (GameConstants.WINDOW_WIDTH - width) / 2;
         float y = 50;
-        this.movingSpeed = 10f;
+        this.moveSpeed = 10f;
         this.characterBox = new Rectangle(x, y, width, height);
         this.hitBox = new Rectangle(250, 400, 15, 15);
         this.characterMode = new Texture("images/harrypotter.png");
@@ -39,7 +39,7 @@ public class Player implements GameControllable {
     }
 
     private float getSpeed () {
-        float speed = this.movingSpeed;
+        float speed = this.moveSpeed;
         if (isSlow) {
             speed *= this.slowMultiplier;
         }

@@ -9,12 +9,8 @@ import org.json.simple.parser.ParseException;
 public class JsonConfigReader {
     private final JSONObject obj;
 
-    public JsonConfigReader () {
-        try {
-            obj = (JSONObject) new JSONParser().parse(Gdx.files.internal("config-jsons/game-level.json").readString());
-        } catch (ParseException ex) {
-            throw new RuntimeException(ex);
-        }
+    public JsonConfigReader () throws ParseException {
+        obj = (JSONObject) new JSONParser().parse(Gdx.files.internal("config-jsons/game-level.json").readString());
     }
 
     public JSONObject getPlayerAttribute () {

@@ -13,6 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.gameclasses.controller.JsonConfigReader;
 import com.gameclasses.utils.GameConstants;
+import org.json.simple.parser.ParseException;
 
 public class MenuScreen implements Screen {
     private final MainGame game;
@@ -116,7 +117,11 @@ public class MenuScreen implements Screen {
         game.setScreen(new ArrowScreen(game));
     }
     private void startGame() {
-        GameConstants.config = new JsonConfigReader();
+        try {
+            GameConstants.config = new JsonConfigReader();
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
         this.dispose();
         stage.dispose();
         game.setScreen(new GameScreen(game));

@@ -6,6 +6,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.gameclasses.controller.lasermovement.LaserMovement;
 import com.gameclasses.controller.laserstrategy.LaserWrapper;
 import com.gameclasses.utils.GameConstants;
+import com.gameclasses.view.score.PlayerLivesSystem;
 
 import java.util.List;
 
@@ -36,7 +37,7 @@ abstract public class Enemy {
         return this.hitbox.overlaps(other);
     }
 
-    public abstract void die ();
+    public abstract void die (PlayerLivesSystem playerLivesSystem);
 
     public boolean isOutOfBounds () {
         return this.hitbox.x + hitbox.width < 0 || this.hitbox.x > GameConstants.WINDOW_WIDTH || this.hitbox.y + hitbox.height < 0

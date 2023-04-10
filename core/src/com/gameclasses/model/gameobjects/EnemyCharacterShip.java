@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
 import com.gameclasses.controller.lasermovement.LaserMovement;
 import com.gameclasses.controller.laserstrategy.LaserWrapper;
+import com.gameclasses.view.score.PlayerLivesSystem;
 
 public class EnemyCharacterShip extends Enemy {
 
@@ -19,8 +20,11 @@ public class EnemyCharacterShip extends Enemy {
     }
 
     @Override
-    public void die () {
-
+    public void die (PlayerLivesSystem playerLivesSystem) {
+        // Final boss die ends game
+        if (this.isFinalBoss) {
+            playerLivesSystem.updateEnd(true);
+        }
     }
 
     public static class BuilderEnemy {

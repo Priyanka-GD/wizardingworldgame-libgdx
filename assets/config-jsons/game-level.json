@@ -1,7 +1,6 @@
 {
   "character": {
-    "lives": 10,
-    "award-prob": 1.0
+    "lives": 15
   },
   "enemy": [
     {

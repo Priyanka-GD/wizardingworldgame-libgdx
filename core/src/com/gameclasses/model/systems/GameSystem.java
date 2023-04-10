@@ -10,6 +10,7 @@ import com.gameclasses.model.gameobjects.EnemyLaser;
 import com.gameclasses.model.gameobjects.Player;
 import com.gameclasses.utils.GameConstants;
 import com.gameclasses.view.gamescreens.BackgroundScreen;
+import com.gameclasses.view.score.PlayerLivesSystem;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -29,6 +30,7 @@ public class GameSystem {
     EnemyFactory enemyCharacterFactory;
     private float characterTimestamp;
     private boolean end = false;
+    private PlayerLivesSystem playerLivesSystem;
 
     public GameSystem (BackgroundScreen screen) {
         this.subject = screen;
@@ -37,7 +39,7 @@ public class GameSystem {
 
     public void init () {
         JsonConfigReader config = GameConstants.config;
-        player = new Player(config.getPlayerAttribute().get("award-prob"));
+        player = new Player(config.getPlayerAttribute());
         GameConstants.playerShip = player;
         characterCommand = new CharacterCommand();
         characterCommand.add(player);
@@ -72,7 +74,6 @@ public class GameSystem {
             enemyShipList.add(enemy);
         }
     }
-
     public void loadEnemies (JsonConfigReader config) {
         JSONArray enemyConfigs = config.getEnemies();
         for (Object obj : enemyConfigs) {
@@ -104,6 +105,7 @@ public class GameSystem {
         characterTimestamp += deltaTime;
         spawnEnemy();
         characterCommand.run();
+        detectCollision();
     }
     private void renderEnemyLasers (SpriteBatch sbatch, float deltaTime) {
         List<EnemyLaser> removeList1 = new ArrayList<>();
@@ -116,8 +118,27 @@ public class GameSystem {
         }
         enemyLaserList.removeAll(removeList1);
     }
-    public boolean canEnd () {
 
+    public boolean canEnd () {
         return characterTimestamp > GameConstants.GAME_LENGTH || this.end;
+    }
+
+    public void setScoreSystem (PlayerLivesSystem ss) {
+        this.playerLivesSystem = ss;
+    }
+
+    private void playerCollisionWithEnemy () {
+        List<EnemyLaser> removeList = new ArrayList<>();
+        for (EnemyLaser laser : enemyLaserList) {
+            if (player.overlaps(laser.hitBox)) {
+                removeList.add(laser);
+                playerLivesSystem.updateLives(-1);
+            }
+        }
+        enemyLaserList.removeAll(removeList);
+    }
+
+    private void detectCollision () {
+        playerCollisionWithEnemy();
     }
 }
