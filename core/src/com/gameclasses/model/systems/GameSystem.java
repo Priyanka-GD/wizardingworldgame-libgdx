@@ -1,10 +1,10 @@
-package com.gameclasses.controller.systems;
+package com.gameclasses.model.systems;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.gameclasses.controller.JsonConfigReader;
 import com.gameclasses.model.factories.EnemyFactory;
 import com.gameclasses.model.factories.EnemyShipFactory;
-import com.gameclasses.model.gamecontrollable.PlayerCommand;
+import com.gameclasses.model.gamecontrollable.CharacterCommand;
 import com.gameclasses.model.gameobjects.Enemy;
 import com.gameclasses.model.gameobjects.EnemyLaser;
 import com.gameclasses.model.gameobjects.Player;
@@ -21,7 +21,7 @@ import java.util.Queue;
 
 public class GameSystem {
     Player player;
-    private PlayerCommand playerCommand;
+    private CharacterCommand characterCommand;
     private Queue<Float> enemyReleaseTime;
     private Queue<JSONObject> enemyToBeReleased;
     private List<Enemy> enemyShipList;
@@ -41,8 +41,8 @@ public class GameSystem {
         JsonConfigReader config = GameConstants.config;
         player = new Player(config.getPlayerAttribute().get("award-prob"));
         GameConstants.playerShip = player;
-        playerCommand = new PlayerCommand();
-        playerCommand.add(player);
+        characterCommand = new CharacterCommand();
+        characterCommand.add(player);
         enemyToBeReleased = new LinkedList<>();
         enemyLaserList = new ArrayList<>();
         enemyShipList = new LinkedList<>();
@@ -107,7 +107,7 @@ public class GameSystem {
     private void updateGame (float deltaTime) {
         characterTimestamp += deltaTime;
         spawnEnemy();
-        playerCommand.run();
+        characterCommand.run();
     }
 
     private void renderEnemyLasers (SpriteBatch sbatch, float deltaTime) {

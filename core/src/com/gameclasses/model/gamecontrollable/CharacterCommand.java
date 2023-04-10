@@ -7,16 +7,19 @@ import com.gameclasses.view.gamescreens.MenuScreen;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PlayerCommand {
+public class CharacterCommand {
     List<GameControllable> gameControllables;
     public int inputType = MenuScreen.keyBind;
-    public PlayerCommand() {
+
+    public CharacterCommand () {
         gameControllables = new ArrayList<>();
     }
-    public void add(GameControllable subscriber) {
+
+    public void add (GameControllable subscriber) {
         gameControllables.add(subscriber);
     }
-    public void run() {
+
+    public void run () {
         for (GameControllable sub : gameControllables) {
             if (inputType == 0) {
                 // Character Movements

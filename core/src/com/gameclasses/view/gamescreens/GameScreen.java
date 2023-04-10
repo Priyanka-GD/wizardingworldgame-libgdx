@@ -10,7 +10,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.gameclasses.controller.JsonConfigReader;
-import com.gameclasses.controller.systems.GameSystem;
+import com.gameclasses.model.systems.GameSystem;
 import com.gameclasses.utils.GameConstants;
 import org.json.simple.JSONObject;
 

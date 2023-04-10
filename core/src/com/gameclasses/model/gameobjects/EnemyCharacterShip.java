@@ -2,12 +2,12 @@ package com.gameclasses.model.gameobjects;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
+import com.gameclasses.controller.lasermovement.LaserMovement;
 import com.gameclasses.controller.laserstrategy.LaserWrapper;
-import com.gameclasses.view.lasermovement.LaserMovement;
 
 public class EnemyCharacterShip extends Enemy {
 
-    public EnemyCharacterShip (EnemyBuilder builder) {
+    public EnemyCharacterShip (BuilderEnemy builder) {
         super();
         this.hp = builder.hp;
         this.hitbox = builder.hitbox;
@@ -23,7 +23,7 @@ public class EnemyCharacterShip extends Enemy {
 
     }
 
-    public static class EnemyBuilder {
+    public static class BuilderEnemy {
         private int hp;
         private int score;
         private Texture texture;
@@ -32,33 +32,33 @@ public class EnemyCharacterShip extends Enemy {
         private LaserWrapper laserWrapper;
         private boolean isFinalBoss;
 
-        public EnemyBuilder () {
+        public BuilderEnemy () {
 
         }
 
-        public EnemyBuilder hp (int hp) {
+        public BuilderEnemy hp (int hp) {
             this.hp = hp;
             return this;
         }
 
-        public EnemyBuilder score (int score) {
+        public BuilderEnemy score (int score) {
             this.score = score;
             return this;
         }
 
-        public EnemyBuilder texture (String filename) {
+        public BuilderEnemy texture (String filename) {
             this.texture = new Texture(filename);
             return this;
         }
 
-        public EnemyBuilder hitbox (int x, int y, int width, int height) {
+        public BuilderEnemy hitbox (int x, int y, int width, int height) {
             this.hitbox = new Rectangle(x, y, width, height);
             return this;
         }
 
-        public EnemyBuilder movement (String movement) {
+        public BuilderEnemy movement (String movement) {
             try {
-                Class cls = Class.forName("com.gameclasses.model.lasermovement." + movement);
+                Class cls = Class.forName("com.gameclasses.controller.lasermovement." + movement);
                 this.laserMovement = (LaserMovement) cls.getConstructor().newInstance();
             } catch (Throwable e) {
                 System.err.println(e);
@@ -67,12 +67,12 @@ public class EnemyCharacterShip extends Enemy {
             }
         }
 
-        public EnemyBuilder laserWrapper (LaserWrapper laserWrapper) {
+        public BuilderEnemy laserWrapper (LaserWrapper laserWrapper) {
             this.laserWrapper = laserWrapper;
             return this;
         }
 
-        public EnemyBuilder isFinalBoss (boolean isFinalBoss) {
+        public BuilderEnemy isFinalBoss (boolean isFinalBoss) {
             this.isFinalBoss = isFinalBoss;
             return this;
         }

@@ -1,8 +1,8 @@
 package com.gameclasses.controller.laserstrategy;
 
 import com.badlogic.gdx.math.Rectangle;
+import com.gameclasses.controller.lasermovement.LaserMovement;
 import com.gameclasses.model.gameobjects.EnemyLaser;
-import com.gameclasses.view.lasermovement.LaserMovement;
 
 import java.util.List;
 
@@ -43,7 +43,7 @@ public class NormalLaserStrategy implements LaserStrategy {
     public void fire (float deltaTime, Rectangle hitbox, List<EnemyLaser> list) {
         timeSinceLastShot += deltaTime;
         try {
-            Class cls = Class.forName("com.gameclasses.model.lasermovement." + movementClass);
+            Class cls = Class.forName("com.gameclasses.controller.lasermovement." + movementClass);
             LaserMovement laserMovement = (LaserMovement) cls.getConstructor().newInstance();
             laserMovement.setDirection(0, -1);
             laserMovement.setSpeed(laserMovementSpeed);

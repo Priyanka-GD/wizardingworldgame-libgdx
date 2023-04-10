@@ -21,7 +21,7 @@ public class EnemyShipFactory implements EnemyFactory {
                     (String) laser.get("texture")
             );
         }
-        return new EnemyCharacterShip.EnemyBuilder()
+        return new EnemyCharacterShip.BuilderEnemy()
                 .hp(((Long) object.get("hp")).intValue())
                 .score(((Long) object.get("reward")).intValue())
                 .texture((String) object.get("texture"))

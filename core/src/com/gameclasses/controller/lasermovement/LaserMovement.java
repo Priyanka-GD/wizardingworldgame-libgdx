@@ -1,4 +1,4 @@
-package com.gameclasses.view.lasermovement;
+package com.gameclasses.controller.lasermovement;
 
 import com.badlogic.gdx.math.Rectangle;
 

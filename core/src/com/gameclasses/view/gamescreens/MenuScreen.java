@@ -15,21 +15,22 @@ import com.gameclasses.controller.JsonConfigReader;
 import com.gameclasses.utils.GameConstants;
 
 public class MenuScreen implements Screen {
-        private final MainGame game;
-        private final Texture background;
-        private final Stage stage;
+    private final MainGame game;
+    private final Texture background;
+    private final Stage stage;
     public static int keyBind = 0;
     private final Skin skin;
 
-        public MenuScreen(MainGame game) {
-            this.game = game;
-            skin = new Skin(Gdx.files.internal("skin/glassy-ui.json"));
-            background = new Texture("images/firstscreen.jpg");
-            stage = new Stage(new ScreenViewport());
-            Gdx.input.setInputProcessor(stage);
-            loadButtons();
-        }
-    public void loadButtons()
+    public MenuScreen (MainGame game) {
+        this.game = game;
+        skin = new Skin(Gdx.files.internal("skin/glassy-ui.json"));
+        background = new Texture("images/firstscreen.jpg");
+        stage = new Stage(new ScreenViewport());
+        Gdx.input.setInputProcessor(stage);
+        loadButtons();
+    }
+
+    public void loadButtons ()
     {
         int sizeUnit = 60;
         //About the game

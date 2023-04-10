@@ -1,4 +1,4 @@
-package com.gameclasses.view.lasermovement;
+package com.gameclasses.controller.lasermovement;
 
 import com.badlogic.gdx.math.Rectangle;
 
@@ -24,7 +24,7 @@ public class LShapedLaserMovement implements LaserMovement {
 
     @Override
     public void setDirection (float xDirection, float yDirection) {
-        // DO NOTHING
+
     }
 
     @Override
@@ -34,6 +34,6 @@ public class LShapedLaserMovement implements LaserMovement {
 
     @Override
     public void setAcceleration (float acceleration) {
-        // DO NOTHING
+
     }
 }
