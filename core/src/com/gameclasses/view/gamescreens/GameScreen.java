@@ -55,11 +55,14 @@ public class GameScreen implements Screen {
         Gdx.gl.glClear(GL_COLOR_BUFFER_BIT);
         this.backgroundScreen.renderBackground();
         spriteBatch.setProjectionMatrix(cameraForeground.combined);
-        Gdx.gl.glViewport(10,10, GameConstants.WINDOW_WIDTH, GameConstants.WINDOW_HEIGHT);
+        Gdx.gl.glViewport(10, 10, GameConstants.WINDOW_WIDTH, GameConstants.WINDOW_HEIGHT);
         spriteBatch.begin();
         spriteBatch.draw(this.texture, 0, 0, GameConstants.EXT_WINDOW_WIDTH, GameConstants.EXT_WINDOW_HEIGHT);
         gameSystem.render(spriteBatch, deltaTime);
         spriteBatch.end();
+        if (gameSystem.canEnd()) {
+            this.gameEnd();
+        }
     }
     @Override
     public void resize(int width, int height) {
@@ -68,15 +71,22 @@ public class GameScreen implements Screen {
     @Override
     public void pause() {
     }
+
     @Override
-    public void resume() {
+    public void resume () {
     }
 
     @Override
-    public void hide() {
+    public void hide () {
     }
-    @Override
-    public void dispose() {
 
+    @Override
+    public void dispose () {
+
+    }
+
+    private void gameEnd () {
+        this.dispose();
+        game.setScreen(new GameExitScreen(game, playerLivesSystem.isWin()));
     }
 }

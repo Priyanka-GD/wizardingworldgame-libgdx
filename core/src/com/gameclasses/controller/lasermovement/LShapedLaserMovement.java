@@ -3,20 +3,20 @@ package com.gameclasses.controller.lasermovement;
 import com.badlogic.gdx.math.Rectangle;
 
 public class LShapedLaserMovement implements LaserMovement {
-    public float timestamp;
+    public float timeStamp;
     public float timeToTurn;
     public float speed;
 
     public LShapedLaserMovement () {
-        timestamp = 0;
-        timeToTurn = 5;
-        speed = 45;
+        timeStamp = 0;
+        timeToTurn = 10;
+        speed = 50;
     }
 
     @Override
     public void move (float deltaTime, Rectangle hitbox) {
-        timestamp += deltaTime;
-        if (timestamp < timeToTurn)
+        timeStamp += deltaTime;
+        if (timeStamp < timeToTurn)
             hitbox.y -= speed * deltaTime;
         else
             hitbox.x += speed * deltaTime;

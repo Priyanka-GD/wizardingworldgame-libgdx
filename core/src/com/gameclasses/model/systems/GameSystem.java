@@ -106,6 +106,8 @@ public class GameSystem {
         spawnEnemy();
         characterCommand.run();
         detectCollision();
+        if (playerLivesSystem.getLives() == 0)
+            this.end = true;
     }
     private void renderEnemyLasers (SpriteBatch sbatch, float deltaTime) {
         List<EnemyLaser> removeList1 = new ArrayList<>();
