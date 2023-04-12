@@ -43,5 +43,10 @@ to ensure that the code structure is modular, extendable, and efficient.
 
 
 # Work done for Deliverable 2
-1. Basillisk(enemy) as an enemy appear in a count of 5 and throw thunderbolt at the character.
-2. Created Json file to read the configuration for game characters
+1. Basillisk(enemy) and Dementor appear as regular enemies and throw thunderbolt at the character.
+2. Professor Umbridge appear as mid-boss, followed by Voldemort as FInal Boss
+3. Created Json file to read the configuration for game characters
+4. Player can fire bullets and kill enemies
+5. Enemies can fire bullets which reduces hp of the player by -1.
+6. When no HP left for a player, game over
+7. If player stays till the end of the game, then player wins
