@@ -4,23 +4,22 @@ import com.badlogic.gdx.math.Rectangle;
 
 public class StraightLineShapedLaserMovement implements LaserMovement {
 
-    private float xDirection = 0;
-    private float yDirection = 0;
-
-    private float movementSpeed = 110;
-    private float acceleration = 2;
+    private float x = 0;
+    private float y = 0;
+    private float movementSpeed = 90;
+    private float acceleration = 1;
 
     @Override
-    public void move (float deltaTime, Rectangle hitbox) {
-        hitbox.x += movementSpeed * xDirection * deltaTime;
-        hitbox.y += movementSpeed * yDirection * deltaTime;
+    public void moveLaser (float deltaTime, Rectangle hitBox) {
+        hitBox.x += movementSpeed * x * deltaTime;
+        hitBox.y += movementSpeed * y * deltaTime;
         movementSpeed = movementSpeed * acceleration;
     }
 
     @Override
-    public void setDirection (float xDirection, float yDirection) {
-        this.xDirection = xDirection;
-        this.yDirection = yDirection;
+    public void setDirection (float x, float y) {
+        this.x = x;
+        this.y = y;
     }
 
     @Override

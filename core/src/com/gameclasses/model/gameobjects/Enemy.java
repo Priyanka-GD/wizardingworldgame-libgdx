@@ -12,7 +12,7 @@ import java.util.List;
 
 //Deliverable 2
 abstract public class Enemy {
-    public Rectangle hitbox;
+    public Rectangle hitBox;
     public int hp;
     public int score;
     public boolean isFinalBoss;
@@ -34,23 +34,23 @@ abstract public class Enemy {
     }
 
     public void draw (Batch batch, float deltaTime) {
-        enemyLaserMovement.move(deltaTime, this.hitbox);
-        batch.draw(enemyTexture, hitbox.x, hitbox.y, hitbox.width, hitbox.height);
+        enemyLaserMovement.moveLaser(deltaTime, this.hitBox);
+        batch.draw(enemyTexture, hitBox.x, hitBox.y, hitBox.width, hitBox.height);
     }
 
     public void fire (float deltaTime, List<EnemyLaser> lasers) {
-        laserBindings.fire(deltaTime, this.hitbox, lasers);
+        laserBindings.fire(deltaTime, this.hitBox, lasers);
     }
 
     public boolean overlaps (Rectangle other) {
-        return this.hitbox.overlaps(other);
+        return this.hitBox.overlaps(other);
     }
 
     public abstract void die (PlayerLivesSystem playerLivesSystem);
 
     public boolean isOutOfBounds () {
-        return this.hitbox.x + hitbox.width < 0 || this.hitbox.x > GameConstants.WINDOW_WIDTH || this.hitbox.y + hitbox.height < 0
-                || this.hitbox.y > GameConstants.WINDOW_HEIGHT;
+        return this.hitBox.x + hitBox.width < 0 || this.hitBox.x > GameConstants.WINDOW_WIDTH || this.hitBox.y + hitBox.height < 0
+                || this.hitBox.y > GameConstants.WINDOW_HEIGHT;
     }
 }
 

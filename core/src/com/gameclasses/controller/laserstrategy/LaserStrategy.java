@@ -11,5 +11,5 @@ public interface LaserStrategy {
 
     void setLaserTexture (String filename);
 
-    void laserFire (float deltaTime, Rectangle hitbox, List<EnemyLaser> list);
+    void laserFire (float deltaTime, Rectangle hitBox, List<EnemyLaser> list);
 }

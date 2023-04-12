@@ -3,9 +3,9 @@ package com.gameclasses.controller.lasermovement;
 import com.badlogic.gdx.math.Rectangle;
 
 public interface LaserMovement {
-    void move (float deltaTime, Rectangle hitbox);
+    void moveLaser (float deltaTime, Rectangle hitBox);
 
-    void setDirection (float xDirection, float yDirection);
+    void setDirection (float x, float y);
 
     void setSpeed (float speed);
 

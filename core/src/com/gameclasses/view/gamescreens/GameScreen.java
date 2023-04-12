@@ -42,7 +42,7 @@ public class GameScreen implements Screen {
         texture = new Texture("images/gamescreen.jpg");
         playerLivesSystem = new PlayerLivesSystem(playerConfigs);
         this.backgroundScreen = new BackgroundScreen(playerLivesSystem);
-        gameSystem.setScoreSystem(playerLivesSystem);
+        gameSystem.setLivesSystem(playerLivesSystem);
         this.game = game;
     }
 

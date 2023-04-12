@@ -11,7 +11,7 @@ public class EnemyCharacterShip extends Enemy {
     public EnemyCharacterShip (BuilderEnemy builder) {
         super();
         this.hp = builder.hp;
-        this.hitbox = builder.hitbox;
+        this.hitBox = builder.hitBox;
         this.score = builder.score;
         this.enemyTexture = builder.texture;
         this.enemyLaserMovement = builder.laserMovement;
@@ -31,7 +31,7 @@ public class EnemyCharacterShip extends Enemy {
         private int hp;
         private int score;
         private Texture texture;
-        private Rectangle hitbox;
+        private Rectangle hitBox;
         private LaserMovement laserMovement;
         private LaserBindings laserBindings;
         private boolean isFinalBoss;
@@ -55,8 +55,8 @@ public class EnemyCharacterShip extends Enemy {
             return this;
         }
 
-        public BuilderEnemy hitbox (int x, int y, int width, int height) {
-            this.hitbox = new Rectangle(x, y, width, height);
+        public BuilderEnemy hitBox (int x, int y, int width, int height) {
+            this.hitBox = new Rectangle(x, y, width, height);
             return this;
         }
 
