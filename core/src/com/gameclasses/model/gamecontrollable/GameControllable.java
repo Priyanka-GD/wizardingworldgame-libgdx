@@ -1,4 +1,4 @@
-package com.gameclasses.model.gameobjects;
+package com.gameclasses.model.gamecontrollable;
 
 public interface GameControllable {
     void moveUp ();
@@ -8,6 +8,8 @@ public interface GameControllable {
     void moveLeft ();
 
     void moveRight ();
+
+    void playerFire ();
 
     void slowMode (boolean slow);
 }

@@ -3,8 +3,10 @@ package com.gameclasses.model.gameobjects;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Rectangle;
-import com.gameclasses.model.lasermovement.Movement;
+import com.gameclasses.controller.lasermovement.LaserMovement;
+import com.gameclasses.controller.laserstrategy.LaserBindings;
 import com.gameclasses.utils.GameConstants;
+import com.gameclasses.view.score.PlayerLivesSystem;
 
 import java.util.List;
 
@@ -14,28 +16,37 @@ abstract public class Enemy {
     public int hp;
     public int score;
     public boolean isFinalBoss;
-    public LaserWrapper laserWrapper;
-    public Movement enemyMovement;
+    public LaserBindings laserBindings;
+    public LaserMovement enemyLaserMovement;
     Texture enemyTexture;
+    private List<EnemyLaser> enemyLaserList;
+
+    public List<EnemyLaser> getEnemyLaserList () {
+        return enemyLaserList;
+    }
+
+    public void setEnemyLaserList (List<EnemyLaser> enemyLaserList) {
+        this.enemyLaserList = enemyLaserList;
+    }
 
     public Enemy () {
         isFinalBoss = false;
     }
 
     public void draw (Batch batch, float deltaTime) {
-        enemyMovement.move(deltaTime, this.hitbox);
+        enemyLaserMovement.move(deltaTime, this.hitbox);
         batch.draw(enemyTexture, hitbox.x, hitbox.y, hitbox.width, hitbox.height);
     }
 
     public void fire (float deltaTime, List<EnemyLaser> lasers) {
-        laserWrapper.fire(deltaTime, this.hitbox, lasers);
+        laserBindings.fire(deltaTime, this.hitbox, lasers);
     }
 
     public boolean overlaps (Rectangle other) {
         return this.hitbox.overlaps(other);
     }
 
-    public abstract void die ();
+    public abstract void die (PlayerLivesSystem playerLivesSystem);
 
     public boolean isOutOfBounds () {
         return this.hitbox.x + hitbox.width < 0 || this.hitbox.x > GameConstants.WINDOW_WIDTH || this.hitbox.y + hitbox.height < 0

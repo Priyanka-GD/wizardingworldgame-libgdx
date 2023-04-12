@@ -1,15 +1,17 @@
-package com.gameclasses.controller.systems;
+package com.gameclasses.model.systems;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.gameclasses.controller.JsonConfigReader;
-import com.gameclasses.controller.PlayerCommand;
 import com.gameclasses.model.factories.EnemyFactory;
 import com.gameclasses.model.factories.EnemyShipFactory;
+import com.gameclasses.model.gamecontrollable.CharacterCommand;
 import com.gameclasses.model.gameobjects.Enemy;
 import com.gameclasses.model.gameobjects.EnemyLaser;
-import com.gameclasses.model.gameobjects.MainCharacter;
+import com.gameclasses.model.gameobjects.Player;
+import com.gameclasses.model.gameobjects.PlayerProjectile;
 import com.gameclasses.utils.GameConstants;
 import com.gameclasses.view.gamescreens.BackgroundScreen;
+import com.gameclasses.view.score.PlayerLivesSystem;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -18,10 +20,9 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
-
 public class GameSystem {
-    MainCharacter mainCharacter;
-    private PlayerCommand playerCommand;
+    Player player;
+    private CharacterCommand characterCommand;
     private Queue<Float> enemyReleaseTime;
     private Queue<JSONObject> enemyToBeReleased;
     private List<Enemy> enemyShipList;
@@ -30,18 +31,21 @@ public class GameSystem {
     EnemyFactory enemyCharacterFactory;
     private float characterTimestamp;
     private boolean end = false;
+    private PlayerLivesSystem playerLivesSystem;
+    private List<PlayerProjectile> playerBulletList;
 
     public GameSystem (BackgroundScreen screen) {
-
         this.subject = screen;
         init();
     }
 
     public void init () {
         JsonConfigReader config = GameConstants.config;
-        mainCharacter = new MainCharacter(config.getPlayerAttribute().get("award-prob"));
-        playerCommand = new PlayerCommand();
-        playerCommand.add(mainCharacter);
+        playerBulletList = new ArrayList<>();
+        player = new Player(config.getPlayerAttribute(), playerBulletList);
+        GameConstants.PLAYERSHIP = player;
+        characterCommand = new CharacterCommand();
+        characterCommand.add(player);
         enemyToBeReleased = new LinkedList<>();
         enemyLaserList = new ArrayList<>();
         enemyShipList = new LinkedList<>();
@@ -54,7 +58,7 @@ public class GameSystem {
     }
 
     private void renderCharacter (SpriteBatch sbatch, float deltaTime) {
-        mainCharacter.draw(sbatch, deltaTime);
+        player.draw(sbatch, deltaTime);
     }
 
     public void render (SpriteBatch sbatch, float deltaTime) {
@@ -63,6 +67,7 @@ public class GameSystem {
         // Deliverable 2
         renderEnemy(sbatch, deltaTime);
         renderEnemyLasers(sbatch, deltaTime);
+        renderPlayerShipProjectile(sbatch, deltaTime);
     }
 
     //Deliverable 2
@@ -73,7 +78,6 @@ public class GameSystem {
             enemyShipList.add(enemy);
         }
     }
-
     public void loadEnemies (JsonConfigReader config) {
         JSONArray enemyConfigs = config.getEnemies();
         for (Object obj : enemyConfigs) {
@@ -87,7 +91,6 @@ public class GameSystem {
             }
         }
     }
-
     private void renderEnemy (SpriteBatch sbatch, float deltaTime) {
         List<Enemy> removeList = new ArrayList<>();
         for (Enemy enemy : enemyShipList) {
@@ -102,26 +105,74 @@ public class GameSystem {
         }
         enemyShipList.removeAll(removeList);
     }
-
     private void updateGame (float deltaTime) {
         characterTimestamp += deltaTime;
         spawnEnemy();
-        playerCommand.run();
+        characterCommand.run();
+        detectCollision();
+        if (playerLivesSystem.getLives() == 0)
+            this.end = true;
     }
-
     private void renderEnemyLasers (SpriteBatch sbatch, float deltaTime) {
         List<EnemyLaser> removeList1 = new ArrayList<>();
         for (EnemyLaser enemyLaser : enemyLaserList) {
             enemyLaser.move(deltaTime);
             enemyLaser.draw(sbatch);
-            if (enemyLaser.canRemove()) {
-                removeList1.add(enemyLaser);
             }
         }
-        enemyLaserList.removeAll(removeList1);
-    }
 
     public boolean canEnd () {
-        return characterTimestamp > GameConstants.GAME_LENGTH || this.end;
+        return characterTimestamp > GameConstants.GAME_LENGTH || this.end || playerLivesSystem.canEnd();
+    }
+    public void setScoreSystem (PlayerLivesSystem ss) {
+        this.playerLivesSystem = ss;
+    }
+
+    private void playerCollisionWithEnemy () {
+        List<EnemyLaser> removeList = new ArrayList<>();
+        for (EnemyLaser laser : enemyLaserList) {
+            if (player.overlaps(laser.hitBox)) {
+                removeList.add(laser);
+                playerLivesSystem.updateLives(-1);
+            }
+        }
+        enemyLaserList.removeAll(removeList);
+    }
+
+    private void renderPlayerShipProjectile (SpriteBatch sbatch, float deltaTime) {
+        List<PlayerProjectile> removeList = new ArrayList<>();
+        for (PlayerProjectile bullet : playerBulletList) {
+            bullet.move(deltaTime);
+            bullet.draw(sbatch);
+            if (bullet.canRemove()) {
+                removeList.add(bullet);
+            }
+        }
+        playerBulletList.removeAll(removeList);
+    }
+
+    private void detectCollision () {
+        playerCollisionWithEnemy();
+        collision();
+    }
+
+    private void collision () {
+        List<PlayerProjectile> playerRemoveBulletList = new ArrayList<>();
+        List<Enemy> removeEnemyList = new ArrayList<>();
+        for (PlayerProjectile bullet : playerBulletList) {
+            for (Enemy enemy : enemyShipList) {
+                if (enemy.overlaps(bullet.playerBulletHitbox)) {
+                    enemy.hp -= 1;
+                    playerRemoveBulletList.add(bullet);
+                    enemyLaserList.removeAll(enemyLaserList);
+                    if (enemy.hp <= 0) {
+                        removeEnemyList.add(enemy);
+                        enemy.die(playerLivesSystem);
+                    }
+                }
+            }
+        }
+        playerBulletList.removeAll(playerRemoveBulletList);
+        enemyShipList.removeAll(removeEnemyList);
     }
 }

@@ -13,23 +13,25 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.gameclasses.controller.JsonConfigReader;
 import com.gameclasses.utils.GameConstants;
+import org.json.simple.parser.ParseException;
 
 public class MenuScreen implements Screen {
-        private final MainGame game;
-        private final Texture background;
-        private final Stage stage;
+    private final MainGame game;
+    private final Texture background;
+    private final Stage stage;
     public static int keyBind = 0;
     private final Skin skin;
 
-        public MenuScreen(MainGame game) {
-            this.game = game;
-            skin = new Skin(Gdx.files.internal("skin/glassy-ui.json"));
-            background = new Texture("images/firstscreen.jpg");
-            stage = new Stage(new ScreenViewport());
-            Gdx.input.setInputProcessor(stage);
-            loadButtons();
-        }
-    public void loadButtons()
+    public MenuScreen (MainGame game) {
+        this.game = game;
+        skin = new Skin(Gdx.files.internal("skin/glassy-ui.json"));
+        background = new Texture("images/firstscreen.jpg");
+        stage = new Stage(new ScreenViewport());
+        Gdx.input.setInputProcessor(stage);
+        loadButtons();
+    }
+
+    public void loadButtons ()
     {
         int sizeUnit = 60;
         //About the game
@@ -115,7 +117,11 @@ public class MenuScreen implements Screen {
         game.setScreen(new ArrowScreen(game));
     }
     private void startGame() {
-        GameConstants.config = new JsonConfigReader(1);
+        try {
+            GameConstants.config = new JsonConfigReader();
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
         this.dispose();
         stage.dispose();
         game.setScreen(new GameScreen(game));

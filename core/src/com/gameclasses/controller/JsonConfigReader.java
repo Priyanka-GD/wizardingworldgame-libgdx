@@ -4,18 +4,13 @@ import com.badlogic.gdx.Gdx;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 public class JsonConfigReader {
-    private JSONObject obj;
+    private final JSONObject obj;
 
-    public JsonConfigReader (int level) {
-        try {
-            if (level == 1) {
-                obj = (JSONObject) new JSONParser().parse(Gdx.files.internal("config-jsons/game-level.json").readString());
-            }
-        } catch (org.json.simple.parser.ParseException e) {
-            throw new RuntimeException(e);
-        }
+    public JsonConfigReader () throws ParseException {
+        obj = (JSONObject) new JSONParser().parse(Gdx.files.internal("config-jsons/game-level.json").readString());
     }
 
     public JSONObject getPlayerAttribute () {

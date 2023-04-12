@@ -18,8 +18,8 @@ import com.gameclasses.utils.GameConstants;
 
 public class ArrowScreen implements Screen {
         private final MainGame game;
-        private final SpriteBatch sbatch;
-        private final Texture background;
+    private final SpriteBatch sBatch;
+    private final Texture background;
         private final Stage stage;
         private final Skin skin;
         private final BitmapFont font;
@@ -33,7 +33,7 @@ public class ArrowScreen implements Screen {
             this.font = new BitmapFont();
             this.font.setColor(0, 0, 0, 1);
             this.font.getData().setScale(1f);
-            sbatch = new SpriteBatch();
+            sBatch = new SpriteBatch();
         }
     private void loadButtons() {
         int sizeUnit = 60;
