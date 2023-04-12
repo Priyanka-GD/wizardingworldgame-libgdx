@@ -9,7 +9,7 @@ import java.util.List;
 public interface LaserStrategy {
     void setLaserMovement (String movement);
 
-    void setTexture (String filename);
+    void setLaserTexture (String filename);
 
-    void fire (float deltaTime, Rectangle hitbox, List<EnemyLaser> list);
+    void laserFire (float deltaTime, Rectangle hitbox, List<EnemyLaser> list);
 }

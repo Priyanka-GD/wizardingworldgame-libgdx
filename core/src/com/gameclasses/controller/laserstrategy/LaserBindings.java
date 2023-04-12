@@ -8,35 +8,35 @@ import java.util.List;
 import java.util.Queue;
 
 public class LaserBindings {
-    private final Queue<Float> releaseTime;
-    private final Queue<LaserStrategy> strategyList;
+    private final Queue<Float> laserReleaseTime;
+    private final Queue<LaserStrategy> laserStrategies;
     private float timestamp;
-    private LaserStrategy currentStrategy;
+    private LaserStrategy currentLaserStrategy;
 
     public LaserBindings () {
         timestamp = 0;
-        releaseTime = new LinkedList<>();
-        strategyList = new LinkedList<>();
+        laserReleaseTime = new LinkedList<>();
+        laserStrategies = new LinkedList<>();
     }
 
-    public void fire (float deltaTime, Rectangle hitbox, List<EnemyLaser> list) {
+    public void fire (float deltaTime, Rectangle laserHitbox, List<EnemyLaser> enemyLaserList) {
         timestamp += deltaTime;
-        if (currentStrategy == null || (!releaseTime.isEmpty() && timestamp >= releaseTime.peek())) {
-            releaseTime.poll();
-            currentStrategy = strategyList.poll();
+        if (currentLaserStrategy == null || (!laserReleaseTime.isEmpty() && timestamp >= laserReleaseTime.peek())) {
+            laserReleaseTime.poll();
+            currentLaserStrategy = laserStrategies.poll();
         }
-        currentStrategy.fire(deltaTime, hitbox, list);
+        currentLaserStrategy.laserFire(deltaTime, laserHitbox, enemyLaserList);
     }
 
-    public void addLaser (float timestamp, String stratStr, String moveStr, String texture) {
+    public void addLaser (float timeStamp, String stringStrategy, String stringMovement, String texture) {
 
         try {
-            Class cls = Class.forName("com.gameclasses.controller.laserstrategy." + stratStr);
+            Class cls = Class.forName("com.gameclasses.controller.laserstrategy." + stringStrategy);
             LaserStrategy strategy = (LaserStrategy) cls.getConstructor().newInstance();
-            strategy.setTexture(texture);
-            strategy.setLaserMovement(moveStr);
-            releaseTime.offer(timestamp);
-            strategyList.offer(strategy);
+            strategy.setLaserMovement(stringMovement);
+            strategy.setLaserTexture(texture);
+            laserReleaseTime.offer(timeStamp);
+            laserStrategies.offer(strategy);
         } catch (Throwable e) {
             System.err.println(e);
         }
