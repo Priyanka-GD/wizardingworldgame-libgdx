@@ -8,6 +8,7 @@ import com.gameclasses.model.gamecontrollable.CharacterCommand;
 import com.gameclasses.model.gameobjects.Enemy;
 import com.gameclasses.model.gameobjects.EnemyLaser;
 import com.gameclasses.model.gameobjects.Player;
+import com.gameclasses.model.gameobjects.PlayerProjectile;
 import com.gameclasses.utils.GameConstants;
 import com.gameclasses.view.gamescreens.BackgroundScreen;
 import com.gameclasses.view.score.PlayerLivesSystem;
@@ -31,6 +32,7 @@ public class GameSystem {
     private float characterTimestamp;
     private boolean end = false;
     private PlayerLivesSystem playerLivesSystem;
+    private List<PlayerProjectile> playerBulletList;
 
     public GameSystem (BackgroundScreen screen) {
         this.subject = screen;
@@ -39,8 +41,9 @@ public class GameSystem {
 
     public void init () {
         JsonConfigReader config = GameConstants.config;
-        player = new Player(config.getPlayerAttribute());
-        GameConstants.playerShip = player;
+        playerBulletList = new ArrayList<>();
+        player = new Player(config.getPlayerAttribute(), playerBulletList);
+        GameConstants.PLAYERSHIP = player;
         characterCommand = new CharacterCommand();
         characterCommand.add(player);
         enemyToBeReleased = new LinkedList<>();
@@ -64,6 +67,7 @@ public class GameSystem {
         // Deliverable 2
         renderEnemy(sbatch, deltaTime);
         renderEnemyLasers(sbatch, deltaTime);
+        renderPlayerShipProjectile(sbatch, deltaTime);
     }
 
     //Deliverable 2
@@ -114,17 +118,12 @@ public class GameSystem {
         for (EnemyLaser enemyLaser : enemyLaserList) {
             enemyLaser.move(deltaTime);
             enemyLaser.draw(sbatch);
-            if (enemyLaser.canRemove()) {
-                removeList1.add(enemyLaser);
             }
         }
-        enemyLaserList.removeAll(removeList1);
-    }
 
     public boolean canEnd () {
-        return characterTimestamp > GameConstants.GAME_LENGTH || this.end;
+        return characterTimestamp > GameConstants.GAME_LENGTH || this.end || playerLivesSystem.canEnd();
     }
-
     public void setScoreSystem (PlayerLivesSystem ss) {
         this.playerLivesSystem = ss;
     }
@@ -140,7 +139,40 @@ public class GameSystem {
         enemyLaserList.removeAll(removeList);
     }
 
+    private void renderPlayerShipProjectile (SpriteBatch sbatch, float deltaTime) {
+        List<PlayerProjectile> removeList = new ArrayList<>();
+        for (PlayerProjectile bullet : playerBulletList) {
+            bullet.move(deltaTime);
+            bullet.draw(sbatch);
+            if (bullet.canRemove()) {
+                removeList.add(bullet);
+            }
+        }
+        playerBulletList.removeAll(removeList);
+    }
+
     private void detectCollision () {
         playerCollisionWithEnemy();
+        collision();
+    }
+
+    private void collision () {
+        List<PlayerProjectile> playerRemoveBulletList = new ArrayList<>();
+        List<Enemy> removeEnemyList = new ArrayList<>();
+        for (PlayerProjectile bullet : playerBulletList) {
+            for (Enemy enemy : enemyShipList) {
+                if (enemy.overlaps(bullet.playerBulletHitbox)) {
+                    enemy.hp -= 1;
+                    playerRemoveBulletList.add(bullet);
+                    enemyLaserList.removeAll(enemyLaserList);
+                    if (enemy.hp <= 0) {
+                        removeEnemyList.add(enemy);
+                        enemy.die(playerLivesSystem);
+                    }
+                }
+            }
+        }
+        playerBulletList.removeAll(playerRemoveBulletList);
+        enemyShipList.removeAll(removeEnemyList);
     }
 }

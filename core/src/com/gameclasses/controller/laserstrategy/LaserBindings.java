@@ -8,21 +8,21 @@ import java.util.List;
 import java.util.Queue;
 
 public class LaserBindings {
-    private final Queue<Float> laserReleaseTime;
+    private final Queue<Float> releaseTime;
     private final Queue<LaserStrategy> laserStrategies;
     private float timestamp;
     private LaserStrategy currentLaserStrategy;
 
     public LaserBindings () {
         timestamp = 0;
-        laserReleaseTime = new LinkedList<>();
+        releaseTime = new LinkedList<>();
         laserStrategies = new LinkedList<>();
     }
 
     public void fire (float deltaTime, Rectangle laserHitbox, List<EnemyLaser> enemyLaserList) {
         timestamp += deltaTime;
-        if (currentLaserStrategy == null || (!laserReleaseTime.isEmpty() && timestamp >= laserReleaseTime.peek())) {
-            laserReleaseTime.poll();
+        if (currentLaserStrategy == null || (!releaseTime.isEmpty() && timestamp >= releaseTime.peek())) {
+            releaseTime.poll();
             currentLaserStrategy = laserStrategies.poll();
         }
         currentLaserStrategy.laserFire(deltaTime, laserHitbox, enemyLaserList);
@@ -35,7 +35,7 @@ public class LaserBindings {
             LaserStrategy strategy = (LaserStrategy) cls.getConstructor().newInstance();
             strategy.setLaserMovement(stringMovement);
             strategy.setLaserTexture(texture);
-            laserReleaseTime.offer(timeStamp);
+            releaseTime.offer(timeStamp);
             laserStrategies.offer(strategy);
         } catch (Throwable e) {
             System.err.println(e);

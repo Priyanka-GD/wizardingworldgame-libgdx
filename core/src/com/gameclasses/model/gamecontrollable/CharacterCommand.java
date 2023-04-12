@@ -36,6 +36,9 @@ public class CharacterCommand {
                 if (Gdx.input.isKeyPressed(GameConstants.RIGHT)) {
                     sub.moveRight();
                 }
+                if (Gdx.input.isKeyPressed(GameConstants.PLAYER_FIRE)) {
+                    sub.playerFire();
+                }
             }
 
         }

@@ -9,5 +9,7 @@ public interface GameControllable {
 
     void moveRight ();
 
+    void playerFire ();
+
     void slowMode (boolean slow);
 }

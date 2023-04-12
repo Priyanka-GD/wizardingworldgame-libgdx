@@ -4,7 +4,6 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Rectangle;
 import com.gameclasses.controller.lasermovement.LaserMovement;
-import com.gameclasses.utils.GameConstants;
 
 public class EnemyLaser {
     private final Texture textureReg;
@@ -17,11 +16,11 @@ public class EnemyLaser {
         this.textureReg = new Texture(filename);
     }
 
-    public boolean canRemove () {
+ /*   public boolean canRemove () {
         return hitBox.x < 0 || hitBox.x > GameConstants.WINDOW_WIDTH
                 || hitBox.y > GameConstants.WINDOW_HEIGHT || hitBox.y < 0;
     }
-
+*/
     public void move (float deltaTime) {
         laserMovement.move(deltaTime, hitBox);
     }
