@@ -44,17 +44,10 @@ public class EnemyCharacterShip extends Enemy {
             this.hp = hp;
             return this;
         }
-
-        public BuilderEnemy score (int score) {
-            this.score = score;
-            return this;
-        }
-
         public BuilderEnemy texture (String filename) {
             this.texture = new Texture(filename);
             return this;
         }
-
         public BuilderEnemy hitBox (int x, int y, int width, int height) {
             this.hitBox = new Rectangle(x, y, width, height);
             return this;

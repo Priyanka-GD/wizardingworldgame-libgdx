@@ -10,12 +10,7 @@
       "y": 700,
       "width": 100,
       "height": 100,
-      "movement": "MovementShapeOne",
-      "laser": [
-        {
-          "texture": "images/thunder1.png"
-        }
-      ],
+      "enemyMovement": "MovementShapeOne",
       "count": 1,
       "isFinalBoss": false,
       "spawnTime": 3
@@ -27,46 +22,31 @@
       "y": 800,
       "width": 100,
       "height": 100,
-      "movement": "MovementShapeOne",
-      "laser": [
-        {
-          "texture": "images/thunder1.png"
-        }
-      ],
+      "enemyMovement": "MovementShapeOne",
       "count": 1,
       "isFinalBoss": false,
       "spawnTime": 15
     },
     {
-      "hp": 20,
+      "hp": 5,
       "texture": "images/umbridge-midboss.png",
       "x": 250,
       "y": 800,
       "width": 100,
       "height": 100,
-      "movement": "MovementShapeTwo",
-      "laser": [
-        {
-          "texture": "images/thunder1.png"
-        }
-      ],
+      "enemyMovement": "MovementShapeTwo",
       "count": 1,
       "spawnTime": 30,
       "isFinalBoss": false
     },
     {
-      "hp": 40,
+      "hp": 10,
       "texture": "images/voldemort.jpg",
       "x": 250,
       "y": 800,
       "width": 120,
       "height": 110,
-      "movement": "MovementShapeThree",
-      "laser": [
-        {
-          "texture": "images/thunder1.png"
-        }
-      ],
+      "enemyMovement": "MovementShapeThree",
       "count": 1,
       "spawnTime": 50,
       "isFinalBoss": true
