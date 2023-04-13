@@ -37,7 +37,6 @@ public class LaserStrategyOne implements LaserStrategy {
         this.filename = filename;
     }
 
-
     @Override
     public void laserFire (float deltaTime, Rectangle hitBox, List<EnemyLaser> laserList) {
         timeSinceLastShot += deltaTime;

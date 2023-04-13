@@ -13,18 +13,12 @@
       "movement": "MovementShapeOne",
       "laser": [
         {
-          "texture": "images/thunder1.png",
-          "strategy": "LaserStrategyOne",
-          "movement": "StraightLineShapedLaserMovement",
-          "width": 20,
-          "effectiveFrom": 0
+          "texture": "images/thunder1.png"
         }
       ],
-      "interval": 1,
       "count": 1,
       "isFinalBoss": false,
-      "spawnTime": 3,
-      "reward": 100
+      "spawnTime": 3
     },
     {
       "hp": 1,
@@ -36,18 +30,12 @@
       "movement": "MovementShapeOne",
       "laser": [
         {
-          "texture": "images/thunder1.png",
-          "strategy": "LaserStrategyOne",
-          "movement": "StraightLineShapedLaserMovement",
-          "width": 20,
-          "effectiveFrom": 5
+          "texture": "images/thunder1.png"
         }
       ],
-      "interval": 1,
       "count": 1,
       "isFinalBoss": false,
-      "spawnTime": 15,
-      "reward": 100
+      "spawnTime": 15
     },
     {
       "hp": 20,
@@ -59,15 +47,10 @@
       "movement": "MovementShapeTwo",
       "laser": [
         {
-          "texture": "images/thunder1.png",
-          "strategy": "LaserStrategyOne",
-          "movement": "StraightLineShapedLaserMovement",
-          "effectiveFrom": 8
+          "texture": "images/thunder1.png"
         }
       ],
-      "interval": 1,
       "count": 1,
-      "reward": 1000,
       "spawnTime": 30,
       "isFinalBoss": false
     },
@@ -81,15 +64,10 @@
       "movement": "MovementShapeThree",
       "laser": [
         {
-          "texture": "images/thunder1.png",
-          "strategy": "LaserStrategyOne",
-          "movement": "StraightLineShapedLaserMovement",
-          "effectiveFrom": 11
+          "texture": "images/thunder1.png"
         }
       ],
-      "interval": 1,
       "count": 1,
-      "reward": 1000,
       "spawnTime": 50,
       "isFinalBoss": true
     }

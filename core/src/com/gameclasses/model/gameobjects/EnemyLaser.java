@@ -20,10 +20,6 @@ public class EnemyLaser {
         laserMovement.moveLaser(deltaTime, hitBox);
     }
 
-    public boolean overlaps (Rectangle hitBox) {
-        return this.hitBox.overlaps(hitBox);
-    }
-
     public void draw (Batch batch) {
         batch.draw(textureReg, hitBox.x, hitBox.y, hitBox.width, hitBox.height);
     }

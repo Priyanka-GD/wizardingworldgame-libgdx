@@ -19,23 +19,23 @@ public class LaserBindings {
         laserStrategies = new LinkedList<>();
     }
 
-    public void fire (float deltaTime, Rectangle laserhitBox, List<EnemyLaser> enemyLaserList) {
+    public void fire (float deltaTime, Rectangle laserHitBox, List<EnemyLaser> enemyLaserList) {
         timestamp += deltaTime;
         if (currentLaserStrategy == null || (!releaseTime.isEmpty() && timestamp >= releaseTime.peek())) {
             releaseTime.poll();
             currentLaserStrategy = laserStrategies.poll();
         }
-        currentLaserStrategy.laserFire(deltaTime, laserhitBox, enemyLaserList);
+        currentLaserStrategy.laserFire(deltaTime, laserHitBox, enemyLaserList);
     }
 
-    public void addLaser (float timeStamp, String stringStrategy, String stringMovement, String texture) {
+    public void addLaser (String texture) {
 
         try {
-            Class cls = Class.forName("com.gameclasses.controller.laserstrategy." + stringStrategy);
+            Class cls = Class.forName("com.gameclasses.controller.laserstrategy." + "LaserStrategyOne");
             LaserStrategy strategy = (LaserStrategy) cls.getConstructor().newInstance();
-            strategy.setLaserMovement(stringMovement);
+            strategy.setLaserMovement("StraightLineShapedLaserMovement");
             strategy.setLaserTexture(texture);
-            releaseTime.offer(timeStamp);
+            releaseTime.offer(0.0f);
             laserStrategies.offer(strategy);
         } catch (Throwable e) {
             System.err.println(e);

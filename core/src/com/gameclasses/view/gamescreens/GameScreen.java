@@ -12,7 +12,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.gameclasses.controller.JsonConfigReader;
 import com.gameclasses.model.systems.GameSystem;
 import com.gameclasses.utils.GameConstants;
-import com.gameclasses.view.score.PlayerLivesSystem;
+import com.gameclasses.view.lives.PlayerLivesSystem;
 import org.json.simple.JSONObject;
 
 import static com.badlogic.gdx.graphics.GL20.GL_COLOR_BUFFER_BIT;
