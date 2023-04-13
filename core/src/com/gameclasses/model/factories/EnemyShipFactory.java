@@ -3,20 +3,13 @@ package com.gameclasses.model.factories;
 import com.gameclasses.controller.laserstrategy.LaserBindings;
 import com.gameclasses.model.gameobjects.Enemy;
 import com.gameclasses.model.gameobjects.EnemyCharacterShip;
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 public class EnemyShipFactory implements EnemyFactory {
     @Override
     public Enemy produce (JSONObject object) {
         LaserBindings laserBindings = new LaserBindings();
-        JSONArray lasers = (JSONArray) object.get("laser");
-        for (Object obj : lasers) {
-            JSONObject laser = (JSONObject) obj;
-            laserBindings.addLaser(
-                    (String) laser.get("texture")
-            );
-        }
+        laserBindings.addLaser();
         return new EnemyCharacterShip.BuilderEnemy()
                 .hp(((Long) object.get("hp")).intValue())
                 .texture((String) object.get("texture"))
@@ -24,9 +17,9 @@ public class EnemyShipFactory implements EnemyFactory {
                         ((Long) object.get("y")).intValue(),
                         ((Long) object.get("width")).intValue(),
                         ((Long) object.get("height")).intValue())
-                .movement((String) object.get("movement"))
-                .laserBindings(laserBindings)
+                .movement((String) object.get("enemyMovement"))
                 .isFinalBoss((boolean) object.get("isFinalBoss"))
+                .laserBindings(laserBindings)
                 .build();
     }
 }
