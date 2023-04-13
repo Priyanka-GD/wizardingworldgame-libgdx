@@ -35,11 +35,9 @@ public class EnemyCharacterShip extends Enemy {
         private LaserMovement laserMovement;
         private LaserBindings laserBindings;
         private boolean isFinalBoss;
-
         public BuilderEnemy () {
 
         }
-
         public BuilderEnemy hp (int hp) {
             this.hp = hp;
             return this;

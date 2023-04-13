@@ -19,15 +19,6 @@ abstract public class Enemy {
     public LaserBindings laserBindings;
     public LaserMovement enemyLaserMovement;
     Texture enemyTexture;
-    private List<EnemyLaser> enemyLaserList;
-
-    public List<EnemyLaser> getEnemyLaserList () {
-        return enemyLaserList;
-    }
-
-    public void setEnemyLaserList (List<EnemyLaser> enemyLaserList) {
-        this.enemyLaserList = enemyLaserList;
-    }
 
     public Enemy () {
         isFinalBoss = false;

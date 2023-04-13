@@ -5,8 +5,7 @@ import com.gameclasses.model.gameobjects.Enemy;
 import com.gameclasses.model.gameobjects.EnemyCharacterShip;
 import org.json.simple.JSONObject;
 
-public class EnemyShipFactory implements EnemyFactory {
-    @Override
+public class EnemyShipFactory {
     public Enemy produce (JSONObject object) {
         LaserBindings laserBindings = new LaserBindings();
         laserBindings.addLaser();

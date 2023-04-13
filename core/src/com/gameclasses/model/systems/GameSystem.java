@@ -2,7 +2,6 @@ package com.gameclasses.model.systems;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.gameclasses.controller.JsonConfigReader;
-import com.gameclasses.model.factories.EnemyFactory;
 import com.gameclasses.model.factories.EnemyShipFactory;
 import com.gameclasses.model.gamecontrollable.CharacterCommand;
 import com.gameclasses.model.gameobjects.Enemy;
@@ -28,7 +27,7 @@ public class GameSystem {
     private List<Enemy> enemyShipList;
     private List<EnemyLaser> enemyLaserList;
     protected BackgroundScreen subject;
-    EnemyFactory enemyCharacterFactory;
+    EnemyShipFactory enemyCharacterFactory;
     private float characterTimestamp;
     private boolean end = false;
     private PlayerLivesSystem playerLivesSystem;
