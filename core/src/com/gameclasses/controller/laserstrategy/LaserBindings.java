@@ -19,13 +19,13 @@ public class LaserBindings {
         laserStrategies = new LinkedList<>();
     }
 
-    public void fire (float deltaTime, Rectangle laserhitBox, List<EnemyLaser> enemyLaserList) {
+    public void fire (float deltaTime, Rectangle laserHitBox, List<EnemyLaser> enemyLaserList) {
         timestamp += deltaTime;
         if (currentLaserStrategy == null || (!releaseTime.isEmpty() && timestamp >= releaseTime.peek())) {
             releaseTime.poll();
             currentLaserStrategy = laserStrategies.poll();
         }
-        currentLaserStrategy.laserFire(deltaTime, laserhitBox, enemyLaserList);
+        currentLaserStrategy.laserFire(deltaTime, laserHitBox, enemyLaserList);
     }
 
     public void addLaser (String texture) {
