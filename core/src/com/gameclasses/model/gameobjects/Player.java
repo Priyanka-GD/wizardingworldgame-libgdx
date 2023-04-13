@@ -33,7 +33,6 @@ public class Player implements GameControllable {
         this.characterMode = new Texture("images/harrypotter.png");
         this.playerBulletList = playerBulletList;
     }
-
     public void draw (Batch batch, float deltaTime) {
         update(deltaTime);
         batch.draw(characterMode, characterBox.x, characterBox.y, characterBox.width, characterBox.height);

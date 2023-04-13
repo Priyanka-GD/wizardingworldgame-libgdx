@@ -15,7 +15,6 @@ public class EnemyLaser {
         this.laserMovement = laserMovement;
         this.textureReg = new Texture(filename);
     }
-
     public void moveLaser (float deltaTime) {
         laserMovement.moveLaser(deltaTime, hitBox);
     }
