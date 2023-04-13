@@ -113,16 +113,6 @@ public class GameSystem {
         detectCollision();
         if (playerLivesSystem.getLives() == 0)
             this.end = true;
-        playerWin();
-    }
-
-    private void playerWin () {
-        for (Enemy enemy : enemyShipList) {
-            if (enemy.isFinalBoss) {
-                if (playerLivesSystem.getLives() > 0 && enemyLaserList.size() == 0)
-                    this.playerLivesSystem.isWin();
-            }
-        }
     }
 
     private void renderEnemyLasers (SpriteBatch sbatch, float deltaTime) {

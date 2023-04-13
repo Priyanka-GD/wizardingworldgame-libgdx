@@ -42,7 +42,7 @@ public class PlayerProjectile {
         private float movementSpeed;
         private Rectangle hitBox;
         private float x;
-        private float acceleration;
+        private final float acceleration;
         private float y;
 
         public Builder (Texture texture) {
@@ -73,10 +73,6 @@ public class PlayerProjectile {
             return this;
         }
 
-        public Builder acceleration (float acc) {
-            this.acceleration = acc;
-            return this;
-        }
 
         public PlayerProjectile build () {
             return new PlayerProjectile(this);

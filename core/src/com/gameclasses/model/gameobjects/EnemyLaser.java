@@ -16,11 +16,6 @@ public class EnemyLaser {
         this.textureReg = new Texture(filename);
     }
 
-    /*   public boolean canRemove () {
-           return hitBox.x < 0 || hitBox.x > GameConstants.WINDOW_WIDTH
-                   || hitBox.y > GameConstants.WINDOW_HEIGHT || hitBox.y < 0;
-       }
-   */
     public void moveLaser (float deltaTime) {
         laserMovement.moveLaser(deltaTime, hitBox);
     }
