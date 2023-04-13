@@ -105,6 +105,7 @@ public class GameSystem {
         }
         enemyShipList.removeAll(removeList);
     }
+
     private void updateGame (float deltaTime) {
         characterTimestamp += deltaTime;
         spawnEnemy();
@@ -113,18 +114,19 @@ public class GameSystem {
         if (playerLivesSystem.getLives() == 0)
             this.end = true;
     }
+
     private void renderEnemyLasers (SpriteBatch sbatch, float deltaTime) {
-        List<EnemyLaser> removeList1 = new ArrayList<>();
         for (EnemyLaser enemyLaser : enemyLaserList) {
-            enemyLaser.move(deltaTime);
+            enemyLaser.moveLaser(deltaTime);
             enemyLaser.draw(sbatch);
-            }
         }
+    }
 
     public boolean canEnd () {
         return characterTimestamp > GameConstants.GAME_LENGTH || this.end || playerLivesSystem.canEnd();
     }
-    public void setScoreSystem (PlayerLivesSystem ss) {
+
+    public void setLivesSystem (PlayerLivesSystem ss) {
         this.playerLivesSystem = ss;
     }
 
@@ -161,7 +163,7 @@ public class GameSystem {
         List<Enemy> removeEnemyList = new ArrayList<>();
         for (PlayerProjectile bullet : playerBulletList) {
             for (Enemy enemy : enemyShipList) {
-                if (enemy.overlaps(bullet.playerBulletHitbox)) {
+                if (enemy.overlaps(bullet.playerBullethitBox)) {
                     enemy.hp -= 1;
                     playerRemoveBulletList.add(bullet);
                     enemyLaserList.removeAll(enemyLaserList);

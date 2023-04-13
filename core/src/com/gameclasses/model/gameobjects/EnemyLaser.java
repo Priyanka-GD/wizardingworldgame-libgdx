@@ -10,19 +10,14 @@ public class EnemyLaser {
     public Rectangle hitBox;
     public LaserMovement laserMovement;
 
-    public EnemyLaser (String filename, Rectangle hitbox, LaserMovement laserMovement) {
-        this.hitBox = hitbox;
+    public EnemyLaser (String filename, Rectangle hitBox, LaserMovement laserMovement) {
+        this.hitBox = hitBox;
         this.laserMovement = laserMovement;
         this.textureReg = new Texture(filename);
     }
 
- /*   public boolean canRemove () {
-        return hitBox.x < 0 || hitBox.x > GameConstants.WINDOW_WIDTH
-                || hitBox.y > GameConstants.WINDOW_HEIGHT || hitBox.y < 0;
-    }
-*/
-    public void move (float deltaTime) {
-        laserMovement.move(deltaTime, hitBox);
+    public void moveLaser (float deltaTime) {
+        laserMovement.moveLaser(deltaTime, hitBox);
     }
 
     public boolean overlaps (Rectangle hitBox) {

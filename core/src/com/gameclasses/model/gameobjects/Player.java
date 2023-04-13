@@ -76,12 +76,12 @@ public class Player implements GameControllable {
         if (shootTimestamp >= playerShootInterval) {
             shootTimestamp = 0;
             this.playerBulletList.add(new PlayerProjectile.Builder(new Texture("images/snitch.png"))
-                    .hitbox(new Rectangle((characterBox.x + (characterBox.width / 2)) - 5, (characterBox.y + characterBox.height) - 5, 15, 30))
+                    .hitBox(new Rectangle((characterBox.x + (characterBox.width / 2)) - 5, (characterBox.y + characterBox.height) - 5, 15, 30))
                     .speed(300)
                     .direction(0, 1)
                     .build());
             this.playerBulletList.add(new PlayerProjectile.Builder(new Texture("images/snitch.png"))
-                    .hitbox(new Rectangle((characterBox.x + (characterBox.width / 2)) + 10, (characterBox.y + characterBox.height) - 5, 15, 30))
+                    .hitBox(new Rectangle((characterBox.x + (characterBox.width / 2)) + 10, (characterBox.y + characterBox.height) - 5, 15, 30))
                     .speed(300)
                     .direction(0, 1)
                     .build());

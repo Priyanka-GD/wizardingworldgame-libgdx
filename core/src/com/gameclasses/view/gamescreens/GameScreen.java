@@ -42,7 +42,7 @@ public class GameScreen implements Screen {
         texture = new Texture("images/gamescreen.jpg");
         playerLivesSystem = new PlayerLivesSystem(playerConfigs);
         this.backgroundScreen = new BackgroundScreen(playerLivesSystem);
-        gameSystem.setScoreSystem(playerLivesSystem);
+        gameSystem.setLivesSystem(playerLivesSystem);
         this.game = game;
     }
 
@@ -75,18 +75,18 @@ public class GameScreen implements Screen {
     @Override
     public void resume () {
     }
-
     @Override
     public void hide () {
     }
-
     @Override
     public void dispose () {
 
     }
-
     private void gameEnd () {
         this.dispose();
-        game.setScreen(new GameExitScreen(game, playerLivesSystem.isWin()));
+        if (this.playerLivesSystem.getLives() > 0)
+            game.setScreen(new GameExitScreen(game, true));
+        else
+            game.setScreen(new GameExitScreen(game, playerLivesSystem.isWin()));
     }
 }

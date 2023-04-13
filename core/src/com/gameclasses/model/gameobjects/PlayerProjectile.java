@@ -6,65 +6,65 @@ import com.badlogic.gdx.math.Rectangle;
 import com.gameclasses.utils.GameConstants;
 
 public class PlayerProjectile {
-    public Rectangle playerBulletHitbox;
+    private final float x;
     private float movementSpeed;
-    private final float xDirection;
-    private final float yDirection;
+    private final float y;
+    public Rectangle playerBullethitBox;
     private final float acceleration;
     private final Texture playerBulletTexture;
 
     public PlayerProjectile (Builder builder) {
-        this.playerBulletHitbox = builder.hitbox;
+        this.playerBullethitBox = builder.hitBox;
         this.movementSpeed = builder.movementSpeed;
-        this.xDirection = builder.xDirection;
-        this.yDirection = builder.yDirection;
+        this.x = builder.x;
+        this.y = builder.y;
         this.acceleration = builder.acceleration;
-        this.playerBulletTexture = builder.textureReg;
+        this.playerBulletTexture = builder.texture;
     }
 
     public boolean canRemove () {
-        return playerBulletHitbox.x < 0 || playerBulletHitbox.x > GameConstants.WINDOW_WIDTH
-                || playerBulletHitbox.y > GameConstants.WINDOW_HEIGHT || playerBulletHitbox.y < 0;
+        return playerBullethitBox.x < 0 || playerBullethitBox.x > GameConstants.WINDOW_WIDTH
+                || playerBullethitBox.y > GameConstants.WINDOW_HEIGHT || playerBullethitBox.y < 0;
     }
 
     public void move (float deltaTime) {
-        playerBulletHitbox.x += movementSpeed * xDirection * deltaTime;
-        playerBulletHitbox.y += movementSpeed * yDirection * deltaTime;
+        playerBullethitBox.x += movementSpeed * x * deltaTime;
+        playerBullethitBox.y += movementSpeed * y * deltaTime;
         movementSpeed = movementSpeed * acceleration;
     }
 
     public void draw (Batch batch) {
-        batch.draw(playerBulletTexture, playerBulletHitbox.x, playerBulletHitbox.y, playerBulletHitbox.width, playerBulletHitbox.height);
+        batch.draw(playerBulletTexture, playerBullethitBox.x, playerBullethitBox.y, playerBullethitBox.width, playerBullethitBox.height);
     }
 
     public static class Builder {
-        private Rectangle hitbox;
+        private final Texture texture;
         private float movementSpeed;
-        private float xDirection;
-        private float yDirection;
-        private float acceleration;
-        private final Texture textureReg;
+        private Rectangle hitBox;
+        private float x;
+        private final float acceleration;
+        private float y;
 
         public Builder (Texture texture) {
-            this.textureReg = texture;
-            xDirection = 0;
-            yDirection = 1;
+            this.texture = texture;
+            x = 0;
+            y = 1;
             acceleration = 1;
         }
 
-        public Builder hitbox (Rectangle hitbox) {
-            this.hitbox = hitbox;
+        public Builder hitBox (Rectangle hitBox) {
+            this.hitBox = hitBox;
             return this;
         }
 
-        public Builder hitbox (float x, float y, float width, float height) {
-            this.hitbox = new Rectangle(x, y, width, height);
+        public Builder hitBox (float x, float y, float width, float height) {
+            this.hitBox = new Rectangle(x, y, width, height);
             return this;
         }
 
         public Builder direction (float x, float y) {
-            this.xDirection = x;
-            this.yDirection = y;
+            this.x = x;
+            this.y = y;
             return this;
         }
 
@@ -73,10 +73,6 @@ public class PlayerProjectile {
             return this;
         }
 
-        public Builder acceleration (float acc) {
-            this.acceleration = acc;
-            return this;
-        }
 
         public PlayerProjectile build () {
             return new PlayerProjectile(this);
