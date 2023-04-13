@@ -11,11 +11,11 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.gameclasses.utils.GameConstants;
-import com.gameclasses.view.score.PlayerLivesSystem;
-import com.gameclasses.view.score.ScoreRenderer;
+import com.gameclasses.view.lives.PlayerLivesSystem;
+import com.gameclasses.view.lives.PlayerUpdateRenderer;
 
 
-public class BackgroundScreen extends ScoreRenderer {
+public class BackgroundScreen extends PlayerUpdateRenderer {
     private final Camera cameraBackground;
 
     private final Viewport viewportBackground;

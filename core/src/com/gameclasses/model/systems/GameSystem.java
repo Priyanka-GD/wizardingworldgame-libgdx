@@ -11,7 +11,7 @@ import com.gameclasses.model.gameobjects.Player;
 import com.gameclasses.model.gameobjects.PlayerProjectile;
 import com.gameclasses.utils.GameConstants;
 import com.gameclasses.view.gamescreens.BackgroundScreen;
-import com.gameclasses.view.score.PlayerLivesSystem;
+import com.gameclasses.view.lives.PlayerLivesSystem;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -87,7 +87,6 @@ public class GameSystem {
             for (int i = 0; i < count; i++) {
                 enemyToBeReleased.offer(enemyObj);
                 enemyReleaseTime.offer(timestamp);
-                timestamp += ((Long) enemyObj.get("interval")).floatValue();
             }
         }
     }

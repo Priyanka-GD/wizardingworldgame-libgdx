@@ -14,15 +14,11 @@ public class EnemyShipFactory implements EnemyFactory {
         for (Object obj : lasers) {
             JSONObject laser = (JSONObject) obj;
             laserBindings.addLaser(
-                    ((Long) laser.get("effectiveFrom")).intValue(),
-                    (String) laser.get("strategy"),
-                    (String) laser.get("movement"),
                     (String) laser.get("texture")
             );
         }
         return new EnemyCharacterShip.BuilderEnemy()
                 .hp(((Long) object.get("hp")).intValue())
-                .score(((Long) object.get("reward")).intValue())
                 .texture((String) object.get("texture"))
                 .hitBox(((Long) object.get("x")).intValue(),
                         ((Long) object.get("y")).intValue(),

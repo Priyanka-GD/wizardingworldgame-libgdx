@@ -1,6 +1,7 @@
-package com.gameclasses.view.score;
+package com.gameclasses.view.lives;
 
-public abstract class ScoreRenderer {
+public abstract class PlayerUpdateRenderer {
     protected PlayerLivesSystem subject;
+
     public abstract void updateLives ();
 }

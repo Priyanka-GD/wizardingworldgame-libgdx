@@ -6,7 +6,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.gameclasses.controller.lasermovement.LaserMovement;
 import com.gameclasses.controller.laserstrategy.LaserBindings;
 import com.gameclasses.utils.GameConstants;
-import com.gameclasses.view.score.PlayerLivesSystem;
+import com.gameclasses.view.lives.PlayerLivesSystem;
 
 import java.util.List;
 

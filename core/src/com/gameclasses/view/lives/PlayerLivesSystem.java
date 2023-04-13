@@ -1,10 +1,10 @@
-package com.gameclasses.view.score;
+package com.gameclasses.view.lives;
 
 import org.json.simple.JSONObject;
 
 public class PlayerLivesSystem {
 
-    protected ScoreRenderer backScreen;
+    protected PlayerUpdateRenderer backScreen;
     private int lives;
     private boolean win;
 
@@ -13,7 +13,7 @@ public class PlayerLivesSystem {
         win = false;
     }
 
-    public void attachBackScreen (ScoreRenderer backgroundScreen) {
+    public void attachBackScreen (PlayerUpdateRenderer backgroundScreen) {
         this.backScreen = backgroundScreen;
     }
 

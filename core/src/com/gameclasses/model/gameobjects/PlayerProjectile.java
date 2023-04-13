@@ -73,7 +73,6 @@ public class PlayerProjectile {
             return this;
         }
 
-
         public PlayerProjectile build () {
             return new PlayerProjectile(this);
         }
