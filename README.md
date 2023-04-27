@@ -50,3 +50,8 @@ to ensure that the code structure is modular, extendable, and efficient.
 5. Enemies can fire bullets which reduces hp of the player by -1.
 6. When no HP left for a player, game over
 7. If player stays till the end of the game, then player wins
+
+# Work done for Deliverable 3
+1. Modularized GameSystem Class - dedicated class for collision detection, spawning enemies, render player
+2. 
+
