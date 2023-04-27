@@ -21,7 +21,6 @@ public class PlayerLivesSystem {
         lives += change;
         this.backScreen.updateLives();
     }
-
     public int getLives () {
         return lives;
     }

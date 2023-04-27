@@ -12,7 +12,6 @@ public class EnemyCharacterShip extends Enemy {
         super();
         this.hp = builder.hp;
         this.hitBox = builder.hitBox;
-        this.score = builder.score;
         this.enemyTexture = builder.texture;
         this.enemyLaserMovement = builder.laserMovement;
         this.laserBindings = builder.laserBindings;
@@ -21,7 +20,7 @@ public class EnemyCharacterShip extends Enemy {
 
     @Override
     public void die (PlayerLivesSystem playerLivesSystem) {
-        // Final boss die ends game
+        // game ends when final boss die
         if (this.isFinalBoss) {
             playerLivesSystem.updateEnd(true);
         }
@@ -29,7 +28,6 @@ public class EnemyCharacterShip extends Enemy {
 
     public static class BuilderEnemy {
         private int hp;
-        private int score;
         private Texture texture;
         private Rectangle hitBox;
         private LaserMovement laserMovement;
