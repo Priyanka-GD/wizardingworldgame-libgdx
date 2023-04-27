@@ -69,18 +69,9 @@ public class GameSystem {
         renderLaser.renderEnemyLasers(sbatch, deltaTime, enemyLaserList);
         renderLaser.renderPlayerShipProjectile(sbatch, deltaTime, playerBulletList);
     }
-    //Deliverable 2
-    //spawning enemies
-    private void spawnEnemy () {
-        if (enemyReleaseTime.size() > 0 && characterTimestamp > enemyReleaseTime.peek()) {
-            enemyReleaseTime.poll();
-            Enemy enemy = enemyCharacterFactory.produce(enemyToBeReleased.poll());
-            enemyShipList.add(enemy);
-        }
-    }
     private void updateGame (float deltaTime) {
         characterTimestamp += deltaTime;
-        spawnEnemy();
+        renderCharacter.spawnEnemy(enemyToBeReleased, enemyReleaseTime, enemyShipList, enemyCharacterFactory, characterTimestamp);
         characterCommand.run();
         // collision detection
         detectCollision.playerCollisionWithEnemy(enemyLaserList, player, playerLivesSystem);

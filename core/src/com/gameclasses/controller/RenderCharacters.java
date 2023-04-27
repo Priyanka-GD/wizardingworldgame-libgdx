@@ -1,6 +1,7 @@
 package com.gameclasses.controller;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.gameclasses.model.factories.EnemyShipFactory;
 import com.gameclasses.model.gameobjects.Enemy;
 import com.gameclasses.model.gameobjects.EnemyLaser;
 import com.gameclasses.model.gameobjects.Player;
@@ -49,4 +50,14 @@ public class RenderCharacters {
         }
     }
 
+    //Deliverable 2
+    //spawning enemies
+    public void spawnEnemy (Queue<JSONObject> enemyToBeReleased, Queue<Float> enemyReleaseTime, List<Enemy> enemyShipList,
+                            EnemyShipFactory enemyCharacterFactory, float characterTimestamp) {
+        if (enemyReleaseTime.size() > 0 && characterTimestamp > enemyReleaseTime.peek()) {
+            enemyReleaseTime.poll();
+            Enemy enemy = enemyCharacterFactory.produce(enemyToBeReleased.poll());
+            enemyShipList.add(enemy);
+        }
+    }
 }
