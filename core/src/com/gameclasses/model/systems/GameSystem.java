@@ -3,6 +3,7 @@ package com.gameclasses.model.systems;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.gameclasses.controller.DetectCollision;
 import com.gameclasses.controller.JsonConfigReader;
+import com.gameclasses.controller.RenderCharacters;
 import com.gameclasses.controller.RenderLaser;
 import com.gameclasses.model.factories.EnemyShipFactory;
 import com.gameclasses.model.gamecontrollable.CharacterCommand;
@@ -13,7 +14,6 @@ import com.gameclasses.model.gameobjects.PlayerProjectile;
 import com.gameclasses.utils.GameConstants;
 import com.gameclasses.view.gamescreens.BackgroundScreen;
 import com.gameclasses.view.lives.PlayerLivesSystem;
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import java.util.ArrayList;
@@ -21,7 +21,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
-// break down module
 public class GameSystem {
     Player player;
     private CharacterCommand characterCommand;
@@ -37,13 +36,11 @@ public class GameSystem {
     private List<PlayerProjectile> playerBulletList;
     private RenderLaser renderLaser;
     private DetectCollision detectCollision;
-
-
+    private RenderCharacters renderCharacter;
     public GameSystem (BackgroundScreen screen) {
         this.subject = screen;
         init();
     }
-
     //initialize variables
     public void init () {
         JsonConfigReader config = GameConstants.config;
@@ -61,24 +58,17 @@ public class GameSystem {
         enemyCharacterFactory = new EnemyShipFactory();
         detectCollision = new DetectCollision();
         renderLaser = new RenderLaser();
-        loadEnemies(config);
-
+        renderCharacter = new RenderCharacters();
+        renderCharacter.loadEnemies(config, enemyToBeReleased, enemyReleaseTime);
     }
-
-    //render character on screen
-    private void renderCharacter (SpriteBatch sbatch, float deltaTime) {
-        player.draw(sbatch, deltaTime);
-    }
-
     public void render (SpriteBatch sbatch, float deltaTime) {
         updateGame(deltaTime);
-        renderCharacter(sbatch, deltaTime);
+        renderCharacter.renderCharacter(sbatch, deltaTime, player);
         // Deliverable 2
-        renderEnemy(sbatch, deltaTime);
+        renderCharacter.renderEnemy(sbatch, deltaTime, enemyShipList, enemyLaserList, this.end);
         renderLaser.renderEnemyLasers(sbatch, deltaTime, enemyLaserList);
         renderLaser.renderPlayerShipProjectile(sbatch, deltaTime, playerBulletList);
     }
-
     //Deliverable 2
     //spawning enemies
     private void spawnEnemy () {
@@ -87,36 +77,6 @@ public class GameSystem {
             Enemy enemy = enemyCharacterFactory.produce(enemyToBeReleased.poll());
             enemyShipList.add(enemy);
         }
-    }
-
-    //loading enemies
-    public void loadEnemies (JsonConfigReader config) {
-        JSONArray enemyConfigs = config.getEnemies();
-        for (Object obj : enemyConfigs) {
-            JSONObject enemyObj = (JSONObject) obj;
-            float timestamp = ((Long) enemyObj.get("spawnTime")).floatValue();
-            int count = ((Long) enemyObj.get("count")).intValue();
-            for (int i = 0; i < count; i++) {
-                enemyToBeReleased.offer(enemyObj);
-                enemyReleaseTime.offer(timestamp);
-            }
-        }
-    }
-
-    //rendering enemies on screen
-    private void renderEnemy (SpriteBatch sbatch, float deltaTime) {
-        List<Enemy> removeList = new ArrayList<>();
-        for (Enemy enemy : enemyShipList) {
-            enemy.draw(sbatch, deltaTime);
-            enemy.fire(deltaTime, enemyLaserList);
-            if (enemy.isOutOfBounds()) {
-                if (enemy.isFinalBoss) {
-                    this.end = true;
-                }
-                removeList.add(enemy);
-            }
-        }
-        enemyShipList.removeAll(removeList);
     }
     private void updateGame (float deltaTime) {
         characterTimestamp += deltaTime;
@@ -129,7 +89,6 @@ public class GameSystem {
         if (playerLivesSystem.getLives() == 0)
             this.end = true;
     }
-
     // if the game ends
     public boolean canEnd () {
         return characterTimestamp > GameConstants.GAME_LENGTH || this.end || playerLivesSystem.canEnd();
@@ -137,5 +96,4 @@ public class GameSystem {
     public void setLivesSystem (PlayerLivesSystem ss) {
         this.playerLivesSystem = ss;
     }
-
 }
