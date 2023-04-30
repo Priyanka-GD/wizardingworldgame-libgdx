@@ -16,6 +16,7 @@ public class EnemyCharacterShip extends Enemy {
         this.enemyLaserMovement = builder.laserMovement;
         this.laserBindings = builder.laserBindings;
         this.isFinalBoss = builder.isFinalBoss;
+        //updating score
         this.score = builder.score;
     }
 
