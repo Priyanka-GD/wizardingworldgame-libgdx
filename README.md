@@ -53,5 +53,5 @@ to ensure that the code structure is modular, extendable, and efficient.
 
 # Work done for Deliverable 3
 1. Modularized GameSystem Class - dedicated class for collision detection, spawning enemies, render player
-2. 
+2. Score is dialayed. Have used Observer pattern to update lives and score
 
