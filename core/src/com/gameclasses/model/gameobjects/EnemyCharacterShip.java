@@ -4,7 +4,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
 import com.gameclasses.controller.lasermovement.LaserMovement;
 import com.gameclasses.controller.laserstrategy.LaserBindings;
-import com.gameclasses.view.lives.PlayerLivesSystem;
+import com.gameclasses.view.observerlivesandscore.PlayerSystem;
 
 public class EnemyCharacterShip extends Enemy {
 
@@ -12,29 +12,31 @@ public class EnemyCharacterShip extends Enemy {
         super();
         this.hp = builder.hp;
         this.hitBox = builder.hitBox;
-        this.score = builder.score;
         this.enemyTexture = builder.texture;
         this.enemyLaserMovement = builder.laserMovement;
         this.laserBindings = builder.laserBindings;
         this.isFinalBoss = builder.isFinalBoss;
+        //updating score
+        this.score = builder.score;
     }
 
     @Override
-    public void die (PlayerLivesSystem playerLivesSystem) {
-        // Final boss die ends game
+    public void die (PlayerSystem playerSystem) {
+        // game ends when final boss die
+        playerSystem.updateScore(this.score);
         if (this.isFinalBoss) {
-            playerLivesSystem.updateEnd(true);
+            playerSystem.updateEnd(true);
         }
     }
 
     public static class BuilderEnemy {
         private int hp;
-        private int score;
         private Texture texture;
         private Rectangle hitBox;
         private LaserMovement laserMovement;
         private LaserBindings laserBindings;
         private boolean isFinalBoss;
+        private int score;
         public BuilderEnemy () {
 
         }
@@ -76,5 +78,9 @@ public class EnemyCharacterShip extends Enemy {
             return new EnemyCharacterShip(this);
         }
 
+        public BuilderEnemy score (int score) {
+            this.score = score;
+            return this;
+        }
     }
 }

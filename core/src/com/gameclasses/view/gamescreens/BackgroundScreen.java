@@ -11,8 +11,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.gameclasses.utils.GameConstants;
-import com.gameclasses.view.lives.PlayerLivesSystem;
-import com.gameclasses.view.lives.PlayerUpdateRenderer;
+import com.gameclasses.view.observerlivesandscore.PlayerSystem;
+import com.gameclasses.view.observerlivesandscore.PlayerUpdateRenderer;
 
 
 public class BackgroundScreen extends PlayerUpdateRenderer {
@@ -25,9 +25,9 @@ public class BackgroundScreen extends PlayerUpdateRenderer {
     private final Skin skin;
     private final Stage stage;
     private final Texture lives;
-    private int heartCount;
+    private int heartCount, score;
 
-    public BackgroundScreen (PlayerLivesSystem subject) {
+    public BackgroundScreen (PlayerSystem subject) {
         this.cameraBackground = new OrthographicCamera();
         ((OrthographicCamera) cameraBackground).setToOrtho(false, GameConstants.EXT_WINDOW_WIDTH, GameConstants.EXT_WINDOW_HEIGHT);
         this.viewportBackground = new StretchViewport(GameConstants.EXT_WINDOW_WIDTH, GameConstants.EXT_WINDOW_HEIGHT, cameraBackground);
@@ -43,6 +43,8 @@ public class BackgroundScreen extends PlayerUpdateRenderer {
         this.subject = subject;
         this.subject.attachBackScreen(this);
         this.heartCount = this.subject.getLives();
+        this.score = this.subject.getScore();
+
     }
 
     public void renderBackground () {
@@ -50,19 +52,28 @@ public class BackgroundScreen extends PlayerUpdateRenderer {
         Gdx.gl.glViewport(0, 0, GameConstants.EXT_WINDOW_WIDTH, GameConstants.EXT_WINDOW_HEIGHT);
         sbatch.begin();
         sbatch.draw(this.background, 0, 0, GameConstants.EXT_WINDOW_WIDTH, GameConstants.EXT_WINDOW_HEIGHT);
+        //observer pattern -- observing player and sends an update -- player as a subject-- reduce coupling
+        fontHP.draw(sbatch, "Score: " + String.format("%08d", this.score), GameConstants.WINDOW_WIDTH + 15, GameConstants.WINDOW_HEIGHT - 60);
         fontHP.draw(sbatch, "Remaining Lives: ", GameConstants.WINDOW_WIDTH + 12, GameConstants.WINDOW_HEIGHT - 110);
         this.displayLives();
         sbatch.end();
         stage.act();
         stage.draw();
     }
+
     public void displayLives () {
         for (int i = 0; i < this.heartCount; i++)
-            sbatch.draw(lives, GameConstants.WINDOW_WIDTH + 15 + ((i % 6) * 50),
-                    GameConstants.WINDOW_HEIGHT - (240 + 50 * (i / 6)), 40, 40);
+            sbatch.draw(lives, GameConstants.WINDOW_WIDTH + 10 + ((i % 5) * 40),
+                    GameConstants.WINDOW_HEIGHT - (200 + 40 * (i / 5)), 35, 30);
     }
+
     @Override
     public void updateLives () {
         this.heartCount = subject.getLives();
+    }
+
+    @Override
+    public void updateScore () {
+        this.score = subject.getScore();
     }
 }

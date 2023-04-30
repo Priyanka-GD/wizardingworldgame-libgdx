@@ -13,7 +13,8 @@
       "enemyMovement": "MovementShapeOne",
       "count": 1,
       "isFinalBoss": false,
-      "spawnTime": 3
+      "spawnTime": 3,
+      "reward": 100
     },
     {
       "hp": 1,
@@ -22,10 +23,11 @@
       "y": 800,
       "width": 100,
       "height": 100,
-      "enemyMovement": "MovementShapeOne",
+      "enemyMovement": "MovementShapeThree",
       "count": 1,
       "isFinalBoss": false,
-      "spawnTime": 15
+      "spawnTime": 15,
+      "reward": 100
     },
     {
       "hp": 5,
@@ -37,7 +39,8 @@
       "enemyMovement": "MovementShapeTwo",
       "count": 1,
       "spawnTime": 30,
-      "isFinalBoss": false
+      "isFinalBoss": false,
+      "reward": 500
     },
     {
       "hp": 10,
@@ -49,7 +52,8 @@
       "enemyMovement": "MovementShapeThree",
       "count": 1,
       "spawnTime": 50,
-      "isFinalBoss": true
+      "isFinalBoss": true,
+      "reward": 1000
     }
   ]
 }
