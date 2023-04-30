@@ -15,7 +15,6 @@ public class RenderLaser {
             enemyLaser.draw(sbatch);
         }
     }
-
     // player shooting projectile towards enemies
     public void renderPlayerShipProjectile (SpriteBatch sbatch, float deltaTime, List<PlayerProjectile> playerBulletList) {
         List<PlayerProjectile> removeList = new ArrayList<>();

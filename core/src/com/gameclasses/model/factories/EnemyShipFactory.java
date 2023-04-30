@@ -18,6 +18,7 @@ public class EnemyShipFactory {
                         ((Long) object.get("height")).intValue())
                 .movement((String) object.get("enemyMovement"))
                 .isFinalBoss((boolean) object.get("isFinalBoss"))
+                .score(((Long) object.get("reward")).intValue())
                 .laserBindings(laserBindings)
                 .build();
     }

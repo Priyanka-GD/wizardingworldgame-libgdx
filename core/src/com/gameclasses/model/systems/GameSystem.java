@@ -13,7 +13,7 @@ import com.gameclasses.model.gameobjects.Player;
 import com.gameclasses.model.gameobjects.PlayerProjectile;
 import com.gameclasses.utils.GameConstants;
 import com.gameclasses.view.gamescreens.BackgroundScreen;
-import com.gameclasses.view.lives.PlayerLivesSystem;
+import com.gameclasses.view.observerlivesandscore.PlayerSystem;
 import org.json.simple.JSONObject;
 
 import java.util.ArrayList;
@@ -32,7 +32,7 @@ public class GameSystem {
     EnemyShipFactory enemyCharacterFactory;
     private float characterTimestamp;
     private boolean end = false;
-    private PlayerLivesSystem playerLivesSystem;
+    private PlayerSystem playerSystem;
     private List<PlayerProjectile> playerBulletList;
     private RenderLaser renderLaser;
     private DetectCollision detectCollision;
@@ -74,17 +74,19 @@ public class GameSystem {
         renderCharacter.spawnEnemy(enemyToBeReleased, enemyReleaseTime, enemyShipList, enemyCharacterFactory, characterTimestamp);
         characterCommand.run();
         // collision detection
-        detectCollision.playerCollisionWithEnemy(enemyLaserList, player, playerLivesSystem);
-        detectCollision.collision(playerBulletList, enemyShipList, enemyLaserList, playerLivesSystem);
+        detectCollision.playerCollisionWithEnemy(enemyLaserList, player, playerSystem);
+        detectCollision.collision(playerBulletList, enemyShipList, enemyLaserList, playerSystem);
         // When player life gets exhausted, then game over screen
-        if (playerLivesSystem.getLives() == 0)
+        if (playerSystem.getLives() == 0)
             this.end = true;
     }
+
     // if the game ends
     public boolean canEnd () {
-        return characterTimestamp > GameConstants.GAME_LENGTH || this.end || playerLivesSystem.canEnd();
+        return characterTimestamp > GameConstants.GAME_LENGTH || this.end || playerSystem.canEnd();
     }
-    public void setLivesSystem (PlayerLivesSystem ss) {
-        this.playerLivesSystem = ss;
+
+    public void setLivesSystem (PlayerSystem ss) {
+        this.playerSystem = ss;
     }
 }

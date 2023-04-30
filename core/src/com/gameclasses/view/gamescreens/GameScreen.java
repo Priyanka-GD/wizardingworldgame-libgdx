@@ -12,7 +12,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.gameclasses.controller.JsonConfigReader;
 import com.gameclasses.model.systems.GameSystem;
 import com.gameclasses.utils.GameConstants;
-import com.gameclasses.view.lives.PlayerLivesSystem;
+import com.gameclasses.view.observerlivesandscore.PlayerSystem;
 import org.json.simple.JSONObject;
 
 import static com.badlogic.gdx.graphics.GL20.GL_COLOR_BUFFER_BIT;
@@ -27,7 +27,7 @@ public class GameScreen implements Screen {
     private final Texture texture;
     private final SpriteBatch spriteBatch;
     private BackgroundScreen backgroundScreen;
-    private final PlayerLivesSystem playerLivesSystem;
+    private final PlayerSystem playerSystem;
 
     public GameScreen (MainGame game) {
         //Deliverable 2
@@ -40,9 +40,9 @@ public class GameScreen implements Screen {
         ((OrthographicCamera) cameraForeground).setToOrtho(false, GameConstants.WINDOW_WIDTH, GameConstants.WINDOW_HEIGHT);
         this.viewport = new FitViewport(GameConstants.WINDOW_WIDTH, GameConstants.WINDOW_HEIGHT, cameraForeground);
         texture = new Texture("images/gamescreen.jpg");
-        playerLivesSystem = new PlayerLivesSystem(playerConfigs);
-        this.backgroundScreen = new BackgroundScreen(playerLivesSystem);
-        gameSystem.setLivesSystem(playerLivesSystem);
+        playerSystem = new PlayerSystem(playerConfigs);
+        this.backgroundScreen = new BackgroundScreen(playerSystem);
+        gameSystem.setLivesSystem(playerSystem);
         this.game = game;
     }
 
@@ -84,9 +84,9 @@ public class GameScreen implements Screen {
     }
     private void gameEnd () {
         this.dispose();
-        if (this.playerLivesSystem.getLives() > 0)
+        if (this.playerSystem.getLives() > 0)
             game.setScreen(new GameExitScreen(game, true));
         else
-            game.setScreen(new GameExitScreen(game, playerLivesSystem.isWin()));
+            game.setScreen(new GameExitScreen(game, playerSystem.isWin()));
     }
 }
