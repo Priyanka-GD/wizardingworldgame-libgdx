@@ -7,10 +7,7 @@ import com.gameclasses.controller.RenderCharacters;
 import com.gameclasses.controller.RenderLaser;
 import com.gameclasses.model.factories.EnemyShipFactory;
 import com.gameclasses.model.gamecontrollable.CharacterCommand;
-import com.gameclasses.model.gameobjects.Enemy;
-import com.gameclasses.model.gameobjects.EnemyLaser;
-import com.gameclasses.model.gameobjects.Player;
-import com.gameclasses.model.gameobjects.PlayerProjectile;
+import com.gameclasses.model.gameobjects.*;
 import com.gameclasses.utils.GameConstants;
 import com.gameclasses.view.gamescreens.BackgroundScreen;
 import com.gameclasses.view.observerlivesandscore.PlayerSystem;
@@ -37,15 +34,20 @@ public class GameSystem {
     private RenderLaser renderLaser;
     private DetectCollision detectCollision;
     private RenderCharacters renderCharacter;
+    private List<PlayerSpecialBomb> specialBombs;
+    private CharacterCommand command;
+
     public GameSystem (BackgroundScreen screen) {
         this.subject = screen;
         init();
     }
+
     //initialize variables
     public void init () {
         JsonConfigReader config = GameConstants.config;
         playerBulletList = new ArrayList<>();
-        player = new Player(config.getPlayerAttribute(), playerBulletList);
+        specialBombs = new ArrayList<>();
+        player = new Player(config.getPlayerAttribute(), playerBulletList, specialBombs);
         GameConstants.PLAYERSHIP = player;
         characterCommand = new CharacterCommand();
         characterCommand.add(player);
@@ -59,6 +61,8 @@ public class GameSystem {
         detectCollision = new DetectCollision();
         renderLaser = new RenderLaser();
         renderCharacter = new RenderCharacters();
+        command = new CharacterCommand();
+        command.add(player);
         renderCharacter.loadEnemies(config, enemyToBeReleased, enemyReleaseTime);
     }
     public void render (SpriteBatch sbatch, float deltaTime) {
@@ -68,11 +72,13 @@ public class GameSystem {
         renderCharacter.renderEnemy(sbatch, deltaTime, enemyShipList, enemyLaserList, this.end);
         renderLaser.renderEnemyLasers(sbatch, deltaTime, enemyLaserList);
         renderLaser.renderPlayerShipProjectile(sbatch, deltaTime, playerBulletList);
+        //Deliverable 3
+        renderLaser.renderPlayerShipBomb(sbatch, deltaTime, specialBombs, enemyLaserList, enemyShipList, playerSystem);
     }
     private void updateGame (float deltaTime) {
         characterTimestamp += deltaTime;
         renderCharacter.spawnEnemy(enemyToBeReleased, enemyReleaseTime, enemyShipList, enemyCharacterFactory, characterTimestamp);
-        characterCommand.run();
+        command.run();
         // collision detection
         detectCollision.playerCollisionWithEnemy(enemyLaserList, player, playerSystem);
         detectCollision.collision(playerBulletList, enemyShipList, enemyLaserList, playerSystem);
@@ -80,13 +86,12 @@ public class GameSystem {
         if (playerSystem.getLives() == 0)
             this.end = true;
     }
-
     // if the game ends
     public boolean canEnd () {
         return characterTimestamp > GameConstants.GAME_LENGTH || this.end || playerSystem.canEnd();
     }
-
     public void setLivesSystem (PlayerSystem ss) {
         this.playerSystem = ss;
+        this.command.setCheckBombs(ss);
     }
 }

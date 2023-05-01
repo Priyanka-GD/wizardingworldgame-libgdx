@@ -1,6 +1,7 @@
 {
   "character": {
-    "lives": 15
+    "lives": 15,
+    "bombs": 5
   },
   "enemy": [
     {

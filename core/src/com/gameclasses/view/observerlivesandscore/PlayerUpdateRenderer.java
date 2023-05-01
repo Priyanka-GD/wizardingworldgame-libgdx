@@ -6,4 +6,6 @@ public abstract class PlayerUpdateRenderer {
     public abstract void updateLives ();
 
     public abstract void updateScore ();
+
+    public abstract void updateBombs ();
 }

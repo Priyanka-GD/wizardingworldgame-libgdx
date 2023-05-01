@@ -8,9 +8,11 @@ public class PlayerSystem {
     private int lives;
     private boolean win;
     private int score;
+    private int bombs;
 
     public PlayerSystem (JSONObject object) {
         lives = ((Long) object.get("lives")).intValue();
+        bombs = ((Long) object.get("bombs")).intValue();
         win = false;
         score = 0;
     }
@@ -46,5 +48,14 @@ public class PlayerSystem {
 
     public int getScore () {
         return score;
+    }
+
+    public void updateBombs (int num) {
+        bombs -= num;
+        this.backScreen.updateBombs();
+    }
+
+    public int getBombs () {
+        return bombs;
     }
 }

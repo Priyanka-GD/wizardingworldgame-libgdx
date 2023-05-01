@@ -18,4 +18,5 @@ public class GameConstants {
     public static final int GAME_LENGTH = 130;
     public static Player PLAYERSHIP;
     public static int PLAYER_FIRE = Input.Keys.SPACE;
+    public static int BOMB = Input.Keys.B;
 }

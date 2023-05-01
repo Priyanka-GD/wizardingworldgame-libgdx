@@ -25,7 +25,8 @@ public class BackgroundScreen extends PlayerUpdateRenderer {
     private final Skin skin;
     private final Stage stage;
     private final Texture lives;
-    private int heartCount, score;
+    private final Texture bomb;
+    private int heartCount, score, bombCount;
 
     public BackgroundScreen (PlayerSystem subject) {
         this.cameraBackground = new OrthographicCamera();
@@ -44,7 +45,8 @@ public class BackgroundScreen extends PlayerUpdateRenderer {
         this.subject.attachBackScreen(this);
         this.heartCount = this.subject.getLives();
         this.score = this.subject.getScore();
-
+        this.bombCount = this.subject.getBombs();
+        this.bomb = new Texture("images/bomb.png");
     }
 
     public void renderBackground () {
@@ -75,5 +77,15 @@ public class BackgroundScreen extends PlayerUpdateRenderer {
     @Override
     public void updateScore () {
         this.score = subject.getScore();
+    }
+
+    @Override
+    public void updateBombs () {
+        this.bombCount = subject.getBombs();
+    }
+
+    private void showBombs () {
+        for (int i = 0; i < this.bombCount; i++)
+            sbatch.draw(bomb, GameConstants.WINDOW_WIDTH + 15 + ((i % 6) * 50), GameConstants.WINDOW_HEIGHT - (140 + 50 * (i / 6)), 40, 40);
     }
 }

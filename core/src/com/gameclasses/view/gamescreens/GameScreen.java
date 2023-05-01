@@ -26,7 +26,7 @@ public class GameScreen implements Screen {
 
     private final Texture texture;
     private final SpriteBatch spriteBatch;
-    private BackgroundScreen backgroundScreen;
+    private final BackgroundScreen backgroundScreen;
     private final PlayerSystem playerSystem;
 
     public GameScreen (MainGame game) {
@@ -34,7 +34,7 @@ public class GameScreen implements Screen {
         JsonConfigReader config = GameConstants.config;
         JSONObject playerConfigs = config.getPlayerAttribute();
         //Deliverable 1
-        this.gameSystem = new GameSystem(this.backgroundScreen);
+
         spriteBatch = new SpriteBatch();
         this.cameraForeground = new OrthographicCamera();
         ((OrthographicCamera) cameraForeground).setToOrtho(false, GameConstants.WINDOW_WIDTH, GameConstants.WINDOW_HEIGHT);
@@ -42,6 +42,7 @@ public class GameScreen implements Screen {
         texture = new Texture("images/gamescreen.jpg");
         playerSystem = new PlayerSystem(playerConfigs);
         this.backgroundScreen = new BackgroundScreen(playerSystem);
+        gameSystem = new GameSystem(this.backgroundScreen);
         gameSystem.setLivesSystem(playerSystem);
         this.game = game;
     }

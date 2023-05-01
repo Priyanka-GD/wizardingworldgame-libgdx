@@ -1,8 +1,11 @@
 package com.gameclasses.controller;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.gameclasses.model.gameobjects.Enemy;
 import com.gameclasses.model.gameobjects.EnemyLaser;
 import com.gameclasses.model.gameobjects.PlayerProjectile;
+import com.gameclasses.model.gameobjects.PlayerSpecialBomb;
+import com.gameclasses.view.observerlivesandscore.PlayerSystem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,5 +29,28 @@ public class RenderLaser {
             }
         }
         playerBulletList.removeAll(removeList);
+    }
+
+    public void renderPlayerShipBomb (SpriteBatch sbatch, float deltaTime, List<PlayerSpecialBomb> specialBombs,
+                                      List<EnemyLaser> enemyLaserList, List<Enemy> enemyShipList, PlayerSystem playerSystem) {
+        List<PlayerSpecialBomb> removeList = new ArrayList<>();
+        List<Enemy> removeEnemyList = new ArrayList<>();
+        for (PlayerSpecialBomb bomb : specialBombs) {
+            bomb.move(deltaTime);
+            bomb.draw(sbatch);
+            if (bomb.canRemove()) {
+                removeList.add(bomb);
+                enemyLaserList.clear();
+                for (Enemy enemy : enemyShipList) {
+                    enemy.hp -= 5;
+                    if (enemy.hp <= 0) {
+                        removeEnemyList.add(enemy);
+                        enemy.die(playerSystem);
+                    }
+                }
+                enemyShipList.removeAll(removeEnemyList);
+            }
+        }
+        specialBombs.removeAll(removeList);
     }
 }
