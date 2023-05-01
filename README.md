@@ -63,7 +63,5 @@ to ensure that the code structure is modular, extendable, and efficient.
 - [4] To do - Secret Feature implementation + Design document to implement the same - 2nd May
 - [5] Cheating Mode - 5pts
 - [6] Level wise game implementation
-- [7] Power-Ups/BombSystem/Reward System - implement any one
-- [8] Final Boss mimic attacks
-- [9] Aesthetic make-over, full on sprites, background, animation, sound/music
-
+- [7] Final Boss mimic attacks
+- [8] Aesthetic make-over, full on sprites, background, animation, sound/music
