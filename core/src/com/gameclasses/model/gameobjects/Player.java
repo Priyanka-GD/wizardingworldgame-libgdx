@@ -8,17 +8,15 @@ import com.gameclasses.model.gamecontrollable.GameControllable;
 import com.gameclasses.utils.GameConstants;
 
 import java.util.List;
-
-
 public class Player implements GameControllable {
     private boolean isSlow, isThrow;
     private final float slowMultiplier = 0.1f;
-
     public float moveSpeed;
     private final Texture characterMode;
+    public Rectangle hitBox, cheatingBox, characterBox;
     private float shootTimestamp = 0;
-    public Rectangle characterBox;
-    public Rectangle hitBox;
+    private final Texture cheatingMode;
+    private Texture bufferMode;
     private final float playerShootInterval = 0.2f;
     private final List<PlayerProjectile> playerBulletList;
     private final List<PlayerSpecialBomb> bomblist;
@@ -33,12 +31,15 @@ public class Player implements GameControllable {
         this.characterBox = new Rectangle(x, y, width, height);
         this.hitBox = new Rectangle(250, 400, 15, 15);
         this.characterMode = new Texture("images/harrypotter.png");
+        this.cheatingMode = new Texture("images/cheating.png");
         this.playerBulletList = playerBulletList;
         this.bomblist = bomblist;
+        this.cheatingBox = new Rectangle(hitBox.x, hitBox.y, 40, 60);
+        bufferMode = this.characterMode;
     }
     public void draw (Batch batch, float deltaTime) {
         update(deltaTime);
-        batch.draw(characterMode, characterBox.x, characterBox.y, characterBox.width, characterBox.height);
+        batch.draw(bufferMode, characterBox.x, characterBox.y, characterBox.width, characterBox.height);
     }
 
     private float getSpeed () {
@@ -119,5 +120,16 @@ public class Player implements GameControllable {
     public boolean overlaps (Rectangle other) {
         return this.characterBox.overlaps(other);
     }
+
+    public void changeMode (boolean isCheating) {
+        if (isCheating) {
+            this.hitBox = this.cheatingBox;
+            this.bufferMode = this.cheatingMode;
+        } else {
+            this.hitBox = this.characterBox;
+            this.bufferMode = this.characterMode;
+        }
+    }
+
 }
 

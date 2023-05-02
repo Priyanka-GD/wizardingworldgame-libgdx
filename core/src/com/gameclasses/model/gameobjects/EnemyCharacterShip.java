@@ -4,7 +4,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
 import com.gameclasses.controller.lasermovement.LaserMovement;
 import com.gameclasses.controller.laserstrategy.LaserBindings;
-import com.gameclasses.view.observerlivesandscore.PlayerSystem;
+import com.gameclasses.model.systems.PlayerSystem;
 
 public class EnemyCharacterShip extends Enemy {
 

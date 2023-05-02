@@ -1,4 +1,6 @@
-package com.gameclasses.view.observerlivesandscore;
+package com.gameclasses.controller.observer;
+
+import com.gameclasses.model.systems.PlayerSystem;
 
 public abstract class PlayerUpdateRenderer {
     protected PlayerSystem subject;

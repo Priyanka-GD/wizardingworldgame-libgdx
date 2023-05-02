@@ -4,7 +4,7 @@ import com.gameclasses.model.gameobjects.Enemy;
 import com.gameclasses.model.gameobjects.EnemyLaser;
 import com.gameclasses.model.gameobjects.Player;
 import com.gameclasses.model.gameobjects.PlayerProjectile;
-import com.gameclasses.view.observerlivesandscore.PlayerSystem;
+import com.gameclasses.model.systems.PlayerSystem;
 
 import java.util.ArrayList;
 import java.util.List;

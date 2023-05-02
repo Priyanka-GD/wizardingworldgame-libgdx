@@ -1,5 +1,6 @@
-package com.gameclasses.view.observerlivesandscore;
+package com.gameclasses.model.systems;
 
+import com.gameclasses.controller.observer.PlayerUpdateRenderer;
 import org.json.simple.JSONObject;
 
 public class PlayerSystem {

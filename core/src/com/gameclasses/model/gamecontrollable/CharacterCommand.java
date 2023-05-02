@@ -1,9 +1,9 @@
 package com.gameclasses.model.gamecontrollable;
 
 import com.badlogic.gdx.Gdx;
+import com.gameclasses.model.systems.PlayerSystem;
 import com.gameclasses.utils.GameConstants;
 import com.gameclasses.view.gamescreens.MenuScreen;
-import com.gameclasses.view.observerlivesandscore.PlayerSystem;
 
 import java.util.ArrayList;
 import java.util.List;

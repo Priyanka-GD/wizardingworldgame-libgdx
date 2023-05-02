@@ -5,12 +5,12 @@ import com.gameclasses.controller.DetectCollision;
 import com.gameclasses.controller.JsonConfigReader;
 import com.gameclasses.controller.RenderCharacters;
 import com.gameclasses.controller.RenderLaser;
+import com.gameclasses.controller.observer.CheatingObserver;
 import com.gameclasses.model.factories.EnemyShipFactory;
 import com.gameclasses.model.gamecontrollable.CharacterCommand;
 import com.gameclasses.model.gameobjects.*;
 import com.gameclasses.utils.GameConstants;
 import com.gameclasses.view.gamescreens.BackgroundScreen;
-import com.gameclasses.view.observerlivesandscore.PlayerSystem;
 import org.json.simple.JSONObject;
 
 import java.util.ArrayList;
@@ -18,7 +18,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
-public class GameSystem {
+public class GameSystem extends CheatingObserver {
     Player player;
     private CharacterCommand characterCommand;
     private Queue<Float> enemyReleaseTime;
@@ -36,9 +36,11 @@ public class GameSystem {
     private RenderCharacters renderCharacter;
     private List<PlayerSpecialBomb> specialBombs;
     private CharacterCommand command;
+    private boolean isCheating;
 
     public GameSystem (BackgroundScreen screen) {
         this.subject = screen;
+        this.subject.attachCheatingObserver(this);
         init();
     }
 
@@ -80,18 +82,27 @@ public class GameSystem {
         renderCharacter.spawnEnemy(enemyToBeReleased, enemyReleaseTime, enemyShipList, enemyCharacterFactory, characterTimestamp);
         command.run();
         // collision detection
-        detectCollision.playerCollisionWithEnemy(enemyLaserList, player, playerSystem);
+        if (!isCheating)
+            detectCollision.playerCollisionWithEnemy(enemyLaserList, player, playerSystem);
         detectCollision.collision(playerBulletList, enemyShipList, enemyLaserList, playerSystem);
         // When player life gets exhausted, then game over screen
         if (playerSystem.getLives() == 0)
             this.end = true;
     }
+
     // if the game ends
     public boolean canEnd () {
         return characterTimestamp > GameConstants.GAME_LENGTH || this.end || playerSystem.canEnd();
     }
+
     public void setLivesSystem (PlayerSystem ss) {
         this.playerSystem = ss;
         this.command.setCheckBombs(ss);
+    }
+
+    @Override
+    public void updateCheating () {
+        this.isCheating = subject.getIsCheating();
+        this.player.changeMode(this.isCheating);
     }
 }

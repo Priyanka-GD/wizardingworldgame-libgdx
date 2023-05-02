@@ -6,13 +6,18 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.gameclasses.controller.observer.PlayerUpdateRenderer;
+import com.gameclasses.model.systems.GameSystem;
+import com.gameclasses.model.systems.PlayerSystem;
 import com.gameclasses.utils.GameConstants;
-import com.gameclasses.view.observerlivesandscore.PlayerSystem;
-import com.gameclasses.view.observerlivesandscore.PlayerUpdateRenderer;
 
 
 public class BackgroundScreen extends PlayerUpdateRenderer {
@@ -27,6 +32,10 @@ public class BackgroundScreen extends PlayerUpdateRenderer {
     private final Texture lives;
     private final Texture bomb;
     private int heartCount, score, bombCount;
+    private final TextButton cheatingButton;
+    private final Texture infinity;
+    private boolean isCheating;
+    private GameSystem gameSystem;
 
     public BackgroundScreen (PlayerSystem subject) {
         this.cameraBackground = new OrthographicCamera();
@@ -40,13 +49,61 @@ public class BackgroundScreen extends PlayerUpdateRenderer {
         this.skin = new Skin(Gdx.files.internal("skin/glassy-ui.json"));
         this.stage = new Stage(this.viewportBackground);
         Gdx.input.setInputProcessor(stage);
-        sbatch = new SpriteBatch();
         this.subject = subject;
         this.subject.attachBackScreen(this);
         this.heartCount = this.subject.getLives();
         this.score = this.subject.getScore();
         this.bombCount = this.subject.getBombs();
         this.bomb = new Texture("images/bomb.png");
+        this.cheatingButton = new TextButton("Cheating", skin, "small");
+        this.isCheating = false;
+        this.infinity = new Texture("images/infinity.png");
+        this.loadButtons();
+        sbatch = new SpriteBatch();
+    }
+
+    public void attachCheatingObserver (GameSystem gameSystem) {
+        this.gameSystem = gameSystem;
+    }
+
+    private void loadButtons () {
+        int sizeUnit = 50;
+        cheatingButton.setSize(sizeUnit * 5, sizeUnit);
+        cheatingButton.setPosition(GameConstants.WINDOW_WIDTH + 35, 100);
+        cheatingButton.getLabel().setFontScale(1.2f, 1.2f);
+        cheatingButton.addListener(new InputListener() {
+            @Override
+            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+                if (!isCheating) {
+                    isCheating = true;
+                    gameSystem.updateCheating();
+                } else {
+                    isCheating = false;
+                    gameSystem.updateCheating();
+                }
+            }
+
+            @Override
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+                if (!isCheating)
+                    cheatingButton.setText("Stop Cheating");
+                else
+                    cheatingButton.setText("Start Cheating");
+                return true;
+            }
+
+            @Override
+            public void enter (InputEvent event, float x, float y, int pointer, Actor fromActor) {
+                cheatingButton.getLabel().setFontScale(1.5f, 1.5f);
+            }
+
+            @Override
+            public void exit (InputEvent event, float x, float y, int pointer, Actor fromActor) {
+                cheatingButton.getLabel().setFontScale(1.2f, 1.2f);
+            }
+        });
+
+        this.stage.addActor(cheatingButton);
     }
 
     public void renderBackground () {
@@ -64,9 +121,12 @@ public class BackgroundScreen extends PlayerUpdateRenderer {
     }
 
     public void displayLives () {
-        for (int i = 0; i < this.heartCount; i++)
-            sbatch.draw(lives, GameConstants.WINDOW_WIDTH + 10 + ((i % 5) * 40),
-                    GameConstants.WINDOW_HEIGHT - (200 + 40 * (i / 5)), 35, 30);
+        if (!isCheating)
+            for (int i = 0; i < this.heartCount; i++)
+                sbatch.draw(lives, GameConstants.WINDOW_WIDTH + 10 + ((i % 5) * 40),
+                        GameConstants.WINDOW_HEIGHT - (200 + 40 * (i / 5)), 35, 30);
+        else
+            sbatch.draw(infinity, GameConstants.WINDOW_WIDTH + 100, GameConstants.WINDOW_HEIGHT - 205, 60, 40);
     }
 
     @Override
@@ -87,5 +147,9 @@ public class BackgroundScreen extends PlayerUpdateRenderer {
     private void showBombs () {
         for (int i = 0; i < this.bombCount; i++)
             sbatch.draw(bomb, GameConstants.WINDOW_WIDTH + 15 + ((i % 6) * 50), GameConstants.WINDOW_HEIGHT - (140 + 50 * (i / 6)), 40, 40);
+    }
+
+    public boolean getIsCheating () {
+        return this.isCheating;
     }
 }
