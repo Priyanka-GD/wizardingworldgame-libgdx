@@ -59,14 +59,14 @@ public class MenuScreen implements Screen {
         });
 
         //Start game
-        final TextButton button2 = new TextButton("Start", skin, "small");
+        final TextButton button2 = new TextButton("Select Level", skin, "small");
         button2.setSize(sizeUnit * 3, sizeUnit);
         button2.setPosition((Gdx.graphics.getWidth() - button1.getWidth()) / 2,350);
         button2.getLabel().setFontScale(1.1f, 1.1f);
         button2.addListener(new InputListener(){
             @Override
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
-                startGame();
+                levelSelect();
             }
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
@@ -103,7 +103,7 @@ public class MenuScreen implements Screen {
             }
 
             @Override
-            public void exit(InputEvent event, float x, float y, int pointer, Actor fromActor) {
+            public void exit (InputEvent event, float x, float y, int pointer, Actor fromActor) {
                 button3.getLabel().setFontScale(1.2f, 1.2f);
             }
         });
@@ -111,12 +111,20 @@ public class MenuScreen implements Screen {
         stage.addActor(button2);
         stage.addActor(button3);
     }
-    private void aboutGame() {
+
+    private void levelSelect () {
+        this.dispose();
+        stage.dispose();
+        game.setScreen(new LevelScreen(game));
+    }
+
+    private void aboutGame () {
         this.dispose();
         stage.dispose();
         game.setScreen(new ArrowScreen(game));
     }
-    private void startGame() {
+
+    private void startGame () {
         try {
             GameConstants.config = new JsonConfigReader();
         } catch (ParseException e) {
