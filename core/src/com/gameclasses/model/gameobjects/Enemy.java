@@ -29,8 +29,8 @@ abstract public class Enemy {
         batch.draw(enemyTexture, hitBox.x, hitBox.y, hitBox.width, hitBox.height);
     }
 
-    public void fire (float deltaTime, List<EnemyLaser> lasers) {
-        laserBindings.fire(deltaTime, this.hitBox, lasers);
+    public void fire (float deltaTime, List<EnemyLaser> lasers, List<EnemyLaser> heavyList) {
+        laserBindings.fire(deltaTime, this.hitBox, lasers, heavyList);
     }
 
     public boolean overlaps (Rectangle other) {

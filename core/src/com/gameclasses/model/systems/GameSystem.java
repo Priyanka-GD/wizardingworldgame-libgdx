@@ -25,6 +25,7 @@ public class GameSystem extends CheatingObserver {
     private Queue<JSONObject> enemyToBeReleased;
     private List<Enemy> enemyShipList;
     private List<EnemyLaser> enemyLaserList;
+    private List<EnemyLaser> heavyList;
     protected BackgroundScreen subject;
     EnemyShipFactory enemyCharacterFactory;
     private float characterTimestamp;
@@ -66,12 +67,13 @@ public class GameSystem extends CheatingObserver {
         command = new CharacterCommand();
         command.add(player);
         renderCharacter.loadEnemies(config, enemyToBeReleased, enemyReleaseTime);
+        heavyList = new ArrayList<>();
     }
     public void render (SpriteBatch sbatch, float deltaTime) {
         updateGame(deltaTime);
         renderCharacter.renderCharacter(sbatch, deltaTime, player);
         // Deliverable 2
-        renderCharacter.renderEnemy(sbatch, deltaTime, enemyShipList, enemyLaserList, this.end);
+        renderCharacter.renderEnemy(sbatch, deltaTime, enemyShipList, enemyLaserList, this.end, heavyList);
         renderLaser.renderEnemyLasers(sbatch, deltaTime, enemyLaserList);
         renderLaser.renderPlayerShipProjectile(sbatch, deltaTime, playerBulletList);
         //Deliverable 3

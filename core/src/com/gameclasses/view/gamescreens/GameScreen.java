@@ -34,7 +34,6 @@ public class GameScreen implements Screen {
         JsonConfigReader config = GameConstants.config;
         JSONObject playerConfigs = config.getPlayerAttribute();
         //Deliverable 1
-
         spriteBatch = new SpriteBatch();
         this.cameraForeground = new OrthographicCamera();
         ((OrthographicCamera) cameraForeground).setToOrtho(false, GameConstants.WINDOW_WIDTH, GameConstants.WINDOW_HEIGHT);
