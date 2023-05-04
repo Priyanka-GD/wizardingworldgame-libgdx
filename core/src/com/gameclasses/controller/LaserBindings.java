@@ -1,6 +1,7 @@
-package com.gameclasses.controller.laserstrategy;
+package com.gameclasses.controller;
 
 import com.badlogic.gdx.math.Rectangle;
+import com.gameclasses.controller.laserstrategy.LaserStrategy;
 import com.gameclasses.model.gameobjects.EnemyLaser;
 
 import java.util.LinkedList;
