@@ -55,13 +55,7 @@ to ensure that the code structure is modular, extendable, and efficient.
 1. Modularized GameSystem Class - dedicated class for collision detection, spawning enemies, render player
 2. Score is dialayed. Have used Observer pattern to update lives and score
 3. Power-Ups/BombSystem/Reward System - implement any one - Bomb system implemented
-
-#To do 
-- [1] Unify PlayerProjectile with Laser Movement — confused
-- [2] Work on Secret feature
-- [3] Deliverable 3
-- [4] To do - Secret Feature implementation + Design document to implement the same - 2nd May
-- [5] Cheating Mode - 5pts
-- [6] Level wise game implementation
-- [7] Final Boss mimic attacks
-- [8] Aesthetic make-over, full on sprites, background, animation, sound/music
+4. Work on Secret feature -- documentation + implementation
+5. Cheating Mode -- implemented
+6. Level wise game implementation but same configuration
+7. Aesthetic make-over, full on sprites, background, animation, sound/music
