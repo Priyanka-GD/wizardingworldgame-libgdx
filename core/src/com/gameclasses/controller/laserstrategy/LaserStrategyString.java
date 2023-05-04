@@ -48,7 +48,7 @@ public class LaserStrategyString implements LaserStrategy {
     }
 
     @Override
-    public void laserFire (float deltaTime, Rectangle hitbox, List<EnemyLaser> list, List<EnemyLaser> heavyList) {
+    public void laserFire (float deltaTime, Rectangle hitbox, List<EnemyLaser> list) {
         timeSinceLastShot += deltaTime;
         timeSwitch += deltaTime;
         try {
@@ -65,7 +65,7 @@ public class LaserStrategyString implements LaserStrategy {
                 Class cls = Class.forName("com.gameclasses.controller.lasermovement." + movementClass);
                 LaserMovement movement = (LaserMovement) cls.getConstructor().newInstance();
                 movement.setDirection((float) Math.cos(angle), (float) Math.sin(angle));
-                movement.setSpeed(100);
+                movement.setSpeed(50);
                 movement.setAcceleration(1);
                 list.add(new EnemyLaser(filename,
                         new Rectangle(hitbox.x + (hitbox.width / 2),

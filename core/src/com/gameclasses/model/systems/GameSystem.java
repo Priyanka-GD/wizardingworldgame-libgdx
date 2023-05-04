@@ -73,7 +73,7 @@ public class GameSystem extends CheatingObserver {
         updateGame(deltaTime);
         renderCharacter.renderCharacter(sbatch, deltaTime, player);
         // Deliverable 2
-        renderCharacter.renderEnemy(sbatch, deltaTime, enemyShipList, enemyLaserList, this.end, heavyList);
+        renderCharacter.renderEnemy(sbatch, deltaTime, enemyShipList, enemyLaserList, this.end);
         renderLaser.renderEnemyLasers(sbatch, deltaTime, enemyLaserList);
         renderLaser.renderPlayerShipProjectile(sbatch, deltaTime, playerBulletList);
         //Deliverable 3

@@ -14,7 +14,7 @@
       "enemyMovement": "MovementShapeOne",
       "laser": [
         {
-          "strategy": "LaserStrategyFour",
+          "strategy": "LaserStrategyTriple",
           "movement": "StraightLineShapedLaserMovement",
           "effectiveFrom": 0
         }
@@ -34,7 +34,7 @@
       "enemyMovement": "MovementShapeThree",
       "laser": [
         {
-          "strategy": "LaserStrategyOne",
+          "strategy": "LaserStrategyTriple",
           "movement": "StraightLineShapedLaserMovement",
           "effectiveFrom": 0
         }
@@ -54,7 +54,7 @@
       "enemyMovement": "MovementShapeTwo",
       "laser": [
         {
-          "strategy": "LaserStrategyOne",
+          "strategy": "LaserStrategyString",
           "movement": "StraightLineShapedLaserMovement",
           "effectiveFrom": 0
         }
@@ -74,14 +74,20 @@
       "enemyMovement": "MovementShapeThree",
       "laser": [
         {
-          "strategy": "LaserStrategyThree",
+          "strategy": "LaserStrategyHeavy",
           "movement": "StraightLineShapedLaserMovement",
           "effectiveFrom": 0
         },
         {
-          "strategy": "LaserStrategyTwo",
+          "strategy": "LaserStrategyString",
           "movement": "StraightLineShapedLaserMovement",
-          "effectiveFrom": 0
+          "effectiveFrom": 10
+        },
+        ,
+        {
+          "strategy": "LaserStrategyCircle",
+          "movement": "StraightLineShapedLaserMovement",
+          "effectiveFrom": 10
         }
       ],
       "count": 1,

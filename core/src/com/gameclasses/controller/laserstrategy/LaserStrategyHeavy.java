@@ -40,18 +40,18 @@ public class LaserStrategyHeavy implements LaserStrategy {
     }
 
     @Override
-    public void laserFire (float deltaTime, Rectangle hitbox, List<EnemyLaser> list, List<EnemyLaser> heavyList) {
+    public void laserFire (float deltaTime, Rectangle hitbox, List<EnemyLaser> list) {
         timeSinceLastShot += deltaTime;
         try {
             if (canFire()) {
-                for (int angle = 0; angle < 360; angle += 45) {
+                for (int angle = 0; angle < 360; angle += 15) {
                     timeSinceLastShot = 0;
                     Class cls = Class.forName("com.gameclasses.controller.lasermovement." + movementClass);
                     LaserMovement movement = (LaserMovement) cls.getConstructor().newInstance();
                     movement.setDirection((float) Math.cos(Math.toRadians(angle)), (float) Math.sin(Math.toRadians(angle)));
                     movement.setSpeed(laserMovementSpeed);
                     movement.setAcceleration(1);
-                    heavyList.add(new EnemyLaser(filename,
+                    list.add(new EnemyLaser(filename,
                             new Rectangle(hitbox.x + (hitbox.width / 2) + hitbox.width * 0.5f * (float) Math.cos(Math.toRadians(angle)),
                                     hitbox.y + (hitbox.height / 2) + hitbox.height * 0.5f * (float) Math.sin(Math.toRadians(angle)),
                                     laserWidth,

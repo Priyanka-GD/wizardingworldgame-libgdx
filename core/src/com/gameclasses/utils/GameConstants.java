@@ -15,7 +15,7 @@ public class GameConstants {
     public static int RIGHT = Input.Keys.RIGHT;
     public static int SLOW_MODE = Input.Keys.SHIFT_LEFT;
     public static JsonConfigReader config;
-    public static final int GAME_LENGTH = 130;
+    public static final int GAME_LENGTH = 150;
     public static Player PLAYERSHIP;
     public static int PLAYER_FIRE = Input.Keys.SPACE;
     public static int BOMB = Input.Keys.B;

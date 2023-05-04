@@ -21,11 +21,11 @@ public class RenderCharacters {
     }
 
     //rendering enemies on screen
-    public void renderEnemy (SpriteBatch sbatch, float deltaTime, List<Enemy> enemyShipList, List<EnemyLaser> enemyLaserList, boolean end, List<EnemyLaser> heavyList) {
+    public void renderEnemy (SpriteBatch sbatch, float deltaTime, List<Enemy> enemyShipList, List<EnemyLaser> enemyLaserList, boolean end) {
         List<Enemy> removeList = new ArrayList<>();
         for (Enemy enemy : enemyShipList) {
             enemy.draw(sbatch, deltaTime);
-            enemy.fire(deltaTime, enemyLaserList, heavyList);
+            enemy.fire(deltaTime, enemyLaserList);
             if (enemy.isOutOfBounds()) {
                 if (enemy.isFinalBoss) {
                     end = true;

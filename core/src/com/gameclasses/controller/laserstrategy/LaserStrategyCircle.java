@@ -40,11 +40,11 @@ public class LaserStrategyCircle implements LaserStrategy {
     }
 
     @Override
-    public void laserFire (float deltaTime, Rectangle hitbox, List<EnemyLaser> list, List<EnemyLaser> heavyList) {
+    public void laserFire (float deltaTime, Rectangle hitbox, List<EnemyLaser> list) {
         timeSinceLastShot += deltaTime;
         try {
             if (canFire()) {
-                for (int angle = 0; angle < 360; angle += 5) {
+                for (int angle = 0; angle < 360; angle += 10) {
                     timeSinceLastShot = 0;
                     Class cls = Class.forName("com.gameclasses.controller.lasermovement." + movementClass);
                     LaserMovement movement = (LaserMovement) cls.getConstructor().newInstance();
