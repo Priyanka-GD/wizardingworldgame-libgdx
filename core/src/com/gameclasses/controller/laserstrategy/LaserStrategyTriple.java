@@ -7,7 +7,7 @@ import com.gameclasses.model.gameobjects.EnemyLaser;
 import java.util.List;
 
 //Deliverable 2
-public class LaserStrategyOne implements LaserStrategy {
+public class LaserStrategyTriple implements LaserStrategy {
     float laserWidth, laserHeight;
     float timeBetweenShots;
     float timeSinceLastShot;
@@ -15,15 +15,16 @@ public class LaserStrategyOne implements LaserStrategy {
     String filename;
     String movementClass;
 
-    public LaserStrategyOne () {
-        laserWidth = 5.0f;
-        laserHeight = 25f;
+    public LaserStrategyTriple () {
+        laserWidth = 30f;
+        laserHeight = 30f;
         timeBetweenShots = 0.5f;
         timeSinceLastShot = 0;
         laserMovementSpeed = 190f;
     }
 
-    private boolean canFire () {
+    @Override
+    public boolean canFire () {
         return timeSinceLastShot >= timeBetweenShots;
     }
 

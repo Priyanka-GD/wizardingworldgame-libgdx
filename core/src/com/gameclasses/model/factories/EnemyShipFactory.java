@@ -3,12 +3,21 @@ package com.gameclasses.model.factories;
 import com.gameclasses.controller.laserstrategy.LaserBindings;
 import com.gameclasses.model.gameobjects.Enemy;
 import com.gameclasses.model.gameobjects.EnemyCharacterShip;
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 public class EnemyShipFactory {
     public Enemy produce (JSONObject object) {
         LaserBindings laserBindings = new LaserBindings();
-        laserBindings.addLaser();
+        JSONArray lasers = (org.json.simple.JSONArray) object.get("laser");
+        for (Object obj : lasers) {
+            JSONObject laser = (JSONObject) obj;
+            laserBindings.addLaser(
+                    ((Long) laser.get("effectiveFrom")).intValue(),
+                    (String) laser.get("strategy"),
+                    (String) laser.get("movement")
+            );
+        }
         return new EnemyCharacterShip.BuilderEnemy()
                 .hp(((Long) object.get("hp")).intValue())
                 .texture((String) object.get("texture"))

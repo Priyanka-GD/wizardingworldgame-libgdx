@@ -12,4 +12,10 @@ public interface GameControllable {
     void playerFire ();
 
     void slowMode (boolean slow);
+
+    void throwBomb ();
+
+    boolean getIsThrow ();
+
+    void setIsThrow (boolean isThrow);
 }

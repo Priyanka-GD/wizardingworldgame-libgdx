@@ -5,15 +5,12 @@ import com.gameclasses.controller.DetectCollision;
 import com.gameclasses.controller.JsonConfigReader;
 import com.gameclasses.controller.RenderCharacters;
 import com.gameclasses.controller.RenderLaser;
+import com.gameclasses.controller.observer.CheatingObserver;
 import com.gameclasses.model.factories.EnemyShipFactory;
 import com.gameclasses.model.gamecontrollable.CharacterCommand;
-import com.gameclasses.model.gameobjects.Enemy;
-import com.gameclasses.model.gameobjects.EnemyLaser;
-import com.gameclasses.model.gameobjects.Player;
-import com.gameclasses.model.gameobjects.PlayerProjectile;
+import com.gameclasses.model.gameobjects.*;
 import com.gameclasses.utils.GameConstants;
 import com.gameclasses.view.gamescreens.BackgroundScreen;
-import com.gameclasses.view.observerlivesandscore.PlayerSystem;
 import org.json.simple.JSONObject;
 
 import java.util.ArrayList;
@@ -21,13 +18,14 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
-public class GameSystem {
+public class GameSystem extends CheatingObserver {
     Player player;
     private CharacterCommand characterCommand;
     private Queue<Float> enemyReleaseTime;
     private Queue<JSONObject> enemyToBeReleased;
     private List<Enemy> enemyShipList;
     private List<EnemyLaser> enemyLaserList;
+    private List<EnemyLaser> heavyList;
     protected BackgroundScreen subject;
     EnemyShipFactory enemyCharacterFactory;
     private float characterTimestamp;
@@ -37,15 +35,22 @@ public class GameSystem {
     private RenderLaser renderLaser;
     private DetectCollision detectCollision;
     private RenderCharacters renderCharacter;
+    private List<PlayerSpecialBomb> specialBombs;
+    private CharacterCommand command;
+    private boolean isCheating;
+
     public GameSystem (BackgroundScreen screen) {
         this.subject = screen;
+        this.subject.attachCheatingObserver(this);
         init();
     }
+
     //initialize variables
     public void init () {
         JsonConfigReader config = GameConstants.config;
         playerBulletList = new ArrayList<>();
-        player = new Player(config.getPlayerAttribute(), playerBulletList);
+        specialBombs = new ArrayList<>();
+        player = new Player(config.getPlayerAttribute(), playerBulletList, specialBombs);
         GameConstants.PLAYERSHIP = player;
         characterCommand = new CharacterCommand();
         characterCommand.add(player);
@@ -59,7 +64,10 @@ public class GameSystem {
         detectCollision = new DetectCollision();
         renderLaser = new RenderLaser();
         renderCharacter = new RenderCharacters();
+        command = new CharacterCommand();
+        command.add(player);
         renderCharacter.loadEnemies(config, enemyToBeReleased, enemyReleaseTime);
+        heavyList = new ArrayList<>();
     }
     public void render (SpriteBatch sbatch, float deltaTime) {
         updateGame(deltaTime);
@@ -68,13 +76,16 @@ public class GameSystem {
         renderCharacter.renderEnemy(sbatch, deltaTime, enemyShipList, enemyLaserList, this.end);
         renderLaser.renderEnemyLasers(sbatch, deltaTime, enemyLaserList);
         renderLaser.renderPlayerShipProjectile(sbatch, deltaTime, playerBulletList);
+        //Deliverable 3
+        renderLaser.renderPlayerShipBomb(sbatch, deltaTime, specialBombs, enemyLaserList, enemyShipList, playerSystem);
     }
     private void updateGame (float deltaTime) {
         characterTimestamp += deltaTime;
         renderCharacter.spawnEnemy(enemyToBeReleased, enemyReleaseTime, enemyShipList, enemyCharacterFactory, characterTimestamp);
-        characterCommand.run();
+        command.run();
         // collision detection
-        detectCollision.playerCollisionWithEnemy(enemyLaserList, player, playerSystem);
+        if (!isCheating)
+            detectCollision.playerCollisionWithEnemy(enemyLaserList, player, playerSystem);
         detectCollision.collision(playerBulletList, enemyShipList, enemyLaserList, playerSystem);
         // When player life gets exhausted, then game over screen
         if (playerSystem.getLives() == 0)
@@ -88,5 +99,12 @@ public class GameSystem {
 
     public void setLivesSystem (PlayerSystem ss) {
         this.playerSystem = ss;
+        this.command.setCheckBombs(ss);
+    }
+
+    @Override
+    public void updateCheating () {
+        this.isCheating = subject.getIsCheating();
+        this.player.changeMode(this.isCheating);
     }
 }

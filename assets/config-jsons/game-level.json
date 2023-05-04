@@ -1,6 +1,7 @@
 {
   "character": {
-    "lives": 15
+    "lives": 15,
+    "bombs": 5
   },
   "enemy": [
     {
@@ -11,6 +12,13 @@
       "width": 100,
       "height": 100,
       "enemyMovement": "MovementShapeOne",
+      "laser": [
+        {
+          "strategy": "LaserStrategyTriple",
+          "movement": "StraightLineShapedLaserMovement",
+          "effectiveFrom": 0
+        }
+      ],
       "count": 1,
       "isFinalBoss": false,
       "spawnTime": 3,
@@ -24,6 +32,13 @@
       "width": 100,
       "height": 100,
       "enemyMovement": "MovementShapeThree",
+      "laser": [
+        {
+          "strategy": "LaserStrategyTriple",
+          "movement": "StraightLineShapedLaserMovement",
+          "effectiveFrom": 0
+        }
+      ],
       "count": 1,
       "isFinalBoss": false,
       "spawnTime": 15,
@@ -37,6 +52,13 @@
       "width": 100,
       "height": 100,
       "enemyMovement": "MovementShapeTwo",
+      "laser": [
+        {
+          "strategy": "LaserStrategyString",
+          "movement": "StraightLineShapedLaserMovement",
+          "effectiveFrom": 0
+        }
+      ],
       "count": 1,
       "spawnTime": 30,
       "isFinalBoss": false,
@@ -50,6 +72,24 @@
       "width": 120,
       "height": 110,
       "enemyMovement": "MovementShapeThree",
+      "laser": [
+        {
+          "strategy": "LaserStrategyHeavy",
+          "movement": "StraightLineShapedLaserMovement",
+          "effectiveFrom": 0
+        },
+        {
+          "strategy": "LaserStrategyString",
+          "movement": "StraightLineShapedLaserMovement",
+          "effectiveFrom": 10
+        },
+        ,
+        {
+          "strategy": "LaserStrategyCircle",
+          "movement": "StraightLineShapedLaserMovement",
+          "effectiveFrom": 10
+        }
+      ],
       "count": 1,
       "spawnTime": 50,
       "isFinalBoss": true,

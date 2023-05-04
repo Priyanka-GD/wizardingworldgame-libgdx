@@ -28,13 +28,13 @@ public class LaserBindings {
         currentLaserStrategy.laserFire(deltaTime, laserHitBox, enemyLaserList);
     }
 
-    public void addLaser () {
+    public void addLaser (float timeStamp, String strategyString, String movementString) {
         try {
-            Class cls = Class.forName("com.gameclasses.controller.laserstrategy." + "LaserStrategyOne");
+            Class cls = Class.forName("com.gameclasses.controller.laserstrategy." + strategyString);
             LaserStrategy strategy = (LaserStrategy) cls.getConstructor().newInstance();
-            strategy.setLaserMovement("StraightLineShapedLaserMovement");
+            strategy.setLaserMovement(movementString);
             strategy.setLaserTexture("images/thunder1.png");
-            releaseTime.offer(0.0f);
+            releaseTime.offer(timeStamp);
             laserStrategies.offer(strategy);
         } catch (Throwable e) {
             System.err.println(e);
