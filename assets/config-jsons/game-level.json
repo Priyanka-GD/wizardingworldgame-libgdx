@@ -1,7 +1,7 @@
 {
   "character": {
     "lives": 15,
-    "bombs": 5
+    "bombs": 2
   },
   "enemy": [
     {
@@ -31,7 +31,7 @@
       "y": 800,
       "width": 100,
       "height": 100,
-      "enemyMovement": "MovementShapeThree",
+      "enemyMovement": "MovementShapeOne",
       "laser": [
         {
           "strategy": "LaserStrategyTriple",
@@ -51,7 +51,7 @@
       "y": 800,
       "width": 100,
       "height": 100,
-      "enemyMovement": "MovementShapeTwo",
+      "enemyMovement": "MovementShapeThree",
       "laser": [
         {
           "strategy": "LaserStrategyString",
@@ -60,7 +60,7 @@
         }
       ],
       "count": 1,
-      "spawnTime": 30,
+      "spawnTime": 25,
       "isFinalBoss": false,
       "reward": 500
     },
@@ -68,7 +68,7 @@
       "hp": 10,
       "texture": "images/voldemort.jpg",
       "x": 250,
-      "y": 800,
+      "y": 500,
       "width": 120,
       "height": 110,
       "enemyMovement": "MovementShapeThree",
@@ -83,15 +83,14 @@
           "movement": "StraightLineShapedLaserMovement",
           "effectiveFrom": 10
         },
-        ,
         {
           "strategy": "LaserStrategyCircle",
           "movement": "StraightLineShapedLaserMovement",
-          "effectiveFrom": 10
+          "effectiveFrom": 15
         }
       ],
       "count": 1,
-      "spawnTime": 50,
+      "spawnTime": 60,
       "isFinalBoss": true,
       "reward": 1000
     }

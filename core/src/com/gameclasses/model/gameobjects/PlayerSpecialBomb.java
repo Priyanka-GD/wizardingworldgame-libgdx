@@ -44,7 +44,7 @@ public class PlayerSpecialBomb {
             hitbox.y += movementSpeed * yDirection * deltaTime;
         } else if (this.launchDistance >= 250 && !this.isBombing) {
             this.textureReg = new Texture("images/bombScenes.png");
-            this.hitbox = new Rectangle(hitbox.x - 33, hitbox.y, 100, 200);
+            this.hitbox = new Rectangle(hitbox.x - 33, hitbox.y, 85, 150);
             this.isBombing = true;
         } else {
             bombing(deltaTime);
