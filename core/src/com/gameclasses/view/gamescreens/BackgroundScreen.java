@@ -56,6 +56,7 @@ public class BackgroundScreen extends PlayerUpdateRenderer {
         this.bombCount = this.subject.getBombs();
         this.bomb = new Texture("images/bomb.png");
         this.cheatingButton = new TextButton("Cheating", skin, "small");
+        this.cheatingButton.setSize(45 * 4, 45);
         this.isCheating = false;
         this.infinity = new Texture("images/infinity.png");
         this.loadButtons();

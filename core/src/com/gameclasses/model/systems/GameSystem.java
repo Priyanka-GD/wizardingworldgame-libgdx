@@ -5,7 +5,7 @@ import com.gameclasses.controller.DetectCollision;
 import com.gameclasses.controller.JsonConfigReader;
 import com.gameclasses.controller.RenderCharacters;
 import com.gameclasses.controller.RenderLaser;
-import com.gameclasses.controller.observer.CheatingObserver;
+import com.gameclasses.controller.observer.ObserverCheating;
 import com.gameclasses.model.factories.EnemyShipFactory;
 import com.gameclasses.model.gamecontrollable.CharacterCommand;
 import com.gameclasses.model.gameobjects.*;
@@ -18,7 +18,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
-public class GameSystem extends CheatingObserver {
+public class GameSystem extends ObserverCheating {
     Player player;
     private CharacterCommand characterCommand;
     private Queue<Float> enemyReleaseTime;
