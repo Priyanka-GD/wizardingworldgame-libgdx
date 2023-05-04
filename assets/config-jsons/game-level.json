@@ -48,7 +48,7 @@
       "hp": 5,
       "texture": "images/umbridge-midboss.png",
       "x": 250,
-      "y": 800,
+      "y": 700,
       "width": 100,
       "height": 100,
       "enemyMovement": "MovementShapeThree",
@@ -60,15 +60,15 @@
         }
       ],
       "count": 1,
-      "spawnTime": 25,
+      "spawnTime": 22,
       "isFinalBoss": false,
       "reward": 500
     },
     {
       "hp": 10,
       "texture": "images/voldemort.jpg",
-      "x": 250,
-      "y": 500,
+      "x": 200,
+      "y": 700,
       "width": 120,
       "height": 110,
       "enemyMovement": "MovementShapeThree",
@@ -81,16 +81,16 @@
         {
           "strategy": "LaserStrategyString",
           "movement": "StraightLineShapedLaserMovement",
-          "effectiveFrom": 10
+          "effectiveFrom": 6
         },
         {
           "strategy": "LaserStrategyCircle",
           "movement": "StraightLineShapedLaserMovement",
-          "effectiveFrom": 15
+          "effectiveFrom": 10
         }
       ],
       "count": 1,
-      "spawnTime": 60,
+      "spawnTime": 50,
       "isFinalBoss": true,
       "reward": 1000
     }

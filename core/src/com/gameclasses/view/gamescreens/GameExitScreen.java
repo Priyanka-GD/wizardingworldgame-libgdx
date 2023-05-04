@@ -22,8 +22,10 @@ public class GameExitScreen implements Screen {
     private final Skin skin;
     private final BitmapFont font;
     private Music music;
+    boolean isWin;
 
     public GameExitScreen (MainGame game, boolean isWin) {
+        this.isWin = isWin;
         this.game = game;
         if (isWin) {
             background = new Texture("images/game-won.png");
@@ -118,8 +120,10 @@ public class GameExitScreen implements Screen {
 
     @Override
     public void dispose () {
-        music.stop();
-        music.dispose();
+        if (this.isWin) {
+            music.stop();
+            music.dispose();
+        }
     }
 }
 

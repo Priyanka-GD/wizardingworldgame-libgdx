@@ -102,8 +102,8 @@ public class Player implements GameControllable {
             shootTimestamp = 0;
             isThrow = true;
             this.bomblist.add(new PlayerSpecialBomb.Builder(new Texture("images/bomb.png"))
-                    .hitbox(new Rectangle(hitBox.x - (hitBox.width / 3), hitBox.y + hitBox.height, 30, 30))
-                    .speed(250)
+                    .hitbox(new Rectangle(hitBox.x - (hitBox.width / 3), hitBox.y + hitBox.height, 40, 40))
+                    .speed(200)
                     .direction(0, 1)
                     .build());
         }
