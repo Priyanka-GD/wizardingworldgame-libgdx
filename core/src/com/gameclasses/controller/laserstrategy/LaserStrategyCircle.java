@@ -17,9 +17,9 @@ public class LaserStrategyCircle implements LaserStrategy {
     String movementClass;
 
     public LaserStrategyCircle () {
-        laserWidth = 10f;
-        laserHeight = 10f;
-        timeBetweenShots = 0.3f;
+        laserWidth = 15f;
+        laserHeight = 15f;
+        timeBetweenShots = 0.5f;
         timeSinceLastShot = 0;
         laserMovementSpeed = 70f;
     }

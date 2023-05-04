@@ -3,6 +3,7 @@ package com.gameclasses.view.gamescreens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -28,6 +29,7 @@ public class GameScreen implements Screen {
     private final SpriteBatch spriteBatch;
     private final BackgroundScreen backgroundScreen;
     private final PlayerSystem playerSystem;
+    private final Music music;
 
     public GameScreen (MainGame game) {
         //Deliverable 2
@@ -44,6 +46,9 @@ public class GameScreen implements Screen {
         gameSystem = new GameSystem(this.backgroundScreen);
         gameSystem.setLivesSystem(playerSystem);
         this.game = game;
+        music = Gdx.audio.newMusic(Gdx.files.internal("music/theme.mp3"));
+        music.setLooping(true);
+        music.play();
     }
 
     @Override
@@ -80,7 +85,8 @@ public class GameScreen implements Screen {
     }
     @Override
     public void dispose () {
-
+        music.stop();
+        music.dispose();
     }
     private void gameEnd () {
         this.dispose();
