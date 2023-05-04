@@ -34,7 +34,7 @@ public class Player implements GameControllable {
         this.cheatingMode = new Texture("images/cheating.png");
         this.playerBulletList = playerBulletList;
         this.bomblist = bomblist;
-        this.cheatingBox = new Rectangle(hitBox.x, hitBox.y, 40, 60);
+        this.cheatingBox = new Rectangle(hitBox.x, hitBox.y, 30, 30);
         bufferMode = this.characterMode;
     }
     public void draw (Batch batch, float deltaTime) {

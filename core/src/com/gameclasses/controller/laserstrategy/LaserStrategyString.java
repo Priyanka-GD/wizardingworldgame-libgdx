@@ -20,8 +20,8 @@ public class LaserStrategyString implements LaserStrategy {
     String movementClass;
 
     public LaserStrategyString () {
-        laserWidth = 20f;
-        laserHeight = 20f;
+        laserWidth = 15f;
+        laserHeight = 15f;
         timeBetweenShots = 0.05f;
         timeSinceLastShot = 0;
         laserMovementSpeed = 150f;

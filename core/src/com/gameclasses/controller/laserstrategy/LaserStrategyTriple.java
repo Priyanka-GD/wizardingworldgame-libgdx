@@ -16,8 +16,8 @@ public class LaserStrategyTriple implements LaserStrategy {
     String movementClass;
 
     public LaserStrategyTriple () {
-        laserWidth = 30f;
-        laserHeight = 30f;
+        laserWidth = 20f;
+        laserHeight = 20f;
         timeBetweenShots = 0.5f;
         timeSinceLastShot = 0;
         laserMovementSpeed = 190f;

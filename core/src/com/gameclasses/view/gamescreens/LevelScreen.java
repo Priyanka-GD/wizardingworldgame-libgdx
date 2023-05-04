@@ -16,29 +16,27 @@ import com.gameclasses.utils.GameConstants;
 import org.json.simple.parser.ParseException;
 
 public class LevelScreen implements Screen {
-    private final MainGame game;
-    //private MenuScreen menu;
-    private final Texture background;
-    private final Stage stage;
+    private final MainGame mainGame;
+    private final Texture texture;
+    private final Stage levelScreenStage;
     private final Skin skin;
 
-    public LevelScreen (MainGame game) {
-        this.game = game;
-        //this.menu = menu;
-        background = new Texture("images/firstscreen.jpg");
-        stage = new Stage(new ScreenViewport());
+    public LevelScreen (MainGame mainGame) {
+        this.mainGame = mainGame;
+        texture = new Texture("images/firstscreen.jpg");
+        levelScreenStage = new Stage(new ScreenViewport());
         skin = new Skin(Gdx.files.internal("skin/glassy-ui.json"));
-        Gdx.input.setInputProcessor(stage);
-        loadButtons();
+        Gdx.input.setInputProcessor(levelScreenStage);
+        LoadingButtons();
     }
 
-    private void loadButtons () {
-        int sizeUnit = 60;
-        final TextButton optionButton1 = new TextButton("Level-1", skin, "small");
-        optionButton1.setSize(sizeUnit * 4, sizeUnit);
-        optionButton1.setPosition((Gdx.graphics.getWidth() - optionButton1.getWidth()) / 2, 400);
-        optionButton1.getLabel().setFontScale(1.2f, 1.2f);
-        optionButton1.addListener(new InputListener() {
+    private void LoadingButtons () {
+        int sizeUnit = 45;
+        final TextButton levelOne = new TextButton("Level-1", skin, "small");
+        levelOne.setSize(sizeUnit * 4, sizeUnit);
+        levelOne.setPosition((Gdx.graphics.getWidth() - levelOne.getWidth()) / 2, 400);
+        levelOne.getLabel().setFontScale(1.2f, 1.2f);
+        levelOne.addListener(new InputListener() {
             @Override
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
                 try {
@@ -56,20 +54,20 @@ public class LevelScreen implements Screen {
 
             @Override
             public void enter (InputEvent event, float x, float y, int pointer, Actor fromActor) {
-                optionButton1.getLabel().setFontScale(1.5f, 1.5f);
+                levelOne.getLabel().setFontScale(1.5f, 1.5f);
             }
 
             @Override
             public void exit (InputEvent event, float x, float y, int pointer, Actor fromActor) {
-                optionButton1.getLabel().setFontScale(1.2f, 1.2f);
+                levelOne.getLabel().setFontScale(1.2f, 1.2f);
             }
         });
 
-        final TextButton optionButton2 = new TextButton("Level-2", skin, "small");
-        optionButton2.setSize(sizeUnit * 4, sizeUnit);
-        optionButton2.setPosition((Gdx.graphics.getWidth() - optionButton2.getWidth()) / 2, 300);
-        optionButton2.getLabel().setFontScale(1.2f, 1.2f);
-        optionButton2.addListener(new InputListener() {
+        final TextButton levelTwo = new TextButton("Level-2", skin, "small");
+        levelTwo.setSize(sizeUnit * 4, sizeUnit);
+        levelTwo.setPosition((Gdx.graphics.getWidth() - levelTwo.getWidth()) / 2, 300);
+        levelTwo.getLabel().setFontScale(1.2f, 1.2f);
+        levelTwo.addListener(new InputListener() {
             @Override
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
                 try {
@@ -87,22 +85,22 @@ public class LevelScreen implements Screen {
 
             @Override
             public void enter (InputEvent event, float x, float y, int pointer, Actor fromActor) {
-                optionButton2.getLabel().setFontScale(1.5f, 1.5f);
+                levelTwo.getLabel().setFontScale(1.5f, 1.5f);
             }
 
             @Override
             public void exit (InputEvent event, float x, float y, int pointer, Actor fromActor) {
-                optionButton2.getLabel().setFontScale(1.2f, 1.2f);
+                levelTwo.getLabel().setFontScale(1.2f, 1.2f);
             }
         });
-        stage.addActor(optionButton1);
-        stage.addActor(optionButton2);
+        levelScreenStage.addActor(levelOne);
+        levelScreenStage.addActor(levelTwo);
     }
 
     private void startGame () {
         this.dispose();
-        stage.dispose();
-        game.setScreen(new GameScreen(game));
+        levelScreenStage.dispose();
+        mainGame.setScreen(new GameScreen(mainGame));
     }
 
     @Override
@@ -113,11 +111,11 @@ public class LevelScreen implements Screen {
     @Override
     public void render (float delta) {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        game.batch.begin();
-        game.batch.draw(background, 0, 0, GameConstants.EXT_WINDOW_WIDTH, GameConstants.EXT_WINDOW_HEIGHT);
-        game.batch.end();
-        stage.act();
-        stage.draw();
+        mainGame.batch.begin();
+        mainGame.batch.draw(texture, 0, 0, GameConstants.EXT_WINDOW_WIDTH, GameConstants.EXT_WINDOW_HEIGHT);
+        mainGame.batch.end();
+        levelScreenStage.act();
+        levelScreenStage.draw();
     }
 
     @Override
