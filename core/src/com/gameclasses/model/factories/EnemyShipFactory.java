@@ -1,6 +1,6 @@
 package com.gameclasses.model.factories;
 
-import com.gameclasses.controller.laserstrategy.LaserBindings;
+import com.gameclasses.controller.LaserBindings;
 import com.gameclasses.model.gameobjects.Enemy;
 import com.gameclasses.model.gameobjects.EnemyCharacterShip;
 import org.json.simple.JSONArray;

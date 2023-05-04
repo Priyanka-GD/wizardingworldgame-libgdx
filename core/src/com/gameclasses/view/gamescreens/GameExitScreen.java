@@ -2,6 +2,7 @@ package com.gameclasses.view.gamescreens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -20,11 +21,17 @@ public class GameExitScreen implements Screen {
     private final Stage stage;
     private final Skin skin;
     private final BitmapFont font;
+    private Music music;
+    boolean isWin;
 
     public GameExitScreen (MainGame game, boolean isWin) {
+        this.isWin = isWin;
         this.game = game;
         if (isWin) {
             background = new Texture("images/game-won.png");
+            music = Gdx.audio.newMusic(Gdx.files.internal("music/won.mp3"));
+            music.setLooping(true);
+            music.play();
         } else {
             background = new Texture("images/game-over.png");
         }
@@ -113,7 +120,10 @@ public class GameExitScreen implements Screen {
 
     @Override
     public void dispose () {
-
+        if (this.isWin) {
+            music.stop();
+            music.dispose();
+        }
     }
 }
 

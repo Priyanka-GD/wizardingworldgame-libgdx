@@ -42,7 +42,7 @@ public class RenderLaser {
                 removeList.add(bomb);
                 enemyLaserList.clear();
                 for (Enemy enemy : enemyShipList) {
-                    enemy.hp -= 5;
+                    enemy.hp -= 10;
                     if (enemy.hp <= 0) {
                         removeEnemyList.add(enemy);
                         enemy.die(playerSystem);

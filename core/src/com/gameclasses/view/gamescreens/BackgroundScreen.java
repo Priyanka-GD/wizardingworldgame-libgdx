@@ -114,8 +114,9 @@ public class BackgroundScreen extends PlayerUpdateRenderer {
         sbatch.draw(this.background, 0, 0, GameConstants.EXT_WINDOW_WIDTH, GameConstants.EXT_WINDOW_HEIGHT);
         //observer pattern -- observing player and sends an update -- player as a subject-- reduce coupling
         fontHP.draw(sbatch, "Score: " + String.format("%08d", this.score), GameConstants.WINDOW_WIDTH + 15, GameConstants.WINDOW_HEIGHT - 60);
-        fontHP.draw(sbatch, "Remaining Lives: ", GameConstants.WINDOW_WIDTH + 12, GameConstants.WINDOW_HEIGHT - 110);
+        fontHP.draw(sbatch, "Remaining Lives: ", GameConstants.WINDOW_WIDTH + 16, GameConstants.WINDOW_HEIGHT - 180);
         this.displayLives();
+        this.showBombs();
         sbatch.end();
         stage.act();
         stage.draw();
@@ -125,9 +126,9 @@ public class BackgroundScreen extends PlayerUpdateRenderer {
         if (!isCheating)
             for (int i = 0; i < this.heartCount; i++)
                 sbatch.draw(lives, GameConstants.WINDOW_WIDTH + 10 + ((i % 5) * 40),
-                        GameConstants.WINDOW_HEIGHT - (200 + 40 * (i / 5)), 35, 30);
+                        GameConstants.WINDOW_HEIGHT - (240 + 50 * (i / 5)), 35, 30);
         else
-            sbatch.draw(infinity, GameConstants.WINDOW_WIDTH + 100, GameConstants.WINDOW_HEIGHT - 205, 60, 40);
+            sbatch.draw(infinity, GameConstants.WINDOW_WIDTH + 100, GameConstants.WINDOW_HEIGHT - 250, 50, 30);
     }
 
     @Override

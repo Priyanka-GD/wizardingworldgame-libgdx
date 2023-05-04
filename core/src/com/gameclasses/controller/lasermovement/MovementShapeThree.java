@@ -7,8 +7,8 @@ public class MovementShapeThree implements LaserMovement {
 
     public MovementShapeThree () {
         timeStamp = 1;
-        speed = 45;
-        timeToTurn = 6;
+        speed = 25;
+        timeToTurn = 4;
     }
 
     @Override

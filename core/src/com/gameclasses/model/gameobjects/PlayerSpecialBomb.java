@@ -5,7 +5,6 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Rectangle;
 import com.gameclasses.utils.GameConstants;
 
-// to modify as per needs
 public class PlayerSpecialBomb {
 
     public Rectangle hitbox;
@@ -36,7 +35,7 @@ public class PlayerSpecialBomb {
         return hitbox.width > GameConstants.WINDOW_WIDTH
                 || hitbox.height > GameConstants.WINDOW_HEIGHT || hitbox.y < 0;
     }
-
+// Bomb moves
     public void move (float deltaTime) {
         hitbox.x += movementSpeed * xDirection * deltaTime;
         if (this.launchDistance < 250 && !this.isBombing) {
@@ -44,7 +43,7 @@ public class PlayerSpecialBomb {
             hitbox.y += movementSpeed * yDirection * deltaTime;
         } else if (this.launchDistance >= 250 && !this.isBombing) {
             this.textureReg = new Texture("images/bombScenes.png");
-            this.hitbox = new Rectangle(hitbox.x - 33, hitbox.y, 100, 200);
+            this.hitbox = new Rectangle(hitbox.x - 33, hitbox.y, 85, 150);
             this.isBombing = true;
         } else {
             bombing(deltaTime);
